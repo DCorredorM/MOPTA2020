@@ -1,0 +1,1457 @@
+15001,Aliquippa,80.28,40.6
+15003,Ambridge,80.21,40.59
+15005,Baden,80.19,40.64
+15007,Bakerstown,79.93,40.64
+15009,Beaver,80.33,40.69
+15010,Beaver Falls,80.33,40.76
+15012,Belle Vernon,79.83,40.14
+15014,Brackenridge,79.74,40.6
+15015,Bradfordwoods,80.08,40.63
+15017,Bridgeville,80.11,40.34
+15018,Buena Vista,79.79,40.27
+15019,Bulger,80.36,40.4
+15021,Burgettstown,80.44,40.39
+15022,Charleroi,79.92,40.14
+15024,Cheswick,79.84,40.56
+15025,Clairton,79.91,40.29
+15026,Clinton,80.34,40.51
+15027,Conway,80.23,40.66
+15030,Creighton,79.78,40.58
+15031,Cuddy,80.16,40.36
+15033,Donora,79.86,40.17
+15034,Dravosburg,79.88,40.35
+15035,East McKeesport,79.8,40.38
+15037,Elizabeth,79.85,40.26
+15042,Freedom,80.21,40.68
+15043,Georgetown,80.49,40.57
+15044,Gibsonia,79.94,40.62
+15045,Glassport,79.88,40.32
+15049,Harwick,79.8,40.55
+15050,Hookstown,80.43,40.54
+15051,Indianola,79.88,40.57
+15052,Industry,80.41,40.66
+15053,Joffre,80.39,40.38
+15055,Lawrence,80.14,40.31
+15056,Leetsdale,80.2,40.56
+15057,McDonald,80.25,40.36
+15059,Midland,80.46,40.65
+15060,Midway,80.29,40.36
+15061,Monaca,80.29,40.67
+15062,Monessen,79.88,40.15
+15063,Monongahela,79.92,40.19
+15064,Morgan,80.15,40.36
+15065,Natrona Heights,79.72,40.62
+15066,New Brighton,80.29,40.73
+15067,New Eagle,79.95,40.2
+15068,New Kensington,79.74,40.57
+15071,Oakdale,80.2,40.42
+15074,Rochester,80.26,40.71
+15076,Russellton,79.83,40.61
+15077,Shippingport,80.41,40.62
+15078,Slovan,80.39,40.36
+15083,Sutersville,79.79,40.23
+15084,Tarentum,79.78,40.61
+15085,Trafford,79.75,40.38
+15086,Warrendale,80.08,40.66
+15089,West Newton,79.75,40.2
+15090,Wexford,80.06,40.61
+15101,Allison Park,79.96,40.56
+15102,Bethel Park,80.03,40.32
+15104,Braddock,79.86,40.4
+15106,Carnegie,80.09,40.4
+15108,Coraopolis,80.18,40.51
+15110,Duquesne,79.85,40.37
+15112,East Pittsburgh,79.83,40.4
+15116,Glenshaw,79.96,40.53
+15120,Homestead,79.9,40.39
+15122,West Mifflin,79.89,40.36
+15126,Imperial,80.26,40.45
+15129,Library,80,40.29
+15131,McKeesport,79.81,40.34
+15132,McKeesport,79.84,40.34
+15133,McKeesport,79.86,40.33
+15135,McKeesport,79.81,40.3
+15136,McKees Rocks,80.08,40.47
+15137,North Versailles,79.81,40.37
+15139,Oakmont,79.83,40.51
+15140,Pitcairn,79.77,40.4
+15142,Presto,80.12,40.38
+15143,Sewickley,80.15,40.55
+15144,Springdale,79.78,40.54
+15145,Turtle Creek,79.82,40.41
+15146,Monroeville,79.76,40.42
+15147,Verona,79.83,40.49
+15148,Wilmerding,79.8,40.39
+15201,Pittsburgh,79.95,40.47
+15202,Pittsburgh,80.06,40.5
+15203,Pittsburgh,79.97,40.42
+15204,Pittsburgh,80.06,40.45
+15205,Pittsburgh,80.07,40.43
+15206,Pittsburgh,79.91,40.46
+15207,Pittsburgh,79.93,40.4
+15208,Pittsburgh,79.89,40.45
+15209,Pittsburgh,79.97,40.49
+15210,Pittsburgh,79.98,40.4
+15211,Pittsburgh,80.01,40.42
+15212,Pittsburgh,80.01,40.46
+15213,Pittsburgh,79.95,40.44
+15214,Pittsburgh,80.01,40.48
+15215,Pittsburgh,79.91,40.49
+15216,Pittsburgh,80.03,40.39
+15217,Pittsburgh,79.92,40.43
+15218,Pittsburgh,79.88,40.42
+15219,Pittsburgh,79.97,40.44
+15220,Pittsburgh,80.05,40.41
+15221,Pittsburgh,79.87,40.43
+15222,Pittsburgh,80,40.44
+15223,Pittsburgh,79.95,40.5
+15224,Pittsburgh,79.94,40.46
+15225,Pittsburgh,80.13,40.51
+15226,Pittsburgh,80.01,40.39
+15227,Pittsburgh,79.97,40.37
+15228,Pittsburgh,80.04,40.37
+15229,Pittsburgh,80.03,40.51
+15232,Pittsburgh,79.93,40.45
+15233,Pittsburgh,80.02,40.46
+15234,Pittsburgh,80.01,40.36
+15235,Pittsburgh,79.82,40.46
+15236,Pittsburgh,79.97,40.34
+15237,Pittsburgh,80.03,40.55
+15238,Pittsburgh,79.87,40.51
+15239,Pittsburgh,79.73,40.47
+15241,Pittsburgh,80.07,40.33
+15243,Pittsburgh,80.07,40.37
+15301,Washington,80.25,40.17
+15310,Aleppo,80.45,39.82
+15311,Amity,80.19,40.06
+15312,Avella,80.45,40.27
+15313,Beallsville,80.02,40.06
+15314,Bentleyville,80,40.11
+15317,Canonsburg,80.15,40.27
+15320,Carmichaels,79.97,39.88
+15321,Cecil,80.2,40.32
+15322,Clarksville,80.01,39.99
+15323,Claysville,80.38,40.13
+15324,Cokeburg,80.06,40.1
+15327,Dilliner,79.97,39.75
+15329,Prosperity,80.26,40.02
+15330,Eighty Four,80.06,40.18
+15331,Ellsworth,80.02,40.1
+15332,Finleyville,79.97,40.25
+15333,Fredericktown,80.03,40.02
+15337,Graysville,80.39,39.9
+15338,Greensboro,79.93,39.8
+15340,Hickory,80.3,40.29
+15341,Holbrook,80.33,39.84
+15342,Houston,80.22,40.24
+15344,Jefferson,80.05,39.93
+15345,Marianna,80.11,40.03
+15346,Mather,80.08,39.94
+15349,Mount Morris,80.09,39.74
+15352,New Freeport,80.45,39.75
+15353,Nineveh,80.31,39.97
+15357,Rices Landing,79.98,39.94
+15359,Rogersville,80.28,39.9
+15360,Scenery Hill,80.09,40.09
+15362,Spraggs,80.26,39.76
+15363,Strabane,80.14,40.21
+15364,Sycamore,80.22,39.95
+15367,Venetia,80.05,40.27
+15370,Waynesburg,80.17,39.89
+15376,West Alexander,80.49,40.1
+15377,West Finley,80.44,39.99
+15380,Wind Ridge,80.46,39.89
+15401,Uniontown,79.72,39.88
+15410,Adah,79.89,39.88
+15411,Addison,79.31,39.76
+15412,Allenport,79.85,40.08
+15413,Allison,79.87,39.98
+15417,Brownsville,79.92,40.02
+15419,California,79.89,40.06
+15423,Coal Center,79.88,40.09
+15424,Confluence,79.35,39.82
+15425,Connellsville,79.58,40.02
+15427,Daisytown,79.96,40.07
+15428,Dawson,79.66,40.06
+15431,Dunbar,79.64,39.97
+15432,Dunlevy,79.86,40.11
+15433,East Millsboro,79.96,39.98
+15434,Elco,79.87,40.07
+15436,Fairchance,79.75,39.82
+15437,Farmington,79.58,39.8
+15438,Fayette City,79.83,40.09
+15440,Gibbon Glade,79.57,39.73
+15442,Grindstone,79.84,40
+15444,Hiller,79.89,40
+15445,Hopwood,79.7,39.86
+15446,Indian Head,79.39,40.02
+15450,La Belle,79.93,39.97
+15451,Lake Lynn,79.86,39.75
+15456,Lemont Furnace,79.64,39.93
+15458,McClellandtown,79.85,39.89
+15459,Markleysburg,79.46,39.75
+15461,Masontown,79.89,39.83
+15462,Melcroft,79.35,40.06
+15463,Merrittstown,79.87,39.96
+15464,Mill Run,79.46,39.96
+15468,New Salem,79.8,39.94
+15469,Normalville,79.41,40.04
+15470,Ohiopyle,79.48,39.87
+15472,Oliver,79.71,39.91
+15473,Perryopolis,79.75,40.08
+15474,Point Marion,79.89,39.73
+15475,Republic,79.9,39.96
+15477,Roscoe,79.86,40.07
+15478,Smithfield,79.81,39.79
+15479,Smithton,79.73,40.14
+15480,Smock,79.76,39.99
+15482,Star Junction,79.75,40.08
+15483,Stockdale,79.85,40.08
+15486,Vanderbilt,79.69,40.02
+15488,Waltersburg,79.78,39.99
+15490,White,79.42,40.07
+15501,Somerset,79.08,40.02
+15521,Alum Bank,78.62,40.18
+15522,Bedford,78.52,39.99
+15530,Berlin,78.96,39.91
+15531,Boswell,79.03,40.19
+15533,Breezewood,78.24,39.99
+15534,Buffalo Mills,78.69,39.92
+15535,Clearville,78.43,39.85
+15536,Crystal Spring,78.22,39.91
+15537,Everett,78.37,40
+15538,Fairhope,78.82,39.9
+15540,Fort Hill,79.23,39.87
+15541,Friedens,78.9,40.01
+15542,Garrett,79.06,39.86
+15545,Hyndman,78.73,39.8
+15546,Jenners,79.05,40.14
+15550,Manns Choice,78.64,39.98
+15551,Markleton,79.28,39.86
+15552,Meyersdale,79.02,39.79
+15554,New Paris,78.58,40.11
+15557,Rockwood,79.18,39.93
+15558,Salisbury,79.08,39.75
+15559,Schellsburg,78.64,40.04
+15562,Springs,79.08,39.74
+15563,Stoystown,78.95,40.1
+15601,Greensburg,79.54,40.3
+15610,Acme,79.48,40.1
+15611,Adamsburg,79.65,40.31
+15612,Alverton,79.55,40.12
+15613,Apollo,79.57,40.55
+15615,Ardara,79.73,40.36
+15616,Armbrust,79.55,40.23
+15617,Arona,79.65,40.26
+15618,Avonmore,79.48,40.52
+15620,Bradenville,79.3,40.29
+15622,Champion,79.32,40.04
+15625,Darragh,79.67,40.26
+15626,Delmont,79.57,40.41
+15627,Derry,79.33,40.33
+15628,Donegal,79.38,40.09
+15631,Everson,79.58,40.09
+15632,Export,79.61,40.42
+15634,Grapeville,79.6,40.3
+15636,Harrison City,79.67,40.37
+15637,Herminie,79.71,40.24
+15639,Hunker,79.58,40.21
+15641,Hyde Park,79.58,40.63
+15642,Irwin,79.72,40.31
+15644,Jeannette,79.61,40.32
+15646,Jones Mills,79.33,40.07
+15647,Larimer,79.73,40.35
+15650,Latrobe,79.41,40.29
+15655,Laughlintown,79.18,40.2
+15656,Leechburg,79.62,40.63
+15658,Ligonier,79.23,40.24
+15661,Loyalhanna,79.34,40.3
+15663,Madison,79.67,40.24
+15665,Manor,79.67,40.33
+15666,Mount Pleasant,79.51,40.17
+15668,Murrysville,79.68,40.44
+15670,New Alexandria,79.39,40.39
+15671,New Derry,79.3,40.33
+15672,New Stanton,79.61,40.22
+15675,Penn,79.64,40.33
+15677,Rector,79.24,40.18
+15678,Rillton,79.72,40.28
+15679,Ruffs Dale,79.62,40.15
+15681,Saltsburg,79.44,40.47
+15683,Scottdale,79.59,40.1
+15684,Slickville,79.5,40.46
+15686,Spring Church,79.45,40.61
+15687,Stahlstown,79.34,40.13
+15688,Tarrs,79.56,40.16
+15690,Vandergrift,79.56,40.6
+15692,Westmoreland City,79.54,40.27
+15697,Youngwood,79.58,40.23
+15698,Yukon,79.68,40.21
+15701,Indiana,79.15,40.61
+15711,Anita,78.96,41
+15713,Aultman,79.21,40.54
+15714,Barnesboro,78.77,40.67
+15716,Black Lick,79.19,40.46
+15717,Blairsville,79.25,40.44
+15720,Brush Valley,79.05,40.52
+15721,Burnside,78.78,40.81
+15722,Carrolltown,78.7,40.58
+15724,Cherry Tree,78.84,40.75
+15725,Clarksburg,79.36,40.5
+15728,Clymer,79.01,40.66
+15729,Commodore,78.91,40.7
+15730,Coolspring,78.92,40.95
+15732,Creekside,79.2,40.71
+15739,Ernest,79.09,40.7
+15742,Glen Campbell,78.85,40.85
+15744,Hamilton,79.09,40.92
+15747,Home,79.16,40.78
+15748,Homer City,79.18,40.53
+15753,La Jose,78.62,40.83
+15754,Lucernemines,79.15,40.54
+15757,Mahaffey,78.72,40.88
+15758,Marchand,79.04,40.87
+15759,Marion Center,79.02,40.78
+15760,Marsteller,78.81,40.65
+15762,Nicktown,78.81,40.6
+15763,Northpoint,79.12,40.9
+15764,Oliveburg,79.03,40.99
+15765,Penn Run,78.97,40.62
+15767,Punxsutawney,78.96,40.94
+15770,Ringgold,79.17,40.99
+15771,Rochester Mills,78.99,40.81
+15772,Rossiter,78.94,40.88
+15773,Saint Benedict,78.73,40.61
+15774,Shelocta,79.31,40.63
+15775,Spangler,78.76,40.64
+15776,Sprankle Mills,79.07,41.01
+15777,Starford,78.98,40.7
+15778,Timblin,79.2,40.96
+15780,Valier,79.08,40.92
+15784,Worthville,79.13,41.02
+15801,Du Bois,78.75,41.12
+15821,Benezett,78.35,41.32
+15823,Brockport,78.71,41.28
+15824,Brockway,78.81,41.24
+15825,Brookville,79.06,41.15
+15827,Byrnedale,78.5,41.28
+15828,Clarington,79.14,41.32
+15829,Corsica,79.17,41.18
+15832,Driftwood,78.16,41.37
+15834,Emporium,78.25,41.51
+15840,Falls Creek,78.81,41.14
+15845,Johnsonburg,78.67,41.49
+15846,Kersey,78.6,41.35
+15848,Luthersburg,78.74,41.05
+15849,Penfield,78.57,41.2
+15851,Reynoldsville,78.89,41.06
+15853,Ridgway,78.72,41.43
+15856,Rockton,78.65,41.08
+15857,Saint Marys,78.55,41.42
+15860,Sigel,79.05,41.3
+15861,Sinnamahoning,78.06,41.37
+15864,Summerville,79.17,41.1
+15865,Sykesville,78.81,41.05
+15868,Weedville,78.49,41.26
+15870,Wilcox,78.68,41.57
+15901,Johnstown,78.91,40.32
+15902,Johnstown,78.89,40.3
+15904,Johnstown,78.86,40.28
+15905,Johnstown,78.94,40.3
+15906,Johnstown,78.93,40.35
+15909,Johnstown,78.86,40.38
+15920,Armagh,79.01,40.44
+15923,Bolivar,79.16,40.36
+15924,Cairnbrook,78.81,40.11
+15926,Central City,78.84,40.09
+15927,Colver,78.77,40.54
+15928,Davidsville,78.93,40.22
+15931,Ebensburg,78.72,40.48
+15935,Hollsopple,78.95,40.23
+15936,Hooversville,78.91,40.14
+15938,Lilly,78.62,40.42
+15940,Loretto,78.62,40.51
+15942,Mineral Point,78.83,40.37
+15943,Nanty Glo,78.83,40.47
+15944,New Florence,79.09,40.38
+15945,Parkhill,78.86,40.35
+15946,Portage,78.67,40.38
+15949,Robinson,79.13,40.4
+15951,Saint Michael,78.78,40.33
+15952,Salix,78.74,40.3
+15953,Seanor,78.89,40.23
+15954,Seward,79.02,40.4
+15955,Sidman,78.74,40.32
+15956,South Fork,78.78,40.36
+15957,Strongstown,78.91,40.56
+15958,Summerhill,78.75,40.38
+15960,Twin Rocks,78.86,40.51
+15961,Vintondale,78.94,40.49
+15963,Windber,78.83,40.22
+16001,Butler,79.9,40.86
+16020,Boyers,79.9,41.1
+16022,Bruin,79.72,41.05
+16023,Cabot,79.77,40.77
+16025,Chicora,79.74,40.94
+16028,East Brady,79.63,40.97
+16030,Eau Claire,79.79,41.13
+16033,Evans City,80.05,40.78
+16034,Fenelton,79.73,40.85
+16036,Foxburg,79.65,41.16
+16037,Harmony,80.13,40.84
+16038,Harrisville,79.97,41.16
+16040,Hilliards,79.82,41.1
+16041,Karns City,79.71,41
+16045,Lyndora,79.92,40.85
+16046,Mars,80.03,40.7
+16049,Parker,79.68,41.1
+16050,Petrolia,79.77,41.04
+16051,Portersville,80.17,40.94
+16052,Prospect,80.06,40.9
+16053,Renfrew,79.97,40.81
+16055,Sarver,79.74,40.71
+16056,Saxonburg,79.83,40.73
+16057,Slippery Rock,80.04,41.04
+16059,Valencia,79.92,40.7
+16061,West Sunbury,79.87,41
+16063,Zelienople,80.12,40.73
+16101,New Castle,80.32,40.99
+16102,New Castle,80.39,40.96
+16105,New Castle,80.34,41.03
+16110,Adamsville,80.37,41.5
+16111,Atlantic,80.28,41.53
+16112,Bessemer,80.49,40.97
+16114,Clarks Mills,80.17,41.38
+16115,Darlington,80.45,40.79
+16116,Edinburg,80.46,41.02
+16117,Ellwood City,80.27,40.85
+16120,Enon Valley,80.46,40.87
+16121,Farrell,80.49,41.21
+16123,Fombell,80.2,40.81
+16124,Fredonia,80.26,41.32
+16125,Greenville,80.38,41.39
+16127,Grove City,80.08,41.16
+16130,Hadley,80.15,41.43
+16131,Hartstown,80.38,41.55
+16133,Jackson Center,80.1,41.28
+16134,Jamestown,80.45,41.5
+16137,Mercer,80.23,41.23
+16141,New Galilee,80.39,40.85
+16142,New Wilmington,80.32,41.13
+16143,Pulaski,80.46,41.09
+16145,Sandy Lake,80.04,41.33
+16146,Sharon,80.49,41.23
+16148,Hermitage,80.45,41.23
+16150,Sharpsville,80.46,41.26
+16153,Stoneboro,80.09,41.34
+16154,Transfer,80.41,41.32
+16156,Volant,80.24,41.09
+16157,Wampum,80.33,40.88
+16159,West Middlesex,80.45,41.17
+16201,Kittanning,79.51,40.81
+16210,Adrian,79.5,40.9
+16212,Cadogan,79.57,40.75
+16213,Callensburg,79.55,41.13
+16214,Clarion,79.37,41.21
+16217,Cooksburg,79.19,41.33
+16218,Cowansville,79.59,40.92
+16222,Dayton,79.26,40.87
+16224,Fairmount City,79.27,41.04
+16225,Fisher,79.24,41.26
+16226,Ford City,79.51,40.73
+16229,Freeport,79.66,40.7
+16232,Knox,79.51,41.22
+16233,Leeper,79.3,41.36
+16234,Limestone,79.29,41.13
+16235,Lucinda,79.37,41.31
+16236,McGrann,79.53,40.76
+16238,Manorville,79.52,40.78
+16239,Marienville,79.13,41.46
+16240,Mayport,79.26,40.99
+16242,New Bethlehem,79.35,40.99
+16248,Rimersburg,79.51,41.03
+16249,Rural Valley,79.29,40.78
+16254,Shippenville,79.43,41.24
+16255,Sligo,79.48,41.11
+16256,Smicksburg,79.16,40.83
+16258,Strattanville,79.3,41.19
+16259,Templeton,79.44,40.94
+16260,Vowinckel,79.27,41.37
+16262,Worthington,79.63,40.83
+16301,Oil City,79.69,41.43
+16311,Carlton,80.02,41.48
+16313,Clarendon,79.17,41.73
+16314,Cochranton,80.05,41.52
+16316,Conneaut Lake,80.3,41.61
+16317,Cooperstown,79.87,41.49
+16319,Cranberry,79.71,41.33
+16321,East Hickory,79.38,41.56
+16323,Franklin,79.83,41.4
+16326,Fryburg,79.41,41.37
+16327,Guys Mills,79.97,41.63
+16329,Irvine,79.28,41.84
+16331,Kossuth,79.58,41.29
+16332,Lickingville,79.37,41.37
+16333,Ludlow,78.92,41.72
+16334,Marble,79.44,41.32
+16335,Meadville,80.14,41.63
+16340,Pittsfield,79.41,41.83
+16341,Pleasantville,79.56,41.58
+16342,Polk,79.93,41.35
+16345,Russell,79.12,41.94
+16346,Seneca,79.67,41.37
+16347,Sheffield,79.03,41.7
+16350,Sugar Grove,79.31,41.94
+16351,Tidioute,79.37,41.7
+16353,Tionesta,79.36,41.51
+16354,Titusville,79.68,41.63
+16360,Townville,79.87,41.68
+16362,Utica,79.94,41.47
+16364,Venus,79.5,41.37
+16365,Warren,79.14,41.84
+16371,Youngsville,79.31,41.85
+16372,Clintonville,79.87,41.2
+16373,Emlenton,79.74,41.2
+16374,Kennerdell,79.73,41.28
+16401,Albion,80.37,41.88
+16402,Bear Lake,79.46,41.97
+16403,Cambridge Springs,80.02,41.79
+16404,Centerville,79.79,41.72
+16405,Columbus,79.57,41.93
+16406,Conneautville,80.34,41.74
+16407,Corry,79.65,41.92
+16410,Cranesville,80.3,41.91
+16411,East Springfield,80.43,41.97
+16412,Edinboro,80.13,41.87
+16415,Fairview,80.23,42.04
+16417,Girard,80.31,41.98
+16420,Grand Valley,79.54,41.77
+16421,Harborcreek,79.94,42.17
+16423,Lake City,80.33,42.02
+16424,Linesville,80.42,41.66
+16426,McKean,80.14,41.99
+16428,North East,79.83,42.2
+16433,Saegertown,80.14,41.72
+16434,Spartansburg,79.68,41.79
+16435,Springboro,80.37,41.81
+16436,Spring Creek,79.56,41.84
+16438,Union City,79.84,41.89
+16440,Venango,80.12,41.79
+16441,Waterford,79.99,41.96
+16442,Wattsburg,79.83,42.03
+16443,West Springfield,80.46,41.94
+16501,Erie,80.08,42.12
+16502,Erie,80.09,42.11
+16503,Erie,80.06,42.12
+16504,Erie,80.05,42.11
+16505,Erie,80.16,42.09
+16506,Erie,80.14,42.07
+16507,Erie,80.08,42.13
+16508,Erie,80.09,42.09
+16509,Erie,80.06,42.07
+16510,Erie,80,42.12
+16511,Erie,80.01,42.15
+16565,Erie,80.1,42.06
+16601,Altoona,78.4,40.52
+16602,Altoona,78.39,40.5
+16611,Alexandria,78.1,40.54
+16613,Ashville,78.53,40.55
+16616,Beccaria,78.5,40.75
+16617,Bellwood,78.33,40.6
+16620,Brisbin,78.35,40.83
+16621,Broad Top,78.14,40.2
+16622,Calvin,78.02,40.29
+16623,Cassville,78.02,40.29
+16625,Claysburg,78.47,40.32
+16627,Coalport,78.53,40.75
+16630,Cresson,78.58,40.46
+16634,Dudley,78.18,40.21
+16635,Duncansville,78.43,40.42
+16636,Dysart,78.52,40.6
+16637,East Freedom,78.44,40.32
+16639,Fallentimber,78.46,40.67
+16640,Flinton,78.48,40.7
+16641,Gallitzin,78.55,40.48
+16645,Glen Hope,78.49,40.79
+16646,Hastings,78.7,40.66
+16647,Hesston,78.12,40.41
+16648,Hollidaysburg,78.36,40.43
+16650,Hopewell,78.31,40.11
+16651,Houtzdale,78.36,40.83
+16652,Huntingdon,78,40.5
+16655,Imler,78.51,40.23
+16656,Irvona,78.56,40.8
+16657,James Creek,78.18,40.35
+16659,Loysburg,78.38,40.17
+16661,Madera,78.42,40.82
+16662,Martinsburg,78.32,40.29
+16664,New Enterprise,78.42,40.2
+16666,Osceola Mills,78.27,40.87
+16667,Osterburg,78.5,40.15
+16668,Patton,78.63,40.62
+16669,Petersburg,77.99,40.6
+16671,Ramey,78.39,40.8
+16673,Roaring Spring,78.39,40.32
+16674,Robertsdale,78.11,40.17
+16678,Saxton,78.24,40.22
+16679,Six Mile Run,78.21,40.15
+16680,Smithmill,78.39,40.76
+16683,Spruce Creek,78.13,40.62
+16685,Todd,78.1,40.25
+16686,Tyrone,78.24,40.66
+16689,Waterfall,78.04,40.07
+16691,Wells Tannery,78.14,40.1
+16692,Westover,78.73,40.76
+16693,Williamsburg,78.22,40.43
+16695,Woodbury,78.36,40.21
+16701,Bradford,78.65,41.95
+16720,Austin,78.09,41.62
+16724,Crosby,78.37,41.71
+16726,Cyclone,78.56,41.82
+16727,Derrick City,78.56,41.97
+16729,Duke Center,78.49,41.95
+16731,Eldred,78.38,41.94
+16732,Gifford,78.58,41.86
+16734,James City,78.85,41.59
+16735,Kane,78.79,41.66
+16738,Lewis Run,78.68,41.82
+16740,Mount Jewett,78.64,41.72
+16743,Port Allegany,78.27,41.81
+16744,Rew,78.53,41.91
+16745,Rixford,78.45,41.93
+16746,Roulette,78.15,41.77
+16748,Shinglehouse,78.19,41.95
+16749,Smethport,78.47,41.8
+16750,Turtlepoint,78.33,41.88
+16801,State College,77.85,40.79
+16803,State College,77.89,40.8
+16820,Aaronsburg,77.38,40.87
+16821,Allport,78.21,40.97
+16822,Beech Creek,77.58,41.08
+16823,Bellefonte,77.76,40.9
+16827,Boalsburg,77.78,40.77
+16828,Centre Hall,77.67,40.82
+16829,Clarence,77.93,41.05
+16830,Clearfield,78.44,41.02
+16832,Coburn,77.49,40.86
+16833,Curwensville,78.52,40.96
+16836,Frenchville,78.23,41.1
+16837,Glen Richey,78.47,40.93
+16838,Grampian,78.59,40.98
+16839,Grassflat,78.12,40.99
+16840,Hawk Run,78.21,40.94
+16841,Howard,77.67,41.02
+16844,Julian,77.93,40.89
+16845,Karthaus,78.08,41.11
+16852,Madisonburg,77.49,40.93
+16854,Millheim,77.45,40.89
+16858,Morrisdale,78.23,41
+16859,Moshannon,78,41.03
+16860,Munson,78.18,40.96
+16861,New Millport,78.49,40.88
+16863,Olanta,78.5,40.9
+16864,Orviston,77.62,41.07
+16865,Pennsylvania Furnace,77.95,40.72
+16866,Philipsburg,78.21,40.88
+16870,Port Matilda,78.07,40.8
+16871,Pottersdale,78.03,41.18
+16872,Rebersburg,77.4,40.95
+16874,Snow Shoe,77.95,41.03
+16875,Spring Mills,77.57,40.85
+16877,Warriors Mark,78.07,40.74
+16878,West Decatur,78.31,40.94
+16879,Winburne,78.15,40.96
+16881,Woodland,78.32,41
+16882,Woodward,77.34,40.91
+16901,Wellsboro,77.3,41.73
+16912,Blossburg,77.07,41.66
+16914,Columbia Cross Roads,76.79,41.84
+16915,Coudersport,78,41.78
+16917,Covington,77.1,41.73
+16920,Elkland,77.31,41.98
+16921,Gaines,77.56,41.74
+16922,Galeton,77.65,41.72
+16923,Genesee,77.87,41.93
+16925,Gillett,76.77,41.95
+16926,Granville Summit,76.72,41.69
+16927,Harrison Valley,77.68,41.94
+16928,Knoxville,77.43,41.95
+16929,Lawrenceville,77.11,41.97
+16930,Liberty,77.11,41.56
+16932,Mainesburg,76.96,41.79
+16933,Mansfield,77.07,41.81
+16935,Middlebury Center,77.31,41.89
+16936,Millerton,76.97,41.96
+16937,Mills,77.76,41.9
+16938,Morris,77.29,41.54
+16939,Morris Run,77.02,41.67
+16940,Nelson,77.24,41.97
+16941,Genesee,77.77,41.98
+16942,Osceola,77.35,41.98
+16943,Sabinsville,77.53,41.85
+16946,Tioga,77.13,41.91
+16947,Troy,76.77,41.77
+16948,Ulysses,77.71,41.84
+16950,Westfield,77.53,41.91
+17002,Allensville,77.82,40.52
+17003,Annville,76.54,40.34
+17004,Belleville,77.73,40.6
+17005,Berrysburg,76.81,40.6
+17006,Blain,77.51,40.32
+17007,Boiling Springs,77.11,40.14
+17009,Burnham,77.56,40.63
+17011,Camp Hill,76.92,40.23
+17013,Carlisle,77.19,40.2
+17014,Cocolamus,77.1,40.65
+17017,Dalmatia,76.87,40.64
+17018,Dauphin,76.92,40.38
+17019,Dillsburg,77.03,40.09
+17020,Duncannon,77.04,40.4
+17021,East Waterford,77.65,40.35
+17022,Elizabethtown,76.6,40.15
+17023,Elizabethville,76.83,40.55
+17024,Elliottsburg,77.27,40.36
+17025,Enola,76.94,40.29
+17026,Fredericksburg,76.42,40.45
+17028,Grantville,76.67,40.36
+17029,Granville,77.61,40.54
+17030,Gratz,76.71,40.61
+17031,Green Park,77.32,40.37
+17032,Halifax,76.89,40.47
+17033,Hershey,76.65,40.26
+17034,Highspire,76.78,40.2
+17035,Honey Grove,77.57,40.43
+17036,Hummelstown,76.7,40.27
+17037,Ickesburg,77.34,40.43
+17038,Jonestown,76.5,40.43
+17040,Landisburg,77.31,40.33
+17042,Lebanon,76.42,40.33
+17043,Lemoyne,76.89,40.24
+17044,Lewistown,77.57,40.59
+17045,Liverpool,77,40.57
+17047,Loysville,77.41,40.36
+17048,Lykens,76.7,40.59
+17049,McAlisterville,77.26,40.64
+17051,McVeytown,77.71,40.5
+17052,Mapleton Depot,77.96,40.38
+17053,Marysville,76.97,40.33
+17055,Mechanicsburg,76.99,40.21
+17057,Middletown,76.73,40.2
+17058,Mifflin,77.41,40.57
+17059,Mifflintown,77.37,40.57
+17060,Mill Creek,77.91,40.44
+17061,Millersburg,76.93,40.55
+17062,Millerstown,77.12,40.55
+17063,Milroy,77.55,40.72
+17065,Mount Holly Springs,77.19,40.11
+17066,Mount Union,77.86,40.39
+17067,Myerstown,76.31,40.37
+17068,New Bloomfield,77.19,40.41
+17070,New Cumberland,76.86,40.21
+17071,New Germantown,77.57,40.3
+17073,Newmanstown,76.24,40.31
+17074,Newport,77.16,40.48
+17076,Oakland Mills,77.31,40.61
+17078,Palmyra,76.58,40.3
+17082,Port Royal,77.43,40.51
+17084,Reedsville,77.61,40.67
+17086,Richfield,77.12,40.68
+17087,Richland,76.26,40.38
+17090,Shermans Dale,77.18,40.32
+17094,Thompsontown,77.2,40.59
+17097,Wiconisco,76.7,40.56
+17098,Williamstown,76.62,40.58
+17099,Yeagertown,77.56,40.64
+17101,Harrisburg,76.88,40.26
+17102,Harrisburg,76.89,40.27
+17103,Harrisburg,76.86,40.27
+17104,Harrisburg,76.85,40.25
+17109,Harrisburg,76.82,40.29
+17110,Harrisburg,76.88,40.3
+17111,Harrisburg,76.79,40.26
+17112,Harrisburg,76.79,40.33
+17113,Harrisburg,76.82,40.23
+17201,Chambersburg,77.65,39.93
+17211,Artemas,78.4,39.75
+17212,Big Cove Tannery,78.01,39.88
+17213,Blairs Mills,77.76,40.25
+17214,Blue Ridge Summit,77.46,39.72
+17215,Burnt Cabins,77.9,40.07
+17217,Concord,77.7,40.24
+17219,Doylesburg,77.68,40.21
+17220,Dry Run,77.76,40.17
+17221,Fannettsburg,77.82,40.07
+17222,Fayetteville,77.53,39.9
+17223,Fort Littleton,77.97,40.05
+17224,Fort Loudon,77.89,39.95
+17225,Greencastle,77.74,39.78
+17228,Harrisonville,78.08,39.97
+17229,Hustontown,78.01,40.04
+17232,Lurgan,77.63,40.12
+17233,McConnellsburg,77.99,39.94
+17236,Mercersburg,77.9,39.81
+17237,Mont Alto,77.55,39.84
+17238,Needmore,78.14,39.87
+17239,Neelyton,77.85,40.13
+17240,Newburg,77.56,40.13
+17241,Newville,77.41,40.18
+17243,Orbisonia,77.9,40.23
+17244,Orrstown,77.63,40.07
+17246,Pleasant Hall,77.7,40.04
+17252,Saint Thomas,77.79,39.92
+17255,Shade Gap,77.86,40.17
+17257,Shippensburg,77.51,40.05
+17260,Shirleysburg,77.87,40.31
+17262,Spring Run,77.74,40.14
+17264,Three Springs,77.99,40.18
+17265,Upperstrasburg,77.73,40.05
+17266,Walnut Bottom,77.4,40.08
+17267,Warfordsburg,78.19,39.76
+17268,Waynesboro,77.56,39.76
+17271,Willow Hill,77.79,40.11
+17301,Abbottstown,76.99,39.88
+17302,Airville,76.4,39.82
+17304,Aspers,77.22,39.97
+17307,Biglerville,77.28,39.92
+17309,Brogue,76.48,39.88
+17313,Dallastown,76.64,39.9
+17314,Delta,76.34,39.75
+17315,Dover,76.85,40
+17316,East Berlin,77,39.96
+17319,Etters,76.8,40.15
+17320,Fairfield,77.37,39.76
+17321,Fawn Grove,76.43,39.75
+17322,Felton,76.59,39.83
+17324,Gardners,77.18,40.04
+17325,Gettysburg,77.22,39.83
+17327,Glen Rock,76.74,39.78
+17329,Glenville,76.86,39.75
+17331,Hanover,76.98,39.79
+17339,Lewisberry,76.87,40.14
+17340,Littlestown,77.1,39.74
+17344,McSherrystown,77.01,39.8
+17345,Manchester,76.73,40.06
+17347,Mount Wolf,76.69,40.07
+17349,New Freedom,76.68,39.74
+17350,New Oxford,77.06,39.87
+17352,New Park,76.5,39.76
+17353,Orrtanna,77.38,39.88
+17356,Red Lion,76.6,39.9
+17360,Seven Valleys,76.73,39.85
+17361,Shrewsbury,76.67,39.76
+17362,Spring Grove,76.87,39.85
+17363,Stewartstown,76.59,39.77
+17364,Thomasville,76.88,39.93
+17365,Wellsville,76.94,40.05
+17366,Windsor,76.55,39.92
+17368,Wrightsville,76.52,39.99
+17370,York Haven,76.77,40.12
+17372,York Springs,77.1,40
+17401,York,76.72,39.96
+17402,York,76.67,39.97
+17403,York,76.71,39.94
+17404,York,76.76,39.96
+17406,York,76.59,39.99
+17407,York,76.71,39.88
+17501,Akron,76.2,40.15
+17502,Bainbridge,76.67,40.1
+17505,Bird In Hand,76.18,40.05
+17509,Christiana,76.02,39.93
+17512,Columbia,76.48,40.03
+17516,Conestoga,76.35,39.94
+17517,Denver,76.11,40.22
+17518,Drumore,76.24,39.83
+17519,East Earl,76.02,40.13
+17520,East Petersburg,76.35,40.1
+17522,Ephrata,76.18,40.17
+17527,Gap,75.99,40
+17529,Gordonville,76.11,40.03
+17532,Holtwood,76.3,39.86
+17535,Kinzers,76.04,40
+17536,Kirkwood,76.09,39.82
+17538,Landisville,76.41,40.08
+17540,Leola,76.19,40.09
+17543,Lititz,76.29,40.16
+17545,Manheim,76.41,40.17
+17547,Marietta,76.56,40.06
+17551,Millersville,76.35,39.99
+17552,Mount Joy,76.5,40.1
+17554,Mountville,76.42,40.04
+17555,Narvon,75.97,40.12
+17557,New Holland,76.08,40.1
+17560,New Providence,76.22,39.9
+17562,Paradise,76.1,39.98
+17563,Peach Bottom,76.17,39.77
+17565,Pequea,76.32,39.9
+17566,Quarryville,76.14,39.89
+17569,Reinholds,76.1,40.26
+17572,Ronks,76.16,40.02
+17576,Smoketown,76.22,40.04
+17578,Stevens,76.16,40.21
+17579,Strasburg,76.18,39.97
+17581,Terre Hill,76.05,40.15
+17582,Washington Boro,76.44,39.98
+17584,Willow Street,76.27,39.96
+17601,Lancaster,76.31,40.07
+17602,Lancaster,76.28,40.03
+17603,Lancaster,76.33,40.03
+17701,Williamsport,77.02,41.24
+17723,Jersey Shore,77.46,41.38
+17724,Canton,76.85,41.65
+17727,Cedar Run,77.48,41.49
+17728,Cogan Station,77.06,41.31
+17729,Cross Fork,77.8,41.47
+17737,Hughesville,76.71,41.25
+17740,Jersey Shore,77.24,41.2
+17742,Lairdsville,76.58,41.23
+17744,Linden,77.15,41.24
+17745,Lock Haven,77.44,41.14
+17747,Loganton,77.32,41.02
+17751,Mill Hall,77.48,41.08
+17752,Montgomery,76.88,41.17
+17754,Montoursville,76.9,41.26
+17756,Muncy,76.76,41.21
+17758,Muncy Valley,76.54,41.38
+17763,Ralston,76.95,41.5
+17764,Renovo,77.74,41.33
+17765,Roaring Branch,76.94,41.56
+17768,Shunk,76.74,41.55
+17771,Trout Run,77,41.41
+17772,Turbotville,76.74,41.11
+17774,Unityville,76.51,41.24
+17776,Waterville,77.36,41.31
+17777,Watsontown,76.85,41.1
+17778,Westport,77.93,41.27
+17779,Woolrich,77.33,41.18
+17801,Sunbury,76.77,40.85
+17810,Allenwood,76.97,41.12
+17812,Beaver Springs,77.23,40.75
+17813,Beavertown,77.16,40.77
+17814,Benton,76.34,41.22
+17815,Bloomsburg,76.43,41.01
+17820,Catawissa,76.44,40.91
+17821,Danville,76.62,40.97
+17823,Dornsife,76.76,40.75
+17824,Elysburg,76.55,40.86
+17827,Freeburg,76.94,40.76
+17828,Gowen City,76.52,40.75
+17830,Herndon,76.8,40.69
+17832,Marion Heights,76.46,40.8
+17834,Kulpmont,76.47,40.79
+17835,Laurelton,77.2,40.91
+17836,Leck Kill,76.62,40.71
+17837,Lewisburg,76.9,40.97
+17841,McClure,77.37,40.69
+17842,Middleburg,77.04,40.79
+17843,Beaver Springs,76.97,40.81
+17844,Mifflinburg,77.05,40.92
+17845,Millmont,77.19,40.88
+17846,Millville,76.52,41.12
+17847,Milton,76.83,41.01
+17850,Montandon,76.85,40.97
+17851,Mount Carmel,76.41,40.79
+17853,Mount Pleasant Mills,77,40.7
+17855,New Berlin,76.98,40.88
+17856,New Columbia,76.9,41.05
+17857,Northumberland,76.79,40.9
+17859,Orangeville,76.38,41.1
+17860,Paxinos,76.63,40.84
+17864,Port Trevorton,76.9,40.69
+17866,Coal Township,76.49,40.8
+17867,Rebuck,76.74,40.71
+17868,Riverside,76.63,40.95
+17870,Selinsgrove,76.86,40.82
+17872,Shamokin,76.56,40.79
+17877,Snydertown,76.67,40.87
+17878,Stillwater,76.36,41.15
+17881,Trevorton,76.67,40.78
+17888,Wilburton,76.39,40.81
+17889,Winfield,76.87,40.89
+17901,Pottsville,76.21,40.68
+17921,Ashland,76.34,40.77
+17922,Auburn,76.13,40.59
+17923,Branchdale,76.33,40.66
+17925,Brockton,76.04,40.76
+17927,Centralia,76.35,40.81
+17929,Cressona,76.19,40.62
+17931,Frackville,76.23,40.78
+17935,Girardville,76.28,40.79
+17938,Hegins,76.47,40.66
+17941,Klingerstown,76.65,40.66
+17948,Mahanoy City,76.13,40.81
+17954,Minersville,76.26,40.69
+17957,Muir,76.46,40.61
+17959,New Philadelphia,76.11,40.72
+17960,New Ringgold,75.94,40.71
+17961,Orwigsburg,76.08,40.64
+17963,Pine Grove,76.32,40.56
+17964,Pitman,76.52,40.7
+17965,Port Carbon,76.16,40.69
+17967,Ringtown,76.23,40.85
+17968,Sacramento,76.61,40.63
+17970,Saint Clair,76.19,40.71
+17972,Schuylkill Haven,76.16,40.63
+17976,Shenandoah,76.2,40.81
+17978,Spring Glen,76.63,40.63
+17980,Tower City,76.55,40.58
+17981,Tremont,76.39,40.62
+17983,Valley View,76.54,40.64
+17985,Zion Grove,76.23,40.93
+18011,Alburtis,75.62,40.48
+18013,Bangor,75.19,40.85
+18014,Bath,75.4,40.75
+18015,Bethlehem,75.38,40.6
+18017,Bethlehem,75.35,40.65
+18018,Bethlehem,75.39,40.62
+18031,Breinigsville,75.65,40.55
+18032,Catasauqua,75.46,40.65
+18034,Center Valley,75.42,40.53
+18035,Cherryville,75.55,40.73
+18036,Coopersburg,75.38,40.5
+18037,Coplay,75.51,40.68
+18038,Danielsville,75.51,40.78
+18041,East Greenville,75.5,40.41
+18042,Easton,75.23,40.68
+18049,Emmaus,75.5,40.52
+18051,Fogelsville,75.65,40.59
+18052,Whitehall,75.49,40.64
+18053,Germansville,75.71,40.71
+18054,Green Lane,75.43,40.35
+18055,Hellertown,75.32,40.58
+18056,Hereford,75.57,40.44
+18058,Kunkletown,75.47,40.89
+18062,Macungie,75.56,40.52
+18064,Nazareth,75.31,40.74
+18066,New Tripoli,75.74,40.65
+18067,Northampton,75.48,40.69
+18069,Orefield,75.59,40.62
+18070,Palm,75.53,40.43
+18071,Palmerton,75.6,40.81
+18072,Pen Argyl,75.27,40.85
+18073,Pennsburg,75.48,40.39
+18074,Perkiomenville,75.5,40.31
+18076,Red Hill,75.48,40.37
+18077,Riegelsville,75.21,40.57
+18078,Schnecksville,75.62,40.68
+18080,Slatington,75.62,40.74
+18087,Trexlertown,75.6,40.55
+18088,Walnutport,75.56,40.76
+18091,Wind Gap,75.32,40.81
+18092,Zionsville,75.52,40.47
+18101,Allentown,75.47,40.6
+18102,Allentown,75.47,40.6
+18103,Allentown,75.46,40.58
+18104,Allentown,75.52,40.6
+18106,Allentown,75.56,40.56
+18201,Hazleton,75.97,40.96
+18210,Albrightsville,75.58,40.97
+18211,Andreas,75.83,40.74
+18214,Barnesville,76.06,40.81
+18216,Beaver Meadows,75.94,40.92
+18218,Coaldale,75.91,40.82
+18220,Delano,76.06,40.84
+18222,Drums,75.97,41.02
+18224,Freeland,75.88,41.01
+18229,Jim Thorpe,75.73,40.87
+18232,Lansford,75.88,40.83
+18235,Lehighton,75.7,40.83
+18237,Mcadoo,75.99,40.89
+18240,Nesquehoning,75.82,40.86
+18245,Quakake,75.98,40.84
+18246,Rock Glen,76.16,40.96
+18248,Sheppton,76.13,40.88
+18249,Sugarloaf,76.07,40.99
+18250,Summit Hill,75.86,40.82
+18252,Tamaqua,75.97,40.79
+18255,Weatherly,75.83,40.94
+18301,East Stroudsburg,75.17,41.03
+18321,Bartonsville,75.29,41
+18322,Brodheadsville,75.41,40.93
+18324,Bushkill,75.01,41.12
+18325,Canadensis,75.25,41.23
+18326,Cresco,75.26,41.16
+18327,Delaware Water Gap,75.14,40.98
+18328,Dingmans Ferry,74.93,41.23
+18330,Effort,75.45,40.96
+18331,Gilbert,75.43,40.9
+18332,Henryville,75.27,41.08
+18333,Kresgeville,75.5,40.89
+18334,Long Pond,75.44,41.06
+18336,Matamoras,74.71,41.36
+18337,Milford,74.88,41.32
+18340,Millrift,74.77,41.35
+18343,Mount Bethel,75.11,40.9
+18344,Mount Pocono,75.35,41.12
+18346,Pocono Summit,75.41,41.1
+18347,Pocono Lake,75.55,41.11
+18350,Pocono Pines,75.47,41.1
+18352,Reeders,75.27,40.98
+18353,Saylorsburg,75.37,40.91
+18354,Sciota,75.29,40.92
+18355,Scotrun,75.32,41.07
+18360,Stroudsburg,75.24,40.98
+18370,Swiftwater,75.34,41.08
+18371,Tamiment,74.95,41.16
+18372,Tannersville,75.3,41.04
+18401,Aldenville,75.36,41.64
+18403,Archbald,75.55,41.49
+18405,Beach Lake,75.11,41.6
+18407,Carbondale,75.5,41.58
+18411,Clarks Summit,75.7,41.48
+18414,Dalton,75.7,41.53
+18415,Damascus,75.13,41.73
+18417,Equinunk,75.18,41.81
+18419,Factoryville,75.76,41.57
+18421,Forest City,75.48,41.65
+18424,Gouldsboro,75.5,41.24
+18425,Greeley,75.01,41.43
+18426,Greentown,75.28,41.33
+18427,Hamlin,75.35,41.4
+18428,Hawley,75.19,41.47
+18430,Herrick Center,75.5,41.76
+18431,Honesdale,75.25,41.57
+18433,Jermyn,75.54,41.53
+18434,Jessup,75.56,41.47
+18435,Lackawaxen,75.07,41.5
+18436,Lake Ariel,75.43,41.43
+18437,Lake Como,75.32,41.86
+18438,Lakeville,75.26,41.42
+18439,Lakewood,75.38,41.81
+18441,Lenoxville,75.63,41.66
+18443,Milanville,75.08,41.64
+18444,Moscow,75.53,41.34
+18445,Newfoundland,75.33,41.3
+18446,Nicholson,75.76,41.64
+18447,Olyphant,75.6,41.46
+18451,Paupack,75.23,41.38
+18452,Peckville,75.58,41.48
+18453,Pleasant Mount,75.39,41.73
+18455,Preston Park,75.38,41.86
+18456,Prompton,75.32,41.58
+18458,Shohola,74.91,41.41
+18460,South Sterling,75.38,41.27
+18461,Starlight,75.32,41.92
+18462,Starrucca,75.44,41.89
+18463,Sterling,75.39,41.34
+18464,Tafton,75.1,41.36
+18465,Thompson,75.53,41.83
+18466,Tobyhanna,75.39,41.18
+18469,Tyler Hill,75.15,41.67
+18470,Union Dale,75.54,41.7
+18472,Waymart,75.4,41.57
+18503,Scranton,75.66,41.4
+18504,Scranton,75.68,41.41
+18505,Scranton,75.66,41.39
+18507,Moosic,75.71,41.36
+18508,Scranton,75.66,41.43
+18509,Scranton,75.64,41.42
+18510,Scranton,75.64,41.4
+18512,Scranton,75.62,41.42
+18517,Taylor,75.71,41.39
+18518,Old Forge,75.73,41.37
+18519,Dickson City,75.62,41.46
+18603,Berwick,76.24,41.06
+18610,Blakeslee,75.53,41.04
+18612,Dallas,75.95,41.36
+18614,Dushore,76.4,41.52
+18615,Falls,75.85,41.46
+18616,Forksville,76.6,41.52
+18617,Glen Lyon,76.07,41.17
+18618,Harveys Lake,76.04,41.35
+18619,Hillsgrove,76.69,41.44
+18621,Hunlock Creek,76.08,41.24
+18622,Huntington Mills,76.19,41.2
+18623,Laceyville,76.14,41.66
+18624,Lake Harmony,75.63,41.05
+18628,Lopez,76.3,41.41
+18629,Mehoopany,76.1,41.55
+18630,Meshoppen,76.01,41.63
+18631,Mifflinville,76.29,41.02
+18632,Mildred,76.38,41.47
+18634,Nanticoke,76,41.19
+18635,Nescopeck,76.19,41.04
+18636,Noxen,76.04,41.41
+18640,Pittston,75.78,41.31
+18641,Pittston,75.74,41.33
+18642,Duryea,75.76,41.34
+18643,Pittston,75.81,41.33
+18644,Wyoming,75.85,41.31
+18651,Plymouth,75.94,41.24
+18655,Shickshinny,76.16,41.17
+18656,Sweet Valley,76.13,41.3
+18657,Tunkhannock,75.94,41.55
+18660,Wapwallopen,76.08,41.06
+18661,White Haven,75.77,41.07
+18701,Wilkes Barre,75.88,41.24
+18702,Wilkes Barre,75.88,41.23
+18704,Kingston,75.89,41.27
+18705,Wilkes Barre,75.84,41.26
+18706,Wilkes Barre,75.91,41.2
+18707,Mountain Top,75.93,41.13
+18708,Shavertown,75.97,41.29
+18709,Luzerne,75.89,41.28
+18801,Montrose,75.88,41.83
+18810,Athens,76.48,41.94
+18812,Brackney,75.93,41.96
+18817,East Smithfield,76.61,41.86
+18818,Friendsville,76.02,41.91
+18821,Great Bend,75.73,41.97
+18822,Hallstead,75.78,41.95
+18823,Harford,75.67,41.77
+18824,Hop Bottom,75.78,41.69
+18825,Jackson,75.6,41.86
+18826,Kingsley,75.78,41.76
+18828,Lawton,76.09,41.75
+18829,Le Raysville,76.17,41.84
+18830,Little Meadows,76.11,41.97
+18831,Milan,76.53,41.89
+18832,Monroeton,76.5,41.69
+18833,New Albany,76.43,41.59
+18834,New Milford,75.71,41.86
+18837,Rome,76.3,41.86
+18839,Rushville,76.05,41.77
+18840,Sayre,76.52,41.98
+18842,South Gibson,75.6,41.75
+18844,Springville,75.9,41.71
+18845,Stevensville,76.17,41.77
+18846,Sugar Run,76.25,41.6
+18847,Susquehanna,75.58,41.94
+18848,Towanda,76.46,41.76
+18850,Ulster,76.48,41.84
+18851,Warren Center,76.19,41.93
+18853,Wyalusing,76.27,41.7
+18854,Wysox,76.38,41.78
+18901,Doylestown,75.12,40.32
+18913,Carversville,75.06,40.39
+18914,Chalfont,75.21,40.28
+18915,Colmar,75.26,40.27
+18917,Dublin,75.2,40.37
+18920,Erwinna,75.08,40.5
+18923,Fountainville,75.15,40.33
+18925,Furlong,75.06,40.29
+18927,Hilltown,75.27,40.34
+18929,Jamison,75.09,40.25
+18930,Kintnersville,75.21,40.53
+18932,Line Lexington,75.25,40.28
+18933,Lumberville,75.05,40.4
+18934,Mechanicsville,75.06,40.34
+18936,Montgomeryville,75.23,40.25
+18938,New Hope,74.98,40.35
+18940,Newtown,74.94,40.24
+18942,Ottsville,75.15,40.45
+18944,Perkasie,75.26,40.37
+18947,Pipersville,75.1,40.42
+18951,Quakertown,75.35,40.44
+18954,Richboro,75,40.21
+18955,Richlandtown,75.32,40.47
+18960,Sellersville,75.31,40.36
+18964,Souderton,75.32,40.31
+18966,Southampton,75,40.19
+18969,Telford,75.35,40.32
+18972,Upper Black Eddy,75.12,40.54
+18974,Warminster,75.09,40.2
+18976,Warrington,75.13,40.24
+18977,Washington Crossing,74.88,40.29
+19001,Abington,75.12,40.12
+19002,Ambler,75.2,40.16
+19003,Ardmore,75.29,40
+19004,Bala Cynwyd,75.23,40.01
+19006,Huntingdon Valley,75.05,40.12
+19007,Bristol,74.86,40.1
+19008,Broomall,75.36,39.97
+19010,Bryn Mawr,75.32,40.02
+19012,Cheltenham,75.1,40.06
+19013,Chester,75.37,39.84
+19014,Aston,75.43,39.86
+19015,Brookhaven,75.38,39.86
+19018,Primos,75.29,39.92
+19020,Bensalem,74.93,40.11
+19021,Croydon,74.89,40.09
+19022,Crum Lynne,75.33,39.86
+19023,Darby,75.26,39.91
+19025,Dresher,75.16,40.14
+19026,Drexel Hill,75.3,39.94
+19029,Essington,75.29,39.86
+19030,Fairless Hills,74.85,40.17
+19031,Flourtown,75.21,40.1
+19032,Folcroft,75.28,39.89
+19033,Folsom,75.32,39.89
+19034,Fort Washington,75.2,40.13
+19035,Gladwyne,75.28,40.04
+19036,Glenolden,75.29,39.9
+19038,Glenside,75.15,40.1
+19040,Hatboro,75.1,40.17
+19041,Haverford,75.31,40
+19043,Holmes,75.3,39.9
+19044,Horsham,75.14,40.18
+19046,Jenkintown,75.11,40.1
+19047,Langhorne,74.91,40.17
+19050,Lansdowne,75.26,39.93
+19053,Feasterville Trevose,74.98,40.15
+19054,Levittown,74.82,40.16
+19055,Levittown,74.83,40.14
+19056,Levittown,74.88,40.15
+19057,Levittown,74.86,40.14
+19061,Marcus Hook,75.44,39.83
+19063,Media,75.4,39.91
+19064,Springfield,75.33,39.92
+19066,Merion Station,75.25,40
+19067,Morrisville,74.82,40.21
+19070,Morton,75.32,39.9
+19072,Narberth,75.25,40.01
+19073,Newtown Square,75.4,39.98
+19074,Norwood,75.29,39.88
+19075,Oreland,75.18,40.11
+19076,Prospect Park,75.3,39.88
+19078,Ridley Park,75.32,39.87
+19079,Sharon Hill,75.26,39.9
+19081,Swarthmore,75.34,39.89
+19082,Upper Darby,75.26,39.95
+19083,Havertown,75.31,39.97
+19085,Villanova,75.34,40.03
+19086,Wallingford,75.37,39.88
+19087,Wayne,75.4,40.05
+19090,Willow Grove,75.12,40.14
+19094,Woodlyn,75.34,39.87
+19095,Wyncote,75.15,40.08
+19096,Wynnewood,75.27,40
+19102,Philadelphia,75.16,39.94
+19103,Philadelphia,75.17,39.95
+19104,Philadelphia,75.2,39.95
+19106,Philadelphia,75.14,39.94
+19107,Philadelphia,75.15,39.94
+19111,Philadelphia,75.08,40.05
+19112,Philadelphia,75.17,39.88
+19113,Philadelphia,75.27,39.86
+19114,Philadelphia,74.99,40.06
+19115,Philadelphia,75.04,40.09
+19116,Philadelphia,75.01,40.11
+19118,Philadelphia,75.2,40.08
+19119,Philadelphia,75.18,40.05
+19120,Philadelphia,75.12,40.03
+19121,Philadelphia,75.17,39.98
+19122,Philadelphia,75.14,39.97
+19123,Philadelphia,75.15,39.96
+19124,Philadelphia,75.08,40.01
+19125,Philadelphia,75.12,39.97
+19126,Philadelphia,75.13,40.05
+19127,Philadelphia,75.22,40.02
+19128,Philadelphia,75.22,40.04
+19129,Philadelphia,75.18,40.01
+19130,Philadelphia,75.17,39.96
+19131,Philadelphia,75.22,39.98
+19132,Philadelphia,75.16,39.99
+19133,Philadelphia,75.14,39.99
+19134,Philadelphia,75.11,39.99
+19135,Philadelphia,75.05,40.02
+19136,Philadelphia,75.02,40.04
+19137,Philadelphia,75.07,40
+19138,Philadelphia,75.15,40.05
+19139,Philadelphia,75.23,39.96
+19140,Philadelphia,75.14,40.01
+19141,Philadelphia,75.14,40.03
+19142,Philadelphia,75.23,39.92
+19143,Philadelphia,75.22,39.94
+19144,Philadelphia,75.17,40.03
+19145,Philadelphia,75.18,39.92
+19146,Philadelphia,75.17,39.93
+19147,Philadelphia,75.15,39.93
+19148,Philadelphia,75.15,39.92
+19149,Philadelphia,75.06,40.03
+19150,Philadelphia,75.17,40.07
+19151,Philadelphia,75.25,39.97
+19152,Philadelphia,75.04,40.06
+19153,Philadelphia,75.24,39.9
+19154,Philadelphia,74.97,40.08
+19301,Paoli,75.48,40.04
+19310,Atglen,75.97,39.94
+19311,Avondale,75.76,39.82
+19312,Berwyn,75.44,40.04
+19317,Chadds Ford,75.58,39.86
+19319,Cheyney,75.54,39.91
+19320,Coatesville,75.82,39.98
+19330,Cochranville,75.92,39.87
+19333,Devon,75.42,40.04
+19335,Downingtown,75.71,40.01
+19341,Exton,75.64,40.04
+19342,Glen Mills,75.5,39.9
+19343,Glenmoore,75.77,40.08
+19344,Honey Brook,75.88,40.08
+19346,Kelton,75.87,39.79
+19348,Kennett Square,75.7,39.85
+19350,Landenberg,75.78,39.76
+19352,Lincoln University,75.88,39.78
+19355,Malvern,75.53,40.03
+19362,Nottingham,76.03,39.74
+19363,Oxford,75.98,39.78
+19365,Parkesburg,75.92,39.96
+19372,Thorndale,75.76,40
+19373,Thornton,75.53,39.9
+19374,Toughkenamon,75.78,39.82
+19380,West Chester,75.59,39.98
+19382,West Chester,75.58,39.94
+19390,West Grove,75.83,39.82
+19401,Norristown,75.33,40.12
+19403,Norristown,75.38,40.14
+19405,Bridgeport,75.34,40.1
+19406,King Of Prussia,75.37,40.09
+19422,Blue Bell,75.27,40.15
+19425,Chester Springs,75.63,40.09
+19426,Collegeville,75.44,40.18
+19428,Conshohocken,75.3,40.07
+19435,Frederick,75.53,40.29
+19436,Gwynedd,75.25,40.2
+19438,Harleysville,75.38,40.26
+19440,Hatfield,75.29,40.27
+19444,Lafayette Hill,75.26,40.08
+19446,Lansdale,75.29,40.23
+19453,Mont Clare,75.49,40.13
+19454,North Wales,75.25,40.21
+19460,Phoenixville,75.52,40.12
+19462,Plymouth Meeting,75.27,40.1
+19464,Pottstown,75.63,40.24
+19468,Royersford,75.53,40.19
+19473,Schwenksville,75.46,40.24
+19475,Spring City,75.56,40.17
+19477,Spring House,75.23,40.18
+19492,Zieglerville,75.48,40.28
+19501,Adamstown,76.05,40.24
+19503,Bally,75.58,40.4
+19504,Barto,75.57,40.38
+19505,Bechtelsville,75.62,40.37
+19506,Bernville,76.12,40.45
+19507,Bethel,76.27,40.48
+19508,Birdsboro,75.83,40.25
+19510,Blandon,75.88,40.44
+19512,Boyertown,75.66,40.33
+19518,Douglassville,75.73,40.27
+19520,Elverson,75.78,40.15
+19522,Fleetwood,75.81,40.44
+19525,Gilbertsville,75.59,40.3
+19526,Hamburg,75.98,40.54
+19529,Kempton,75.85,40.63
+19530,Kutztown,75.77,40.52
+19533,Leesport,75.99,40.41
+19534,Lenhartsville,75.84,40.57
+19539,Mertztown,75.68,40.49
+19540,Mohnton,75.98,40.25
+19541,Mohrsville,76.01,40.47
+19543,Morgantown,75.89,40.15
+19547,Oley,75.77,40.38
+19549,Port Clinton,76.02,40.58
+19551,Robesonia,76.13,40.35
+19555,Shoemakersville,75.96,40.49
+19560,Temple,75.9,40.4
+19562,Topton,75.7,40.5
+19565,Wernersville,76.09,40.32
+19567,Womelsdorf,76.19,40.37
+19601,Reading,75.93,40.34
+19602,Reading,75.91,40.33
+19604,Reading,75.91,40.35
+19605,Reading,75.93,40.38
+19606,Reading,75.86,40.32
+19607,Reading,75.95,40.29
+19608,Reading,76.02,40.31
+19609,Reading,75.99,40.32
+19610,Reading,75.97,40.33
+19611,Reading,75.94,40.32
