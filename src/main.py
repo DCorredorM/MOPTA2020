@@ -16,7 +16,7 @@ from sklearn.cluster import KMeans
 import os,shutil
 import glob
 
-import TSP
+#import TSP
 import pulse_mod as pulse
 
 from matplotlib import cm
