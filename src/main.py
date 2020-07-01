@@ -125,7 +125,7 @@ class master():
 		#print(self.dist_m.head())
 
 		self.t_mile=1/40
-		self.c_mile=(.7)
+		self.c_mile=0.7
 
 		#Graph
 		self.G=nx.Graph()
@@ -151,7 +151,7 @@ class master():
 			di=self.Demands[i][self.Demands[i]>0]
 			#print(self.Demands[i])
 			di_mat=self.dist_m.loc[list(di.index),list(di.index)]
-			self.SPS.append(sub_problem(id=len(self.SPS),H=[],D=di,dm=self.dist_m,pos=self.pos))
+			self.SPS.append(sub_problem(id=len(self.SPS),H=[],D=di,dm=self.dist_m,pos=self.pos,master=master))
 			#print(self.SPS[-1].id)
 			#if len(self.SPS)>1:
 		#		break				
@@ -210,6 +210,7 @@ class master():
 		plt.show()
 		
 		'''	
+	
 	def calcPosDisp(self):
 		n=len(self.possibleDepots)
 		k=self.h
@@ -2671,8 +2672,10 @@ def write_tsp_file_dmat(fp,distance_matrix, name):
 
 class sub_problem():
 	"""docstring for sub_problem"""
-	def __init__(self,id,H, D,dm,pos=[]):
+	def __init__(self,master,id,H, D,dm,pos=[]):
 		#super().__init__()		
+
+		self.master=master
 
 		self.id=id
 		#Route time limit
@@ -2722,7 +2725,15 @@ class sub_problem():
 		#self.m=self.master_problem(relaxed=True)
 
 		self.z_hat={i:0 for i in range(len(self.R))}
-		
+
+		#Depot lower time window
+		self.DLtw=0
+		#Depot upper time window
+		self.DUtw=11
+
+		#Depot lower time window
+		self.nLtw=2
+		self.nUtw=10
 	def tsp(self,clients,π):
 		'''
 		Input:
@@ -3125,18 +3136,19 @@ class sub_problem():
 		for j in range(auxs+2):
 			if j==0:
 				#6-8->0-2
-				f.write(f'{j}\t{0}\t{1}\t{0*60}\t{11*60}\n')
+				f.write(f'{j}\t{0}\t{1}\t{self.DLtw*60}\t{self.DUtw*60}\n')
 			elif j==auxs+1:
-				#8-17->2-9
-				f.write(f'{j}\t{0}\t{1}\t{2*60}\t{11*60}\n')
+				#8-17->2-11
+				f.write(f'{j}\t{0}\t{1}\t{self.nLtw*60}\t{self.DUtw*60}\n')
 			else:
-				#8-16->2-8
-				f.write(f'{j}\t{0}\t{1}\t{2*60}\t{10*60}\n')
+				#8-16->2-10
+				f.write(f'{j}\t{0}\t{1}\t{self.nLtw*60}\t{self.nUtw*60}\n')
 		for i in clients.index:
 			#8-16->2-8
 			if π[i]>0:
 				solve.append(i)
-			f.write(f'{i}\t{clients[i]}\t{0}\t{2*60}\t{10*60}\n')
+			#TODO: Modificar Tw por para acelerar pulso.... particionar los nodos por depot	
+			f.write(f'{i}\t{clients[i]}\t{0}\t{self.nLtw*60}\t{self.nUtw*60}\n')
 
 		nArcs=0
 		nNodes=len(clients.index)+auxs+2
@@ -3297,6 +3309,22 @@ class sub_problem():
 		
 		os.chdir(curp)
 
+	def nodeTimeWindow(self,depot,node):
+		'''
+		TODO:
+		Depending on node location assign specific time windows
+
+			|
+		A	|	B
+			|
+	--------|----------
+			|	
+		C	|	D
+			|
+		'''
+		print(self.pos[depot])
+		print(self.pos[node])
+		pass
 
 from math import sin, cos, sqrt, atan2, radians
 def distance(lat1,lon1,lat2,lon2):
@@ -3428,300 +3456,14 @@ def fit_and_plot():
 
 
 if __name__ == '__main__':
-	scal=1
-	#global fsize
-	#fsize=(16*scal, 10*scal)
-	#plt.figure(num=None, figsize=(16*scal, 10*scal), dpi=80, facecolor='w', edgecolor='k')
+	m=master()
+	s=m.SPS[0]
 
-	#p=master()
-	
+	print(m.possibleDepots)
 
 
-	#p.Benders_algo(read=True)
-	#p.SPS[0].runJavaPulse()
-	#costp.SPS[0].readDymacs()
-	#pat=[15051,15445,15456,15683,15610,15131,15144,15051,16059,15237,15229,15136,15147,15051,16212,15713,15920,15944,15949,15716,15051]
-	#pat2=[15051,16423,16507,16316,16130,16148,16101,15051]
-	#path=list(zip(pat[:-1],pat[1:]))
-	#p.plot_G()
-	#nx.draw_networkx_nodes(p.G,nodelist=[15051],pos=p.pos,node_color='r')
-	#plt.show()
-
-	#petals=[pat,pat2]
-	#h=[15051]
-	#p.plot_G()
-	#p.plot_petals(petals, h,pet=False,pet_col='orange')
-	#plt.show()
-
-	'''
-	sol=p.AnimNVeh[-1]
-
-	#vals=list(p.f.xvalues())
-	#print(vals)
-	
-	p.f.hist(bins=500)
-	
-	for d in sol.keys():
-		print(p.f['cost'][d])
-		plt.plot([p.f['cost'][d],p.f['cost'][d]],[0,400])
-	plt.show()
-	'''
-
-	'''
-	anim=p.Benders_animation()
-	import matplotlib.animation as animation
-	print(animation.writers.list())
-
-	Writer = animation.writers['ffmpeg']
-	writer = Writer(fps=1, metadata=dict(artist='Me'), bitrate=500)
-	anim.save('benders_animation.mp4', writer=writer)
-
-	'''
-	'''
-
-
-	os.chdir('../Plots')
-	y_hat=p.AnimNVeh[-1]
-	feas={}
-	for s in p.SPS:
-		s.y_hat=y_hat
-		s.H=list(y_hat.keys())
-		s.Ri={}
-		m=p.solve_sp(s,plot=True)
-		if sum(m._v[i].x for i in  m._v.keys())>=0:
-			print(f'Sub problema {s.id} es infactible con esta solucion')
-			feas[s.id]='Infeasible'
-		else:
-			feas[sp.id]='Feasible'	
-	'''
-
-	#y_hat=p.readResultsFS()
-	#y_hat, x_hat, η_hat, Cost=p.warm_start()
-
-	#numVeh={i:y_hat[i] for i in y_hat.keys() if y_hat[i]>0}
-	#p.plotDepots(numVeh)
-	#plt.savefig(f'BenMap_{0}.png')
-	#plt.clf()
-
-	'''
-	h=[15051]
-	
-	Adj30=(p.dist_m*p.t_mile).applymap(lambda x: 1 if x<=0.5 else 0)
-	#print(Adj30)
-	nodes=[j for j in p.dist_m.index if int(Adj30.loc[h][j])==1]
-
-	p.plot_G()
-	p.plot_cluster(nodes,color='green')
-	plt.show()
-	'''
-	
-	#p.plotDepots(numVeh)
-	#plt.show()
-	'''
-	global fig, ax
-	fig = plt.figure(figsize=fsize)
-	ax=fig.add_subplot()
-
-
-
-	f=lambda x: p.plotDepots(numVeh={list(p.G.nodes)[random.randint(0,len(list(p.G.nodes)))]:''},ax=ax)
-	anim = matplotlib.animation.FuncAnimation(fig, f, frames=20,interval=1000, repeat=True)	
-
-	import matplotlib.animation as animation
-	print(animation.writers.list())
-
-	Writer = animation.writers['ffmpeg']
-	writer = Writer(fps=1, metadata=dict(artist='Me'), bitrate=500)
-	anim.save('vecindario.mp4', writer=writer)
-	plt.show()
-
-	#p.readModel()
-	#p.warm_start()
-	
-	'''
-
-	'''
-	fname = get_dataset_path("berlin52")
-	solver = TSPSolver.from_tspfile(fname)
-	solution = solver.solve()
-	print(solution.found_tour)
-	print(solution.optimal_value)
-	print(solution.tour)
-	'''
-
-
-
-
-
-	'''
-	from scipy.stats import bernoulli
-	from scipy.stats import norm 
-
-
-	r = bernoulli.rvs(0.06, size=1457)
-	m = norm.rvs(10, 2.5, size=1457)
-
-	d=pd.DataFrame({0:list(r*m)},index=p.Demands.index)
-
-	print(d)
-	p.plot_dem(d)
-	plt.show()
-
-	'''
-
-	'''
-	p=master()
-
-
-	Demands=p.import_data('mopta2020_q2019.csv',names=['id']+list(range(366,2*366-1))).set_index('id')
-	print(Demands.head())
-
-	dat=p.Demands
-
-	print(dat.head())
-
-	dem_day=[sum(dat[i]) for i in dat.columns]+[sum(Demands[i]) for i in Demands.columns]
-
-	plt.plot(range(len(dem_day)),dem_day)
-	plt.show()
-
-
-	print(dat.head())
-	'''
-	#dat=dat.loc[:,dat.loc[90,:]>0]
-
-
-	'''
-	plt.matshow(dat.corr())
-	cb = plt.colorbar()
-	plt.show()
-	'''
-
-
-	#import statements
-
-
-
-	################################################################################
-	#Cluster analysis.
-
-	# create np array for data points
-	'''
-	p=master()
-
-
-	nodes=list(p.V.index)
-	points=[[p.V.loc[i]['lat'],p.V.loc[i]['long']] for i in nodes]
-
-	N=[1,3,6,10]
-	
-	All_clusters=[]
-	for n in N:
-		# create kmeans object
-		kmeans = KMeans(n_clusters=n,random_state=5)
-		# fit kmeans object to data
-		kmeans.fit(points)
-
-		# print location of clusters learned by kmeans object
-		centers=kmeans.cluster_centers_
-
-		# save new clusters for chart
-		y_km = kmeans.fit_predict(points)		
-
-		#Nodes in each class
-		casses=[[k for j,k in enumerate(nodes) if y_km[j]==i ] for i in range(n)]
-		All_clusters.append(casses)
-		
 
 	
-	#All_clusters = p.clusters_louvain()
-
-	print(len(All_clusters[-1]))
-	p.gen_report(All_clusters)
-	#delete_all_files(r'/Users/davidcorredor/Universidad de los Andes/MOPTA - Documentos/MOPTA/Implementation/Cluster_anal')
-	'''
-
-	##################################################################################################
-	#Print parameters AIMMS
-	'''
-	centers=pd.read_csv('centroids.csv',names=['lat','lon'],sep='\t')
-	centers=[(centers['lon'][i],centers['lat'][i]) for i in centers.index]
-	H=p.possDepotsNoNocluster(centers)
-	print(H)
-	H=set([p.f.loc[[i for i in H if p.dist_m[c][i]*p.t_mile<1.5]].idxmin().iloc[0] for c in H])
-	print(H)
-	numVeh={h:1 for h in H}
-	p.plot_G()
-	p.plotDepots(numVeh,ax=None)
-	plt.scatter([y for x,y in centers],[x for x,y in centers],c='red')
-	plt.show()
-	'''
-	p=master() 
-	H={17728, 16130, 15427, 16650, 19372, 17582, 15824, 18014, 18463}
-	print(os.getcwd())
-	f=open('reachablesParaMajo.txt','w')
-	f.write("COMPOSITE TABLE\n")
-	f.write("	h	i	ReachBin\n")
-	f.write("!	---------	---------		--------	\n")
-	for h in H:
-		for i in p.Adj.index:
-			f.write("\t"+str(h)+"\t"+str(i)+"\t"+str(p.Adj[h][i])+"\n")
-	
-	'''
-	id=2
-	for id in range(2,5):
-		sp=p.SPS[id]
-		sp.H={17728, 16130, 15427, 16650, 19372, 17582, 15824, 18014, 18463}
-		sp.y_hat={h:10 for h in sp.H}
-
-		p.solveSpJava(sp)
-		#print(sp.R)
-		os.chdir(curp)
-		file_sp=open(f'sp{id}.sp','wb')
-		pickle.dump(sp, file_sp)
-	'''
-	'''
-	for id in range(5):
-		pickle_in = open(f'sp{id}.sp','rb')
-		sp = pickle.load(pickle_in)
-		print(len(sp.R))
-		m2=sp.master_problem()
-		m2.optimize()
-		print(m2.ObjVal)
-		sp.z_hat={k:kk.x for k,kk in m2._z.items()}
-		petals=[sp.R[i] for i,z in sp.z_hat.items() if z>0.5]
-		#p.plot_dem(sp.D)
-		p.plot_dem(sp.D,'green')
-		p.plot_petals(petals=petals,h=sp.H,pet=False)
-		plt.show()
-	
-	'''
-	
-	'''
-	print(os.getcwd())
-	scenarios=pd.read_csv('Scenarios.csv',header=1,sep=',',index_col=0)
-	print(scenarios.columns)
-	os.chdir('/Users/davidcorredor/Universidad de los Andes/MOPTA - MOPTA/User interface/Final 2/MaD CONDORS/data')
-	print(os.getcwd())
-	def dataTable(df,name,AIMMSname):
-		f=open(name,'w')
-		f.write(AIMMSname+":=DATA TABLE\n")
-		f.write('\t\t'+''.join([f"{i}"+'\t' for i in df.columns])+'\n')
-		f.write('!\t\t'+"---------\t"*len(df.columns)+'\n')
-		for i in df.index:
-			f.write('\t'+f"{i}\t"+''.join([str(round(df[j][i],2))+'\t' for j in df.columns])+'\n')
-		f.close()
-	'''
-	#dataTable(scenarios,'Scenarios.txt','DemandScenario(i,s)')
-	
-	#dataTable(p.dist_m,'DistanceMatrix.txt','Distance(i,j)')
-
-	'''
-	for i in scenarios.columns:
-		p.plot_dem(scenarios[i])
-		plt.show() 
-	'''
-
 
 
 
