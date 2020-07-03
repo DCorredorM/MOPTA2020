@@ -17,7 +17,7 @@ import os,shutil
 import glob
 
 #import TSP
-import pulse_mod as pulse
+#import pulse_mod as pulse
 
 from matplotlib import cm
 
@@ -44,11 +44,12 @@ import dill
 import sys
 
 import pickle
+'''
 try:
 	os.chdir('/Users/davidcorredor/Universidad de los Andes/MOPTA - MOPTA/Implementation/src')
 except:
 	pass
-
+'''
 plt.rcParams.update({'figure.max_open_warning': 0})
 
 global fsize
@@ -111,7 +112,7 @@ class master():
 		self.E=self.import_data('mopta2020_edges.csv',h=0,names=['t','h','d'])
 
 		#Daily demmand
-		#self.Demands=self.import_data('Scenarios.csv',h=0names=['id']+list(range(1,366))).set_index('id')
+		#self.Demands=self.import_data('mopta2020_q2018.csv',h=0,names=['id']+list(range(1,366))).set_index('id')
 		
 		self.Demands=pd.read_csv('Scenarios_robust_new.csv',header=0,index_col=0)	
 		#pd.read_csv('Scenarios.csv',header=1,sep=',',index_col=0)
@@ -216,7 +217,6 @@ class master():
 		k=self.h
 		return math.factorial(n)/(math.factorial(k)*(math.factorial(n-k)))
 
-
 	def import_data(self,file,names,h=None):
 		'''
 		Imports data
@@ -294,6 +294,7 @@ class master():
 		nx.draw_networkx(SG,pos=self.pos,with_labels=False,node_size=n_size,node_color='red')		
 
 		#plt.show()
+	
 	def plot_dem(self,dem,node_color='red'):
 		'''
 		Plots demand for a specified day 
@@ -964,7 +965,6 @@ class master():
 
 		return UB,LB,x_hat,y_hat
 
-
 	def Benders_algoMix(self,epsilon=0.1,time_limit=None,read=True):
 		'''
 		Benders algorithm is implemented.		
@@ -981,13 +981,11 @@ class master():
 			self.time_limit=time_limit
 
 		
-
 		print_log('############################################################################################################################')
 		tCBMP=time.time()
 		m=self.Benders_master_p(epsilon=epsilon,read=read)
 		m.update()
 		
-
 		print_log('############################################################################################################################')
 		print_log(f'Me demoro construyendo el BMP{time.time()-tCBMP}')
 		#print(m.getConstrs())
@@ -1056,11 +1054,12 @@ class master():
 				print_log('\t############################################################')
 				print_log('\t',f'Subproblema {ss}')
 				#print(f'Colgen antes de correr me dice {ColGen}')
-				#if it<self.posDisplays+400:
-				#	ColGen=False	
+				#if it<self.posDisplays:
+					#ColGen=False	
 
-				if random.random()<1:
-					ColGen=False
+				#if random.random()<1:
+				#	ColGen=False
+				Colgen=True
 				if ColGen:
 					FOi,λ,π=self.solveSpJava(s,nRoutes=10)
 				else:
@@ -1392,7 +1391,6 @@ class master():
 
 		return UB,LB,x_hat,y_hat
 	
-
 	def solve_sp(self,sp,plot=False):
 		'''
 		Solves the subproble inputed by parameter.
@@ -1550,6 +1548,7 @@ class master():
 			return m.objVal, λ, π
 		else:
 			return m.objVal, λ, π
+
 	def solveSpJava(self,sp,nRoutes=10):
 		FO=[]
 		clients=sp.D.iloc[:]
@@ -1605,6 +1604,7 @@ class master():
 			#	print(FO)
 			if n_it>2:
 				print('\t\tMejora de: '+str((FO[-2]-FO[-1])/FO[-1]))
+				print('\t\tVoy en de: '+str(FO[-1]))
 				if (FO[-2]-FO[-1])/FO[-1]<0.001:
 					term=True
 			
@@ -1884,6 +1884,7 @@ class master():
 				return m,foi, λ, π
 			else:	
 				return m.objVal, λ, π
+	
 	def buil_aux_slaveG(self,clients,π,H):			
 		nod=list(π.keys())+H
 		
@@ -1991,7 +1992,6 @@ class master():
 			
 		#plt.show()
 		'''
-
 
 	def clusters_louvain(self): 
 		'''
@@ -2561,7 +2561,6 @@ class master():
 		#
 		return set(centers)
 
-
 def subplots(n,nn,lab,caption):
 	'''
 	Latex code to plot subplots.
@@ -2593,7 +2592,6 @@ def subplots(n,nn,lab,caption):
 		t+=r'\end{figure}'
 	return t
 
-
 def delete_all_files(path,exceptions=[]):
 	'''
 	Delts all files from a path with th exeption of exception
@@ -2614,7 +2612,6 @@ def delete_all_files(path,exceptions=[]):
 					shutil.rmtree(file_path)
 			except Exception as e:
 				print('Failed to delete %s. Reason: %s' % (file_path, e))
-
 
 def poisson(t, rate): return (rate**(t)/factorial(t))*np.exp(-rate)
 
@@ -2734,6 +2731,7 @@ class sub_problem():
 		#Depot lower time window
 		self.nLtw=2
 		self.nUtw=10
+	
 	def tsp(self,clients,π):
 		'''
 		Input:
@@ -3207,6 +3205,97 @@ class sub_problem():
 		#c mile:0.7
 		f.close()
 
+	def printDymacsTW(self,depot,clients,π,λ,nRoutes=10):
+		
+		delete_all_files('../Java/Dymacs/',exceptions=['.jar'])
+		auxs=math.ceil(clients.sum()/self.cap)
+		
+		
+
+		f=open(f'../Java/Dymacs/dymacsSp_{depot}.txt','w')
+		ttt=time.time()
+		#Adds node 0 (start node for the sp) and its arcs
+		f.write('Nodes\n')
+		#Node\tdem\treplen\tw1\tw2
+		solve=[]
+		for j in range(auxs+2):
+			if j==0:
+				#6-8->0-2
+				f.write(f'{j}\t{0}\t{1}\t{self.DLtw*60}\t{self.DUtw*60}\n')
+			elif j==auxs+1:
+				#8-17->2-11
+				f.write(f'{j}\t{0}\t{1}\t{self.nLtw*60}\t{self.DUtw*60}\n')
+			else:
+				#8-16->2-10
+				f.write(f'{j}\t{0}\t{1}\t{self.nLtw*60}\t{self.nUtw*60}\n')
+		
+		#Random order for TW strategy
+		ro=np.random.permutation([0,1])
+		for i in clients.index:
+			#8-16->2-8
+			if π[i]>0:
+				solve.append(i)
+			
+			nLtw,nUtw=self.nodeTimeWindow(depot,i,ro)
+			f.write(f'{i}\t{clients[i]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
+
+		nArcs=0
+		nNodes=len(clients.index)+auxs+2
+
+		f.write('Arcs\n')
+		for ii,i in enumerate(clients.index):
+		#for ii,i in enumerate(solve):
+			for j in range(auxs+2):				
+				if j==0:					
+					nArcs+=1
+					f.write(str(j)+'\t'+str(i)+'\t'+str(int(100*(self.dm[depot][i]*self.c_mile- π[i])))+'\t'+str(int(60*self.dm[depot][i]*self.t_mile))+'\n')
+					#f.write(str(i)+'\t'+str(j)+'\t'+str(int(100*(self.dm[i][depot]*self.c_mile)))+'\t'+str(int(60*self.dm[i][depot]*self.t_mile))+'\n')
+				elif j==auxs+1:
+					nArcs+=1
+					#f.write(str(j)+'\t'+str(i)+'\t'+str(int(100*(self.dm[depot][i]*self.c_mile- π[i])))+'\t'+str(int(60*self.dm[depot][i]*self.t_mile))+'\n')
+					f.write(str(i)+'\t'+str(j)+'\t'+str(int(100*(self.dm[i][depot]*self.c_mile)))+'\t'+str(int(60*self.dm[i][depot]*self.t_mile))+'\n')
+				else:
+					nArcs+=2
+					f.write(str(j)+'\t'+str(i)+'\t'+str(int(100*(self.dm[depot][i]*self.c_mile- π[i])))+'\t'+str(int(60*self.dm[depot][i]*self.t_mile))+'\n')
+					f.write(str(i)+'\t'+str(j)+'\t'+str(int(100*(self.dm[i][depot]*self.c_mile)))+'\t'+str(int(60*self.dm[i][depot]*self.t_mile))+'\n')			
+			
+			for j in clients.index[ii+1:]:
+			#for j in solve[ii+1:]:
+				nArcs+=2
+				f.write(str(j)+'\t'+str(i)+'\t'+str(int(100*(self.dm[j][i]*self.c_mile- π[i])))+'\t'+str(int(60*self.dm[j][i]*self.t_mile))+'\n')
+				f.write(str(i)+'\t'+str(j)+'\t'+str(int(100*(self.dm[i][j]*self.c_mile- π[j])))+'\t'+str(int(60*self.dm[i][j]*self.t_mile))+'\n')
+			
+		#print(f'me demoro {tiempo.time()-ttt} segs')
+		f.close()
+
+		'''
+		DataFile:USA-road-NY.txt
+		Number of Arcs:733846
+		Number of Nodes:264346
+		Time Constraint:943100
+		Start Node:1
+		End Node:14676
+		'''		
+
+		f=open(f'../Java/Dymacs/config.txt','w')
+		f.write(f'DataFile:dymacsSp_{depot}.txt'+'\n')
+		f.write(f'Number of Arcs:{nArcs}'+'\n')
+		f.write(f'Number of Nodes:{nNodes}'+'\n')
+		f.write(f'Capacity:{self.cap}'+'\n')
+		f.write(f'Start Node:{0}'+'\n')
+		f.write(f'End Node:{auxs+1}'+'\n')
+		f.write(f'Depot id:{depot}\n')
+		f.write(f'λ:{λ*100}\n')
+		f.write(f'Num routes:{nRoutes}\n')
+		f.write(f'Route id:{len(self.R)}\n')
+		f.write(f't mile:{self.t_mile}\n')
+		f.write(f'c mile:{self.c_mile}\n')
+		f.write(f'time Limit:{5}')
+		
+		#t mile:0.025
+		#c mile:0.7
+		f.close()
+
 	def readDymacs(self,path='../Java/Dymacs/results.txt'):
 		f=open(path,'r')
 		try:
@@ -3240,8 +3329,13 @@ class sub_problem():
 		#print(cost/100,route)
 		return cost/100, Routes
 
-	def runJavaPulse(self,depot,clients,π,λ,nRoutes=10):
-		self.printDymacs(depot,clients,π, λ,nRoutes)
+	def runJavaPulse(self,depot,clients,π,λ,nRoutes=10,tw=True):
+
+		if tw:
+			self.printDymacsTW(depot,clients,π, λ,nRoutes)
+		else:
+			self.printDymacs(depot,clients,π, λ,nRoutes)
+
 		dir=os.getcwd()
 		os.chdir('../Java')
 		os.system('java -jar pulse.jar')
@@ -3309,22 +3403,37 @@ class sub_problem():
 		
 		os.chdir(curp)
 
-	def nodeTimeWindow(self,depot,node):
+	def nodeTimeWindow(self,depot,node,order=[0,1]):
 		'''
 		TODO:
 		Depending on node location assign specific time windows
-
-			|
-		A	|	B
-			|
-	--------|----------
-			|	
-		C	|	D
-			|
+				|
+			A	|	B
+				|
+		--------|----------
+				|	
+			C	|	D
+				|
+		'''		
+		o=np.array(self.pos[depot])
+		p=np.array(self.pos[node])
+		
+		p=p-o
+		tw=[(self.nLtw,self.nUtw/2),(self.nLtw+self.nUtw/2,self.nUtw)]
+		if p[0]<=0:
+			return tw[order[0]]
+		else:
+			return tw[order[1]]
 		'''
-		print(self.pos[depot])
-		print(self.pos[node])
-		pass
+		if p[0]<=0 and p[1]>=0:
+			return (self.nLtw,self.nUtw/4)
+		elif p[0]>=0 and p[1]>=0:
+			return (self.nLtw+self.nUtw/4,2*self.nUtw/4)
+		elif p[0]<=0 and p[1]<=0:
+			return (self.nLtw+2*self.nUtw/4,3*self.nUtw/4)
+		elif p[0]>=0 and p[1]<=0:
+			return (self.nLtw+3*self.nUtw/4,self.nUtw)
+		'''
 
 from math import sin, cos, sqrt, atan2, radians
 def distance(lat1,lon1,lat2,lon2):
@@ -3457,10 +3566,11 @@ def fit_and_plot():
 
 if __name__ == '__main__':
 	m=master()
-	s=m.SPS[0]
-
-	print(m.possibleDepots)
-
+	#s=m.SPS[6]
+	#s.y_hat={17728:5,16130:2,15427:5,15824:4,18014:6}
+	#s.H=list(s.y_hat.keys())
+	#m.solveSpJava(s)
+	m.Benders_algoMix(read=False)
 
 
 	
