@@ -3210,7 +3210,8 @@ class sub_problem():
 		delete_all_files('../Java/Dymacs/',exceptions=['.jar'])
 		auxs=math.ceil(clients.sum()/self.cap)
 		
-		
+
+		classifier=self.classifierGen(depot,clients)
 
 		f=open(f'../Java/Dymacs/dymacsSp_{depot}.txt','w')
 		ttt=time.time()
@@ -3236,7 +3237,7 @@ class sub_problem():
 			if π[i]>0:
 				solve.append(i)
 			
-			nLtw,nUtw=self.nodeTimeWindow(depot,i,ro)
+			nLtw,nUtw=classifier(i,ro)
 			f.write(f'{i}\t{clients[i]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
 
 		nArcs=0
@@ -3405,15 +3406,7 @@ class sub_problem():
 
 	def nodeTimeWindow(self,depot,node,order=[0,1]):
 		'''
-		TODO:
-		Depending on node location assign specific time windows
-				|
-			A	|	B
-				|
-		--------|----------
-				|	
-			C	|	D
-				|
+		
 		'''		
 		o=np.array(self.pos[depot])
 		p=np.array(self.pos[node])
@@ -3434,6 +3427,31 @@ class sub_problem():
 		elif p[0]>=0 and p[1]<=0:
 			return (self.nLtw+3*self.nUtw/4,self.nUtw)
 		'''
+	
+	def classifierGen(self,depot,clients):
+		
+		o=np.array(self.pos[depot])
+		XY=np.array([self.pos[i] for i in clients.index])
+		X,Y=[i[0] for i in XY],[i[1] for i in XY]
+		
+		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
+		b=a.dot(o)
+		tw=[(self.nLtw,self.nUtw/2),(self.nLtw+self.nUtw/2,self.nUtw)]
+		
+		def classifier(client,order=[0,1]):
+			p=np.array(self.pos[client])
+			if a.dot(p)>=b:
+				return tw[order[0]]
+			else: 
+				return tw[order[1]]
+
+		return classifier
+
+def normal(x):
+	'''
+	Returns a normal vector to the one given by parameter (only for x \in \mathbb{R}^2)
+	'''
+	return np.array([-x[1],x[0]])
 
 from math import sin, cos, sqrt, atan2, radians
 def distance(lat1,lon1,lat2,lon2):
@@ -3566,11 +3584,12 @@ def fit_and_plot():
 
 if __name__ == '__main__':
 	m=master()
-	#s=m.SPS[6]
-	#s.y_hat={17728:5,16130:2,15427:5,15824:4,18014:6}
-	#s.H=list(s.y_hat.keys())
-	#m.solveSpJava(s)
-	m.Benders_algoMix(read=False)
+	s=m.SPS[2]
+	s.y_hat={17728:5,16130:2,15427:5,15824:4,18014:6}
+	s.H=list(s.y_hat.keys())
+	#m.Benders_algoMix(read=False)
+
+
 
 
 	
