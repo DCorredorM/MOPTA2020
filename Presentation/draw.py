@@ -3,6 +3,11 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.animation as animat
+p=os.getcwd()
+os.chdir('../src')
+print(os.listdir())
+from main import *
+os.chdir(p)
 
 def readNet():
 	os.chdir('SiouxFalls')
@@ -32,7 +37,6 @@ def randomDemand(G):
 	act=np.random.binomial(1,0.4,len(G.nodes()))
 	dems=dict(zip(G.nodes(),np.random.poisson(lam=10,size=len(G.nodes()))*act))
 	return dems
-
 
 def drawDem(G,pos,dem,ax):	
 	dem=dict(filter(lambda x: x[1]>0,dem.items()))
@@ -75,16 +79,18 @@ def animation(G,pos,n):
 	ani = animat.FuncAnimation(fig, f, frames=n,interval=1000, repeat=True)
 	return ani
 
-
 def saveAnim(anim,name):
 	Writer = animat.writers['ffmpeg']
 	writer = Writer(fps=1, metadata=dict(artist='Me'), bitrate=2800)
 	anim.save(f'media/{name}.mp4', writer=writer)
 
 
+
+
+
 if __name__=='__main__':
-	G, pos=readNet()
 	
+	G, pos=readNet()	
 	dem=randomDemand(G)
 	fig,ax=plt.subplots(figsize=(10,8))
 	drawDem(G,pos,dem,ax)
