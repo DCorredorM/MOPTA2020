@@ -56,7 +56,7 @@ global fsize
 
 scal=1
 fsize=(16*scal, 10*scal)
-plt.figure(num=None, figsize=(16*scal, 10*scal), dpi=80, facecolor='w', edgecolor='k')
+#plt.figure(num=None, figsize=(16*scal, 10*scal), dpi=80, facecolor='w', edgecolor='k')
 
 
 
@@ -76,7 +76,7 @@ def print_log(*args):
 class master():
 
 	"""docstring for master"""
-	def __init__(self,h=3):
+	def __init__(self,h=3,load=True):
 		
 		#Number of depots to open |H|.
 		self.h=h
@@ -104,59 +104,75 @@ class master():
 		#p(master, self).__init__()
 		self.data_path = os.chdir("../Data") #Data path
 
-		#Vertexes
+		if load:
+			#Vertexes
 
-		self.V=self.import_data('mopta2020_vertices.csv',names=['id','loc_name','long','lat']).set_index('id')
-		
-		#Edges
-		self.E=self.import_data('mopta2020_edges.csv',h=0,names=['t','h','d'])
+			self.V=self.import_data('mopta2020_vertices.csv',names=['id','loc_name','long','lat']).set_index('id')
+			
+			#Edges
+			self.E=self.import_data('mopta2020_edges.csv',h=0,names=['t','h','d'])
 
-		#Daily demmand
-		#self.Demands=self.import_data('mopta2020_q2018.csv',h=0,names=['id']+list(range(1,366))).set_index('id')
-		
-		self.Demands=pd.read_csv('Scenarios_robust_new.csv',header=0,index_col=0)	
-		#pd.read_csv('Scenarios.csv',header=1,sep=',',index_col=0)
+			#Daily demmand
+			#self.Demands=self.import_data('mopta2020_q2018.csv',h=0,names=['id']+list(range(1,366))).set_index('id')
+			
+			self.Demands=pd.read_csv('Scenarios_robust_new.csv',header=0,index_col=0)	
+			#pd.read_csv('Scenarios.csv',header=1,sep=',',index_col=0)
 
-		#Vertexes
-		self.f=self.import_data('mopta2020_depots.csv',names=['id','cost']).set_index('id')#.to_dict()['cost']
+			#Vertexes
+			self.f=self.import_data('mopta2020_depots.csv',names=['id','cost']).set_index('id')#.to_dict()['cost']
 
 
-		#Distance matrix
-		self.dist_m=self.import_data('distance_matrix.csv',h=0,names=[0]+list(self.V.index)).set_index(0)
-		#print(self.dist_m.head())
+			#Distance matrix
+			self.dist_m=self.import_data('distance_matrix.csv',h=0,names=[0]+list(self.V.index)).set_index(0)
 
+
+			#Graph
+			self.G=nx.Graph()
+			for i in self.V.iloc:
+				self.G.add_node(int(i.name),loc_name=i[0],long=i[1],lat=i[2])
+				
+			for i in self.E.iloc:
+				self.G.add_edge(int(i[0]),int(i[1]),d=i[2],c=0.7*i[2],t=(1/40)*i[2])
+			
+			#print(self.G.nodes)
+			for i in list(self.G.nodes).copy():
+				if i not in self.V.index:
+					#print(i)
+					self.G.remove_node(i)
+			
+			#Graph position
+			self.pos={i:(self.G.nodes[i]['long'],self.G.nodes[i]['lat']) for i in self.G.nodes}
+
+			
+			#Subproblems
+			self.SPS=[]
+			for i in self.Demands:
+				di=self.Demands[i][self.Demands[i]>0]
+				#print(self.Demands[i])
+				#di_mat=self.dist_m.loc[list(di.index),list(di.index)]
+				self.SPS.append(sub_problem(id=len(self.SPS),H=[],D=di,dm=self.dist_m,pos=self.pos,master=self))
+				#print(self.SPS[-1].id)
+				#if len(self.SPS)>1:
+			#		break		
+			self.τ=4
+			#Vecindarios de cada nodo
+			self.Adj=(self.dist_m*self.t_mile).applymap(lambda x: 1 if x<=self.τ else 0)
+
+			#Probabilitie of placing orders for eac node.
+			self.prob=1/len(self.Demands.index)*self.Demands.applymap(lambda x: 1 if x>0 else 0).sum(axis=1)
+			
+			#Lower bound on the number of vehicles needed in each node
+			#self.compMinVeh(α=0.4)
+
+			self.minVeh=self.import_data('num_veh.csv',h=0,names=['id','minVeh']).set_index('id').applymap(lambda x: max(x,1))
+			self.minVeh=self.minVeh['minVeh']	
+			#Cost of not covering a node
+			self.ρ=self.prob*self.demRate*100	
+			
+		#print(self.dist_m.head())		
 		self.t_mile=1/40
 		self.c_mile=0.7
 
-		#Graph
-		self.G=nx.Graph()
-		for i in self.V.iloc:
-			self.G.add_node(int(i.name),loc_name=i[0],long=i[1],lat=i[2])
-			
-		for i in self.E.iloc:
-			self.G.add_edge(int(i[0]),int(i[1]),d=i[2],c=0.7*i[2],t=(1/40)*i[2])
-		
-		#print(self.G.nodes)
-		for i in list(self.G.nodes).copy():
-			if i not in self.V.index:
-				#print(i)
-				self.G.remove_node(i)
-		
-		#Graph position
-		self.pos={i:(self.G.nodes[i]['long'],self.G.nodes[i]['lat']) for i in self.G.nodes}
-
-		
-		#Subproblems
-		self.SPS=[]
-		for i in self.Demands:
-			di=self.Demands[i][self.Demands[i]>0]
-			#print(self.Demands[i])
-			di_mat=self.dist_m.loc[list(di.index),list(di.index)]
-			self.SPS.append(sub_problem(id=len(self.SPS),H=[],D=di,dm=self.dist_m,pos=self.pos,master=master))
-			#print(self.SPS[-1].id)
-			#if len(self.SPS)>1:
-		#		break				
-		
 		#Time limit for the Benders Algo
 		self.time_limit=1000
 
@@ -171,20 +187,8 @@ class master():
 		#Rate for the random variable modeling the number of units in an order.
 		self.demRate=10
 
-		self.τ=4
-		#Vecindarios de cada nodo
-		self.Adj=(self.dist_m*self.t_mile).applymap(lambda x: 1 if x<=self.τ else 0)
-
-		#Probabilitie of placing orders for eac node.
-		self.prob=1/len(self.Demands.index)*self.Demands.applymap(lambda x: 1 if x>0 else 0).sum(axis=1)
-		#Lower bound on the number of vehicles needed in each node
-		#self.compMinVeh(α=0.4)
-
-		self.minVeh=self.import_data('num_veh.csv',h=0,names=['id','minVeh']).set_index('id').applymap(lambda x: max(x,1))
-		self.minVeh=self.minVeh['minVeh']
 		
-		#Cost of not covering a node
-		self.ρ=self.prob*self.demRate*100
+		
 
 		#List for animation...
 		self.AnimNVeh=[{15051: 2.0, 16627: 1.0, 18617: 1.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0, 18617: 1.0}, {15051: 2.0, 16627: 1.0, 18617: 1.0, 18074: 4.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0, 18074: 4.0}, {15051: 2.0, 16627: 1.0, 18617: 14.0}, {15051: 2.0, 17017: 16.0, 16627: 1.0}, {15051: 11.0, 16627: 2.0, 18617: 7.0}, {15051: 8.0, 17017: 7.0, 16627: 7.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0, 18617: 1.0, 18074: 4.0}, {15051: 2.0, 17017: 3.0, 16627: 2.0, 18617: 11.0}, {15051: 7.0, 16627: 5.0, 18617: 1.0, 18074: 4.0}, {15051: 2.0, 16627: 2.0, 18617: 10.0, 18074: 4.0}, {15051: 11.0, 17017: 3.0, 16627: 3.0, 18617: 3.0}, {15051: 2.0, 17017: 3.0, 16627: 11.0, 18074: 4.0}, {15051: 7.0, 16627: 6.0, 18617: 17.0}, {15051: 11.0, 17017: 3.0, 16627: 1.0, 18617: 1.0, 18074: 4.0}, {15051: 12.0, 16627: 1.0, 18617: 9.0, 18074: 4.0}, {15051: 12.0, 17017: 3.0, 16627: 1.0, 18617: 14.0}, {15051: 12.0, 17017: 20.0, 16627: 1.0}, {15051: 2.0, 17017: 3.0, 16627: 10.0, 18617: 20.0, 18074: 4.0}, {15051: 20.0, 17017: 13.0, 16627: 1.0, 18074: 4.0}, {15051: 2.0, 16627: 20.0, 18617: 8.0, 18074: 4.0}, {15051: 20.0, 17017: 3.0, 16627: 1.0, 18617: 20.0, 18074: 4.0}, {15051: 2.0, 17017: 11.0, 16627: 20.0, 18617: 2.0}, {15051: 20.0, 16627: 11.0, 18617: 5.0, 18074: 4.0}, {15051: 20.0, 17017: 3.0, 16627: 20.0, 18617: 1.0, 18074: 4.0}, {15051: 20.0, 17017: 3.0, 16627: 14.0, 18074: 4.0}, {15051: 5.0, 16627: 3.0, 18617: 2.0, 18074: 5.0}, {15051: 5.0, 16627: 3.0, 18617: 4.0, 18074: 4.0}]
@@ -317,7 +321,7 @@ class master():
 		nx.draw_networkx(SG,pos=self.pos,with_labels=False,node_size=n_size,node_color=node_color)
 		#plt.show()
 
-	def plot_petals(self, petals, h,pet=True,pet_col='orange'):
+	def plot_petals(self, petals, h,pet=True,pet_col='orange',ax=None):
 		'''
 		For each petal in petals plots the its tour with color pet_col. of pet==True, it does not plots the actual route in the graph from node to node, if pet == False, it plots the route between each node of each depot.
 		For each i in h (set of depots)in plots a depot.
@@ -330,22 +334,21 @@ class master():
 		Output: 
 			None
 		'''
-
 		#plt.figure(num=None, figsize=(16*scal, 10*scal), dpi=80, facecolor='w', edgecolor='k')
 		for p in petals:			
 			#d=sum(dem[i] for i in p)-2*dem[p[0]]
 			#print('p: ',p,' ',d)
 			if pet:
 				path=list(zip(p[:-1],p[1:]))
-				nx.draw_networkx_edges(self.G, self.pos,edgelist=path,edge_color='black',width=2)
+				nx.draw_networkx_edges(self.G, self.pos,edgelist=path,edge_color=pet_col,width=2,ax=ax)
 			else:			
 				for i,j in zip(p[:-1],p[1:]):				
 					path=nx.shortest_path(self.G,i,j,weight='c')
 					path=list(zip(path[:-1],path[1:]))
 					#print('este pat', path)
-					nx.draw_networkx_edges(self.G, self.pos,edgelist=path,edge_color=pet_col,width=5)
+					nx.draw_networkx_edges(self.G, self.pos,edgelist=path,edge_color=pet_col,width=3,ax=ax)
 			
-		nx.draw_networkx_nodes(self.G, self.pos,nodelist=h,node_shape='s',node_size=100,node_color='blue')
+		nx.draw_networkx_nodes(self.G, self.pos,nodelist=h,node_shape='s',node_size=200,node_color='green',ax=ax)
 	
 	def plotDepots(self,numVeh,ax=None):
 		'''
@@ -1531,6 +1534,7 @@ class master():
 			sp.export_results({i:m._z[i].x for i in m._z.keys()})
 			pet=[i for i,p in enumerate(m._z) if m._z[i].x>.5]
 			routes=[sp.R[i] for i in pet]
+			sp.OptRi=routes
 			#self.plot_dem(sp.D)
 			#self.plot_petals(routes,sp.H,pet=True)
 			#plt.show()
@@ -1549,7 +1553,7 @@ class master():
 		else:
 			return m.objVal, λ, π
 
-	def solveSpJava(self,sp,nRoutes=10):
+	def solveSpJava(self,sp,nRoutes=10,gap=0.001):
 		FO=[]
 		clients=sp.D.iloc[:]
 		π={i:0 for i in clients.index}
@@ -1584,7 +1588,7 @@ class master():
 
 				#print(f'\t\tEmpcece con petal gen del depot {d} en la it {n_it}')
 				time_genPet=time.time()
-
+				
 				r_costs=sp.runJavaPulse(d, clients_h,π,λ[d],nRoutes=nRoutes)
 				#print(f'\t\tRouteGen{d}')
 
@@ -1605,7 +1609,7 @@ class master():
 			if n_it>2:
 				print('\t\tMejora de: '+str((FO[-2]-FO[-1])/FO[-1]))
 				print('\t\tVoy en de: '+str(FO[-1]))
-				if (FO[-2]-FO[-1])/FO[-1]<0.001:
+				if (FO[-2]-FO[-1])/FO[-1]<gap:
 					term=True
 			
 			if n_it==50 or term:
@@ -1641,18 +1645,20 @@ class master():
 				sp.OptRi[d]+=routes		
 		'''
 		#if plot:
-		if False:
+		if True:
 			
 			#print_log('\t\t',sp.id,'\n\t\t',sp.R,'\n\t\t',sp.Route_cost,'\n\t\t',sp.OptRi)
-			#m=sp.master_problem(relaxed=False)
-			#m.optimize()
+			m=sp.master_problem(relaxed=False)
+			m.optimize()
 			
 			sp.export_results({i:m._z[i].x for i in m._z.keys()})
 			pet=[i for i,p in enumerate(m._z) if m._z[i].x>.5]
 			routes=[sp.R[i] for i in pet]
+			sp.OptRi=routes
 			#self.plot_dem(sp.D)
 			#self.plot_petals(routes,sp.H,pet=True)
 			#plt.show()
+			'''
 			os.chdir('../Plots/Subproblems')
 			if sp.id==0:delete_all_files(os.getcwd())
 			self.plot_dem(sp.D)
@@ -1662,6 +1668,7 @@ class master():
 			plt.clf()			
 			os.chdir('..')
 			os.chdir('../Data')
+			'''
 			
 			foi=sum(sp.Route_cost[r]*m._z[r].x for r in range(len(sp.R)))
 			return m.objVal, λ, π
@@ -2666,7 +2673,6 @@ def write_tsp_file_dmat(fp,distance_matrix, name):
 		fp.write(t[:-1]+'\n')	
 	fp.write("EOF\n")
 
-
 class sub_problem():
 	"""docstring for sub_problem"""
 	def __init__(self,master,id,H, D,dm,pos=[]):
@@ -2989,7 +2995,7 @@ class sub_problem():
 		#Decition variables
 		if relaxed:
 			#penal=(max(100,sum(self.Route_cost))/(max(1,len(self.Route_cost))))
-			penal=30+20
+			penal=(30+20)*100
 			#print('\tRoute cost vs penal',sum(self.Route_cost)/len(self.Route_cost),penal)
 			m._z={p:m.addVar(vtype=GRB.CONTINUOUS,name="m._z_"+str(p),lb=0, ub=1,obj=self.Route_cost[p]) for p in range(len(self.R))}
 			#m._v={i:m.addVar(vtype=GRB.CONTINUOUS,name="m._v_"+str(i),lb=0, ub=10,obj=penal) for i in self.y_hat.keys()}
@@ -2998,7 +3004,7 @@ class sub_problem():
 		else:
 			m._z={p:m.addVar(vtype=GRB.BINARY,name="m._z_"+str(p),obj=self.Route_cost[p]) for p in range(len(self.R))}
 			#penal=(sum(self.Route_cost)/(max(1,len(self.Route_cost))))*100
-			penal=30+20
+			penal=(30+20)*100
 			#print('\tRoute cost vs penal',self.Route_cost,penal)
 			#m._v={i:m.addVar(vtype=GRB.INTEGER,name="m._v_"+str(i),lb=0, ub=10,obj=penal) for i in self.y_hat.keys()}
 			m._v={i:m.addVar(vtype=GRB.BINARY,name="m._v_"+str(i),lb=0, ub=1,obj=penal+min([(self.dm[h][i]+self.dm[i][h])*self.c_mile for h in self.H])) for i in self.Clients}
@@ -3236,9 +3242,10 @@ class sub_problem():
 			#8-16->2-8
 			if π[i]>0:
 				solve.append(i)
-			
-			nLtw,nUtw=classifier(i,ro)
-			f.write(f'{i}\t{clients[i]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
+			#print(clients.loc[i][0])
+			nLtw,nUtw=classifier(i,ro)			
+			#f.write(f'{i}\t{clients[i]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
+			f.write(f'{i}\t{clients.loc[i][0]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
 
 		nArcs=0
 		nNodes=len(clients.index)+auxs+2
@@ -3584,6 +3591,7 @@ def fit_and_plot():
 
 if __name__ == '__main__':
 	m=master()
+	print(m.dist_m)
 	s=m.SPS[2]
 	s.y_hat={17728:5,16130:2,15427:5,15824:4,18014:6}
 	s.H=list(s.y_hat.keys())

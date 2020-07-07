@@ -1,13 +1,15 @@
 import os
+import sys
 import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.animation as animat
-p=os.getcwd()
-os.chdir('../src')
-print(os.listdir())
+import pandas as pd
+import random as rnd
+
+sys.path.append('../src')
 from main import *
-os.chdir(p)
+
 
 def readNet():
 	os.chdir('SiouxFalls')
@@ -18,7 +20,7 @@ def readNet():
 	f.readline()
 	for l in f:		
 		l=list(map(float,l.replace('\n','').split('\t')))
-		G.add_edge(int(l[0]),int(l[1]))	
+		G.add_edge(100*int(l[0]),100*int(l[1]),d=int(l[2]/20))
 	f.close()
 
 	f=open('SiouxFalls_pos.txt')
@@ -26,7 +28,7 @@ def readNet():
 	pos={}
 	for l in f:				
 		l=list(map(float,l.replace('\n','').split('\t')[:-1]))
-		pos[int(l[0])]=(l[1],l[2])		
+		pos[100*int(l[0])]=(l[1],l[2])		
 		
 	f.close()
 	os.chdir('..')
@@ -54,7 +56,8 @@ def drawDem(G,pos,dem,ax):
 
 	return ax
 
-def animation(G,pos,n):
+def demandAnimation(n):
+	G, pos=readNet()
 	#fig,ax= plt.subplots()
 	fig=plt.figure(figsize=(10,8))
 	grid=fig.add_gridspec(21, 21, wspace=0, hspace=0)
@@ -84,26 +87,112 @@ def saveAnim(anim,name):
 	writer = Writer(fps=1, metadata=dict(artist='Me'), bitrate=2800)
 	anim.save(f'media/{name}.mp4', writer=writer)
 
+def calcDistM(G):
+	n=G.nodes()
+	d=dict(nx.all_pairs_dijkstra_path_length(G,weight='d'))
+	#mat=np.array([[d[i][j]for j in n]for i in n])
+	mat=pd.DataFrame(d)
 
+	return mat
+
+def createMaster(n):
+	G, pos=readNet()
+	dist_m=calcDistM(G)	
+	
+	m=master(load=False)
+
+	m.G=G
+	m.pos = pos
+	m.SPS=[]
+	m.dist_m=calcDistM(G)
+	m.Adj=(m.dist_m*m.t_mile).applymap(lambda x: 1 if x<=100000 else 0)
+	#print(m.dist_m)
+	for i in range(n):
+		#di=self.Demands[i][self.Demands[i]>0]
+		di=randomDemand(G)
+		di=dict(filter(lambda x: True if x[1]>0 else False,di.items()))
+		di=pd.DataFrame(di.values(),index=di.keys())
+		
+		#di_mat=self.dist_m.loc[list(di.index),list(di.index)]
+		m.SPS.append(sub_problem(id=len(m.SPS),H=[400,1500],D=di,dm=m.dist_m,pos=m.pos,master=m))
+		m.SPS[-1].y_hat={400:2,1500:2}
+
+	return m
+
+def plotSol(sp,ax):
+	dem=sp.D.to_dict()[0]
+	drawDem(sp.master.G,sp.master.pos,dem,ax)
+	petals=sp.OptRi
+	h=sp.H
+	m.plot_petals(petals,h, pet=False,ax=ax)
+	#print(sp.D)
+	#print(sp.OptRi)
+	#print(sorted([i for i in dem.keys() if dem[i]>0]))
+
+def solAnimation(n):
+	global m
+	m=createMaster(n)
+
+	for sp in m.SPS:		
+		m.solveSpJava(sp,gap=0.000001)	
+	
+	
+	fig=plt.figure(figsize=(10,8))
+	grid=fig.add_gridspec(21, 21, wspace=0, hspace=0)
+	#grid = plt.GridSpec(21, 21, wspace=0, hspace=0)
+	
+	ax=plt.subplot(grid[1:20, 0:20])	
+	axk =plt.subplot(grid[0, 0])
+	
+	#axk.axis('off')
+	#ax.axis('off')
+	
+
+	def f(k):
+		ax.clear()
+		axk.clear()
+		axk.text(0,0,f'Day {k+1}',fontweight='bold')		
+		plotSol(m.SPS[k],ax)
+		#drawDem(m.G,m.pos,randomDemand(m.G),ax)		
+		axk.axis('off')
+		ax.axis('off')
+
+	ani = animat.FuncAnimation(fig, f, frames=n,interval=1000, repeat=True)
+	return ani
+
+
+def firstStageAnim(n):
+	G, pos=readNet()
+	fig,ax=plt.subplots(figsize=(10,8))
+	ax.axis('off')
+	def f(k):
+		ax.clear()
+		kk=rnd.randint(2,4)
+		nod=rnd.sample(list(G.nodes()),kk)
+		nx.draw_networkx_nodes(G,pos,node_size=30,node_color='black',ax=ax)
+		nx.draw_networkx_edges(G,pos,ax=ax)
+		nodeSize=[rnd.randint(2,4)*400 for i in nod]
+		nx.draw_networkx_nodes(G,pos,nodelist=nod,node_shape='s',node_size=nodeSize,node_color='green',ax=ax)		
+		ax.axis('off')
+
+	ani = animat.FuncAnimation(fig, f, frames=n,interval=1000, repeat=True)
+	return ani
 
 
 
 if __name__=='__main__':
 	
-	G, pos=readNet()	
-	dem=randomDemand(G)
-	fig,ax=plt.subplots(figsize=(10,8))
-	drawDem(G,pos,dem,ax)
-	ax.axis('off')	
-	plt.savefig(f'media/netDem.png')
-	plt.clf()
-
-
-
-
-	#ani=animation(G,pos,n=20)
-	#saveAnim(ani,'demandDays')
+	ani=firstStageAnim(20)
+	saveAnim(ani,'firstStageVSize')
 	#plt.show()
+	pass
+	
+
+
+
+
+
+
 
 
 
