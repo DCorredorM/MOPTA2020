@@ -182,9 +182,16 @@ def firstStageAnim(n):
 
 if __name__=='__main__':
 	
-	ani=firstStageAnim(20)
-	saveAnim(ani,'firstStageVSize')
-	#plt.show()
+	p=os.getcwd()
+	m=createMaster(10)
+	sp=m.SPS[0]
+	m.solveSpJava(sp)
+	fig,ax= plt.subplots(figsize=(10,8))
+	plotSol(sp,ax)
+	os.chdir(p)
+	ax.axis('off')
+	plt.savefig('media/staticSol.png')
+	plt.show()
 	pass
 	
 
