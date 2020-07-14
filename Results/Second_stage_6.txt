@@ -1,0 +1,8 @@
+Depot: 400
+Number of vehicles2
+Route	Cost
+[400, 800, 500, 400]	91.0
+Depot: 1500
+Number of vehicles2
+Route	Cost
+[1500, 2300, 300, 900, 1000, 1600, 1500]	259.7
