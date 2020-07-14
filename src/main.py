@@ -1557,6 +1557,7 @@ class master():
 		π={i:0 for i in clients.index}
 
 		n_it=0
+		HH=[i for i in sp.H if sp.y_hat[i]>0]
 		while True:
 			n_it+=1			
 			m=sp.master_problem(relaxed=True)
@@ -1574,8 +1575,7 @@ class master():
 			#print('\t λs')
 			#print('\t',λ)
 
-			term=True
-			HH=[i for i in sp.H if sp.y_hat[i]>0]
+			term=True			
 			for d in HH:
 
 				#cord=self.V.loc[d][['lat','long']]	
@@ -1609,6 +1609,146 @@ class master():
 				print('\t\tVoy en de: '+str(FO[-1]))
 				if (FO[-2]-FO[-1])/FO[-1]<gap:
 					term=True
+			
+			if n_it==50 or term:
+				print('\t','El numero de iteraciones fue: ',n_it)
+				print(FO)
+				break
+		print_log('\tTermine con la GC..')
+		
+		
+		m=sp.master_problem(relaxed=True)
+		m.optimize()
+
+		#Uses this solution to start next time
+		sp.z_hat={k:kk.x for k,kk in m._z.items()}	
+
+		#Recovers the duals of the relaxed
+		λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
+		π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}				
+
+		'''
+		m=sp.master_problem(relaxed=False)		
+		print_log('\tEmpece a resolver con integralidad')		
+		time_genPet=time.time()
+		m.optimize()		
+		print_log('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo sub problema {sp.id} con integralidad')
+
+		#Guarda las rutas seleccionadas para cada depot en sp.OptRi
+		for d in sp.H:
+			routes=[i for i,j in m._z.items() if j.x==1 and sp.R[i][0]==d]			
+			if d not in sp.OptRi.keys():
+				sp.OptRi[d]=routes
+			else:
+				sp.OptRi[d]+=routes		
+		'''
+		#if plot:
+		if True:
+			
+			#print_log('\t\t',sp.id,'\n\t\t',sp.R,'\n\t\t',sp.Route_cost,'\n\t\t',sp.OptRi)
+			m=sp.master_problem(relaxed=False)
+			m.optimize()
+			
+			sp.export_results({i:m._z[i].x for i in m._z.keys()})
+			pet=[i for i,p in enumerate(m._z) if m._z[i].x>.5]
+			routes=[sp.R[i] for i in pet]
+			sp.OptRi=routes
+			#self.plot_dem(sp.D)
+			#self.plot_petals(routes,sp.H,pet=True)
+			#plt.show()
+			'''
+			os.chdir('../Plots/Subproblems')
+			if sp.id==0:delete_all_files(os.getcwd())
+			self.plot_dem(sp.D)
+			self.plot_petals(routes,sp.H,pet=False)
+			plt.savefig(f'sp_{sp.id}.png')
+			#plt.show()
+			plt.clf()			
+			os.chdir('..')
+			os.chdir('../Data')
+			'''
+			
+			foi=sum(sp.Route_cost[r]*m._z[r].x for r in range(len(sp.R)))
+			return m.objVal, λ, π
+		else:
+			return m.objVal, λ, π
+
+
+	def solveSpJavaNotAllDepots(self,sp,nRoutes=10,gap=0.001):
+		'''
+		CG-not calling subproblems for every iteration
+		'''
+
+		FO=[]
+		clients=sp.D.iloc[:]
+		π={i:0 for i in clients.index}
+
+		n_it=0
+		HH=[i for i in sp.H if sp.y_hat[i]>0]
+
+
+		while True:
+			n_it+=1			
+			m=sp.master_problem(relaxed=True)
+			time_genPet=time.time()
+			m.optimize()
+			sp.z_hat={k:kk. x for k,kk in m._z.items()}	
+
+			#print('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo la relajación')
+			FO.append(m.objVal)
+			#print('\t',f'el status del problema es {m.getAttr("Status")}')
+			π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
+			λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
+			#print('\t πs')
+			#print('\t',π)
+			#print('\t λs')
+			#print('\t',λ)
+
+			def calcSumPi(d):
+				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
+				clients_h=list(set(clients.index) & set(clients_h))
+				#clients_h=clients.loc[clients_h]							
+				return -sum(π[i] for i in clients_h)
+
+			term=True
+
+			HH=sorted(HH,key=calcSumPi)
+
+			n=np.random.randint(1,len(HH)-1)
+
+			for d in HH[:n]:
+				#cord=self.V.loc[d][['lat','long']]	
+				#clients_h=list(self.V.loc[distance(self.V.loc[:,'lat'],self.V.loc[:,'long'],cord.loc['lat'],cord.loc['long'])<(self.route_time_limit/5) *40].index)			
+				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
+				clients_h=list(set(clients.index) & set(clients_h))
+				clients_h=clients.loc[clients_h]
+
+				#print(f'\t\tEmpcece con petal gen del depot {d} en la it {n_it}')
+				time_genPet=time.time()
+				
+				r_costs=sp.runJavaPulse(d, clients_h,π,λ[d],nRoutes=nRoutes)
+				#print(f'\t\tRouteGen{d}')
+
+				#print('\t\t',f'Me demoro {time.time()-time_genPet} segundos')
+
+				if r_costs-λ[d]<0:
+					#print('\t\t',r_costs)
+					#print('\t\tLas λ dan',λ[d])
+					term=False
+					#break
+			
+			#print('\t',f'Voy {n_it} iteraciones del subproblema')
+			#print('\t',FO[-1])
+			#print(FO)
+			#if n_it==1:
+			#	break
+			#	print(FO)
+			if n_it>2:
+				print('\t\tMejora de: '+str((FO[-2]-FO[-1])/FO[-1]))
+				print('\t\tVoy en de: '+str(FO[-1]))
+				if (FO[-2]-FO[-1])/FO[-1]<gap:
+					#term=True
+					pass
 			
 			if n_it==50 or term:
 				print('\t','El numero de iteraciones fue: ',n_it)
@@ -3597,7 +3737,7 @@ if __name__ == '__main__':
 	print(sum(s.D))
 	s.y_hat={17728:5,16130:2,15427:5,15824:4,18014:6}
 	s.H=list(s.y_hat.keys())
-	m.solveSpJava(s)
+	m.solveSpJavaNotAllDepots(s)
 	#m.Benders_algoMix(read=False)
 
 
