@@ -1,5 +1,9 @@
 from main import *
 import time
+import os
+import datetime
+
+
 
 def Upload_Scenarios(file,trained=False):
 	#p.Demands=p.import_data('mopta2020_q2018.csv',h=0,names=['id']+list(range(1,366))).set_index('id')
@@ -49,7 +53,10 @@ def TrainSPs():
 	'''
 	For each depot solve a problem with only that depot oppended
 	'''
+	#Train pairs
 	TrainPairs()
+
+	#Train all opened
 
 def TrainPairs():
 	'''
@@ -70,26 +77,95 @@ def TrainPairs():
 		y_hat={i:30 if i in l else 0 for i in p.possibleDepots}
 		solveForYHat(y_hat)
 
+def TrainOpened():
+	'''
+	Solves with all depots opened
+	'''
+	y_hat={i:30 for i in p.possibleDepots}
+	solveForYHat(y_hat)
+
+def write(file,s):
+	f=open(file,'a')
+	f.write(s+'\n')
+	f.close()
+
+
+def runBenders(h):
+	'''
+	Runs benders algo for h number of depots
+	'''
+	p.time_limit=10000000
+	p.h=h
+	p.createLog(h)
+	UB,LB,x_hat,y_hat=p.BendersAlgoMix(epsilon=0.01,read=False)
+	return UB,LB,x_hat,y_hat
+	
+	
+
 
 
 if __name__=='__main__':
 	
-	#Constants:
+	'''
+	Save important paths
+	'''
+	os.chdir('../Data')
+	dPath=os.getcwd()							#Data folder
+	os.chdir('../Results/ResultsFSRobust')		#Folder for results.
+	rPath= os.getcwd()							#Results folder
+
+	#Constants:	
+	################################################################
 	tw=True		#TimeWindow strategy?
+	scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
+
+	trained=True
+	
+	compTimes=rPath+'/compTimes.txt'			#Computational times file 
+	Nota=''										#
+	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
+
+	resultsFo=rPath+'/resultsFo.txt'			#Computational times file 
+	Nota=''										#
+	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
+	
+	os.chdir(dPath)					#Change dir to Data
+	################################################################
+
+	#1. Create master problem
+	p=master()	
+	#2. Load Scenarios
+	Upload_Scenarios(scenFile,trained=trained)
 
 	
-	#1. Create master problem
-	p=master()
-
-	#2. Load Scenarios
-
-	file='Scenarios_robust_new.csv'
-	Upload_Scenarios(file)
-
 	#3. Train Scenarios
-	trainingTime=time.time()
-	TrainSPs()
-	trainingTime=time.time()-trainingTime
+	if not trained:
+		trainingTime=time.time()
+		TrainSPs()
+		trainingTime=time.time()-trainingTime
+		write(compTimes,f'Training time: {trainingTime}')
+		write(compTimes,f'\t--------------\nSolving Times:')
+
+
+	#4. Solve firstStage with SPs trained
+	
+	for h in range(3,len(p.possibleDepots)):
+		SolvingTime=time.time()
+		UB,LB,x_hat,y_hat=runBenders(h)
+		SolvingTime=time.time()-SolvingTime
+		write(compTimes,f'\t{h}: {SolvingTime}')
+
+
+
+
+
+
+
+
+
+	
+
+
 
 
 

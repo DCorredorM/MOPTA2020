@@ -81,13 +81,7 @@ class master():
 		#Number of depots to open |H|.
 		self.h=h
 
-		global log_text,log_path
-		os.chdir('../Results')
-		log_text=open(f'log{h}.txt','w')
-		log_path=os.getcwd()+f'/log{h}.txt'
-		print()
-		log_text.close()
-		os.chdir('../Data')
+		self.createLog(h)
 
 		#Maximum number of vehicles per depot.
 		self.M=20
@@ -158,8 +152,7 @@ class master():
 			self.E=self.import_data('mopta2020_edges.csv',h=0,names=['t','h','d'])
 
 			#Daily demmand
-			self.Demands=self.import_data('mopta2020_q2019.csv',h=0,names=['id']+list(range(1,366))).set_index('id')
-			
+			self.Demands=self.import_data('mopta2020_q2019.csv',h=None,names=['id']+list(range(1,366))).set_index('id')
 			#self.Demands=pd.read_csv('Scenarios_robust_new.csv',header=0,index_col=0)	
 			#pd.read_csv('Scenarios.csv',header=1,sep=',',index_col=0)
 
@@ -213,7 +206,14 @@ class master():
 			self.minVeh=self.minVeh['minVeh']	
 			#Cost of not covering a node
 			self.ρ=self.prob*self.demRate*100	
-	
+
+	def createLog(self,h):
+		global log_text,log_path
+		os.chdir('../Results')
+		log_text=open(f'log{h}.txt','w')
+		log_path=os.getcwd()+f'/log{h}.txt'		
+		log_text.close()
+		os.chdir('../Data')
 	def calcPosDisp(self):
 		n=len(self.possibleDepots)
 		k=self.h
@@ -965,6 +965,94 @@ class master():
 		print_log('############################################################################################################')
 
 		return UB,LB,x_hat,y_hat
+	
+
+	def BendersAlgoMix(self,epsilon=0.1,read=True):
+		'''
+		Benders algorithm is implemented.		
+		
+		Input:
+			None
+				
+		Output: 
+			Solution for teh problem: Set of depots (H) and the number of vehicles assigned to each vehicles.		
+		'''
+
+		#Creates empty (no cuts) master problem
+		m=self.Benders_master_p(epsilon=epsilon,read=read)
+		m.update()
+
+		#Initializes important variables:
+		it=0
+		cuts = 0
+		LB, UB, CUT= [], [float("inf")], []
+		Start_time=time.time()
+		ColGen=False		
+		while True:			
+			it+=1
+			#If ColGen then it is that the previous solution is going to be improved, so no new solution needs to be obtained.
+			if not ColGen:
+				#Solve master problem and Update the Lower Bound
+				m.update()
+				m.optimize()
+				LB.append(m.objVal)
+
+				#Recovers solution
+				y_hat={i:m._y[i].x for i in self.possibleDepots}
+				x_hat={i:m._x[i].x for i in self.possibleDepots}
+				η_hat={s:m._η[s].x for s,i in enumerate(self.SPS)}
+
+				#On and Off variables
+				ON= quicksum((1-m._x[i]) for i in self.possibleDepots if x_hat[i]>0.5)
+				OFF = quicksum(m._x[i] for i in self.possibleDepots if x_hat[i]<0.5)
+			
+			#Solve the subproblems
+			OF=[]	#Objective function
+			for ss,s in enumerate(self.SPS):
+				s.H=[i for i in x_hat.keys() if x_hat[i]>.1]
+				s.y_hat=y_hat
+
+				#Strategy for solvin SPs searching for more routes or not
+				if ColGen:
+					FOi,λ,π=self.solveSpJava(s,nRoutes=10,tw=True)
+					#Save sp with new generated routes:
+					file_sp=open(f'sp{s.id}.sp','wb')
+					pickle.dump(s, file_sp)
+				else:
+					FOi,λ,π=self.solveSpNoCG(s)
+				#Save FO
+				OF.append(FOi)
+				#Checks for optimality cuts
+				if η_hat[ss]<FOi:
+					m.addConstr(m._η[ss]>=quicksum(π[i] for i in π.keys()) + quicksum(λ[i]*m._y[i] for i in self.possibleDepots) - FOi*(ON+OFF),name=f'CombOC_{it},{ss}')					
+					cuts+=1		
+			
+			#Update number of cuts and Upper bound
+			CUT.append(cuts)
+			UB.append(min(UB[-1],LB[-1]-(1/len(self.SPS))*(sum(η_hat.values())-sum(OF))))
+			
+			#Decide weather to gen routes or not
+			if not ColGen and it>2:				
+				print(f"Improvements {UB[-1]-UB[-2]}")
+				if UB[-1]-UB[-2]<0:
+					ColGen=True
+					for ss,s in enumerate(self.SPS):
+						try:
+							m.remove(m.getConstrByName(f'CombOC_{it},{ss}'))
+						except:
+							pass
+			else:
+				ColGen=False
+			
+			#Check optimality gap			
+			if ((UB[-1]-LB[-1])<self.epsilon*UB[-1]):								
+				break
+			elif (time.time()-Start_time>=self.time_limit):				
+				break
+			#Export results
+			self.export_results(depots=x_hat,veh_depot=y_hat)
+			
+		return UB,LB,x_hat,y_hat
 
 	def Benders_algoMix(self,epsilon=0.1,time_limit=None,read=True):
 		'''
@@ -1006,7 +1094,7 @@ class master():
 				#Solve the Master problem callback epsilon_optimal:
 				print_log('############################################################')
 				print_log(f'Iteracion {it}')
-				m.optimize(epsilon_optimal)
+				m.optimize()
 				print_log(f'Termine benders master de la it {it}')
 				print_log('############################################################')
 				#Update the Lower Bound
@@ -1226,7 +1314,7 @@ class master():
 			#Solve the Master problem callback epsilon_optimal:
 			print_log('############################################################')
 			print_log(f'Iteracion {it}')
-			m.optimize(epsilon_optimal)
+			m.optimize()
 			print_log(f'Termine benders master de la it {it}')
 			print_log('############################################################')
 			#Update the Lower Bound
