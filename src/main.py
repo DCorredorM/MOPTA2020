@@ -986,6 +986,7 @@ class master():
 		it=0
 		cuts = 0
 		LB, UB, CUT= [], [float("inf")], []
+		ColGenCalls=0
 		Start_time=time.time()
 		ColGen=False		
 		while True:			
@@ -1018,6 +1019,7 @@ class master():
 					#Save sp with new generated routes:
 					file_sp=open(f'sp{s.id}.sp','wb')
 					pickle.dump(s, file_sp)
+					ColGenCalls+=1
 				else:
 					FOi,λ,π=self.solveSpNoCG(s)
 				#Save FO
@@ -1052,7 +1054,7 @@ class master():
 			#Export results
 			self.export_results(depots=x_hat,veh_depot=y_hat)
 			
-		return UB,LB,x_hat,y_hat
+		return UB,LB,x_hat,y_hat,ColGenCalls
 
 	def Benders_algoMix(self,epsilon=0.1,time_limit=None,read=True):
 		'''
@@ -3670,7 +3672,7 @@ class sub_problem():
 		
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
-		tw=[(self.nLtw,self.nUtw/2),(self.nLtw+self.nUtw/2,self.nUtw)]
+		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-1),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-1)]
 		
 		def classifier(client,order=[0,1]):
 			p=np.array(self.pos[client])

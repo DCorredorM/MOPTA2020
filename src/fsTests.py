@@ -121,13 +121,13 @@ if __name__=='__main__':
 
 	trained=True
 	
-	compTimes=rPath+'/compTimes.txt'			#Computational times file 
 	Nota=''										#
+
+	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
 
 	resultsFo=rPath+'/resultsFo.txt'			#Computational times file 
-	Nota=''										#
-	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
+	write(resultsFo,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
 	
 	os.chdir(dPath)					#Change dir to Data
 	################################################################
@@ -145,15 +145,19 @@ if __name__=='__main__':
 		trainingTime=time.time()-trainingTime
 		write(compTimes,f'Training time: {trainingTime}')
 		write(compTimes,f'\t--------------\nSolving Times:')
+		write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
 
 
 	#4. Solve firstStage with SPs trained
 	
 	for h in range(3,len(p.possibleDepots)):
 		SolvingTime=time.time()
-		UB,LB,x_hat,y_hat=runBenders(h)
+		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
 		SolvingTime=time.time()-SolvingTime
 		write(compTimes,f'\t{h}: {SolvingTime}')
+		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
+		
+
 
 
 
