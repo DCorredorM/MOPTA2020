@@ -1551,7 +1551,7 @@ class master():
 		else:
 			return m.objVal, λ, π
 
-	def solveSpJava(self,sp,nRoutes=10,gap=0.001):
+	def solveSpJava(self,sp,nRoutes=10,gap=0.001,tw=False):
 		FO=[]
 		clients=sp.D.iloc[:]
 		π={i:0 for i in clients.index}
@@ -1587,7 +1587,7 @@ class master():
 				#print(f'\t\tEmpcece con petal gen del depot {d} en la it {n_it}')
 				time_genPet=time.time()
 				
-				r_costs=sp.runJavaPulse(d, clients_h,π,λ[d],nRoutes=nRoutes)
+				r_costs=sp.runJavaPulse(d, clients_h,π,λ[d],nRoutes=nRoutes,tw=tw)
 				#print(f'\t\tRouteGen{d}')
 
 				#print('\t\t',f'Me demoro {time.time()-time_genPet} segundos')
@@ -1672,7 +1672,6 @@ class master():
 			return m.objVal, λ, π
 		else:
 			return m.objVal, λ, π
-
 
 	def solveSpJavaNotAllDepots(self,sp,nRoutes=10,gap=0.001):
 		'''
@@ -3477,7 +3476,7 @@ class sub_problem():
 		#print(cost/100,route)
 		return cost/100, Routes
 
-	def runJavaPulse(self,depot,clients,π,λ,nRoutes=10,tw=True):
+	def runJavaPulse(self,depot,clients,π,λ,nRoutes=10,tw=False):
 
 		if tw:
 			self.printDymacsTW(depot,clients,π, λ,nRoutes)
