@@ -94,11 +94,11 @@ def runBenders(h):
 	'''
 	Runs benders algo for h number of depots
 	'''
-	p.time_limit=10000000
+	p.time_limit=1000000000
 	p.h=h
 	p.createLog(h)
-	UB,LB,x_hat,y_hat=p.BendersAlgoMix(epsilon=0.01,read=False)
-	return UB,LB,x_hat,y_hat
+	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False)
+	return UB,LB,x_hat,y_hat,ColGenCalls
 	
 	
 
@@ -124,10 +124,10 @@ if __name__=='__main__':
 	Nota=''										#
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
-	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
+	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
 
 	resultsFo=rPath+'/resultsFo.txt'			#Computational times file 
-	write(resultsFo,f'--------------------\nCorrida {datetime.datetime.now()} {Nota}')
+	write(resultsFo,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
 	
 	os.chdir(dPath)					#Change dir to Data
 	################################################################
@@ -144,20 +144,27 @@ if __name__=='__main__':
 		TrainSPs()
 		trainingTime=time.time()-trainingTime
 		write(compTimes,f'Training time: {trainingTime}')
-		write(compTimes,f'\t--------------\nSolving Times:')
+		write(compTimes,f'\t--------------\n\tSolving Times:')
 		write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
 
 
 	#4. Solve firstStage with SPs trained
-	
-	for h in range(3,len(p.possibleDepots)):
+	'''
+	for h in range(4,len(p.possibleDepots)):
 		SolvingTime=time.time()
 		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
 		SolvingTime=time.time()-SolvingTime
 		write(compTimes,f'\t{h}: {SolvingTime}')
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
+<<<<<<< HEAD
 
+=======
+		
+	'''
+>>>>>>> 940b98d63374bbef2bf2b5a6c0c8f37ace8b9f18
 
+	for s in p.SPS:
+		print(f'{s.id}, {len(s.R)}')
 
 
 

@@ -3522,7 +3522,7 @@ class sub_problem():
 		f.write(f'Start Node:{0}'+'\n')
 		f.write(f'End Node:{auxs+1}'+'\n')
 		f.write(f'Depot id:{depot}\n')
-		f.write(f'λ:{λ*100}\n')
+		f.write(f'lambda:{λ*100}\n')
 		f.write(f'Num routes:{nRoutes}\n')
 		f.write(f'Route id:{len(self.R)}\n')
 		f.write(f't mile:{self.t_mile}\n')
@@ -3673,7 +3673,7 @@ class sub_problem():
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
 		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-1),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-1)]
-		
+		tw=list(map(int,tw))
 		def classifier(client,order=[0,1]):
 			p=np.array(self.pos[client])
 			if a.dot(p)>=b:
