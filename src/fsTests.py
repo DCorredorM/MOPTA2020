@@ -84,7 +84,7 @@ def TrainOpened():
 	y_hat={i:30 for i in p.possibleDepots}
 	solveForYHat(y_hat)
 
-def write(file,s):
+def write(file:str,s:str):
 	f=open(file,'a')
 	f.write(s+'\n')
 	f.close()
@@ -119,7 +119,7 @@ if __name__=='__main__':
 	tw=True		#TimeWindow strategy?
 	scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
 
-	trained=True
+	trained=False
 	
 	Nota=''										#
 
@@ -156,7 +156,7 @@ if __name__=='__main__':
 		SolvingTime=time.time()-SolvingTime
 		write(compTimes,f'\t{h}: {SolvingTime}')
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
-		
+
 
 
 
