@@ -156,15 +156,9 @@ if __name__=='__main__':
 		SolvingTime=time.time()-SolvingTime
 		write(compTimes,f'\t{h}: {SolvingTime}')
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
-<<<<<<< HEAD
-
-=======
-		
 	'''
->>>>>>> 940b98d63374bbef2bf2b5a6c0c8f37ace8b9f18
 
-	for s in p.SPS:
-		print(f'{s.id}, {len(s.R)}')
+	
 
 
 

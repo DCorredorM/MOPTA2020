@@ -8,7 +8,7 @@ import random
 import numpy as np
 import scipy.stats as st
 import math
-
+from math import exp
 import time
 
 from sklearn.cluster import KMeans
@@ -1653,7 +1653,13 @@ class master():
 			m=sp.master_problem(relaxed=True)
 			time_genPet=time.time()
 			m.optimize()
-			sp.z_hat={k:kk. x for k,kk in m._z.items()}	
+			sp.z_hat={k:kk.x for k,kk in m._z.items()}
+
+			#Update route scores
+			sp.updateScores()
+			if n_it%2==0:
+				sp.updateSetOfRoutes(100)	
+			print(f'NumRoutes: {len(sp.R)}\nFo: {m.objVal}')
 
 			#print('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo la relajación')
 			FO.append(m.objVal)
@@ -1704,6 +1710,8 @@ class master():
 				print('\t','El numero de iteraciones fue: ',n_it)
 				print(FO)
 				break
+			
+
 		print_log('\tTermine con la GC..')
 		
 		
@@ -2944,6 +2952,18 @@ class sub_problem():
 		#Set of routes
 		self.R=[]
 
+		#Set of routes
+		self.Rid=[]
+
+		#Number of route 
+
+		self.nRoutes=0
+
+		#Route scores		
+		self.RScores={}
+
+		#Time in routes set
+		self.TInSet={}
 		#Route costs
 		self.Route_cost=[]
 
@@ -3239,10 +3259,10 @@ class sub_problem():
 		#Funcion objetivo
 		#fo=quicksum(self.Route_cost[p]*m._z[p] for p in range(len(self.R)))
 		#m.setObjective(fo)
-
+		
 		#Restricciones
 		#1.) Set covering constraint: Each node with positive demand (i.e. i∈D^s) needs to be visited by at least one vehicle.
-
+		
 		m._set_covering={i:m.addConstr(quicksum(m._z[k] for k,p in enumerate(self.R) if i in p)+m._v[i]>=1) for i in self.Clients}		
 
 		#2.) Not exceeding number of vehicles per depot.
@@ -3578,17 +3598,18 @@ class sub_problem():
 		os.system('java -jar pulse.jar')
 
 		r_costs, Route=self.readDymacs()
-		for route in Route:
+		for route in Route:			
 			if route[0] in self.Ri.keys():
-				self.Ri[route[0]].append(len(self.R))
+				self.Ri[route[0]].append(self.nRoutes)
 			else:
-				self.Ri[route[0]]=[len(self.R)]
-			
+				self.Ri[route[0]]=[self.nRoutes]			
 			#time=self.c_mile*sum(self.dm[k][l] for k,l in zip(route[:-1],route[1:]))
 			cost=self.c_mile*sum(self.dm[k][l] for k,l in zip(route[:-1],route[1:]))
 			
 			self.R.append(route)
+			self.Rid.append(self.nRoutes)
 			self.Route_cost.append(cost)
+			self.nRoutes+=1
 		os.chdir(dir)
 		return r_costs
 
@@ -3672,8 +3693,9 @@ class sub_problem():
 		
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
-		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-1),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-1)]
-		tw=list(map(int,tw))
+		minus=2
+		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-minus),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
+		tw=list(map(lambda x: (int(x[0]),int(x[1])),tw))
 		def classifier(client,order=[0,1]):
 			p=np.array(self.pos[client])
 			if a.dot(p)>=b:
@@ -3682,6 +3704,43 @@ class sub_problem():
 				return tw[order[1]]
 
 		return classifier
+
+	def updateScores(self):
+		'''
+		Updates the scores of the routes
+		'''		
+		#print(self.Rid)
+		for r in self.Rid:
+			try:				
+				self.TInSet[r]+=1
+				self.RScores[r]+=self.z_hat[r]
+			except:
+				self.TInSet[r]=1
+				#print(self.z_hat)
+				self.RScores[r]=self.z_hat[r]
+
+	def updateSetOfRoutes(self,n):
+		'''
+		Uses the scores to keep the first n routes based on the score in the set of routes
+		'''
+		#self.updateScores()
+		n=min(n,len(self.R))
+		gamma=3
+		beta=2
+		tScore=lambda t: exp(gamma/(t**beta))-1
+
+		R=sorted(self.Rid,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
+
+		self.Rid=R[:n]
+		Rno=R[n+1:]
+		list(map(self.RScores.__delitem__, filter(self.RScores.__contains__,Rno)))
+		
+
+
+
+
+
+
 
 def normal(x):
 	'''

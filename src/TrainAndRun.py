@@ -567,8 +567,17 @@ def ReadPySolsNPrint(idis):
 if __name__=='__main__':
 	p=master()
 	#Upload_Scenarios('Scenarios_robust_new.csv')
+	print(len(p.SPS))
 
-	#chechAimms()
+	sp=p.SPS[0]
+
+
+	sp.y_hat={i:30 for i in p.possibleDepots}
+	sp.H=[i for i,j in sp.y_hat.items() if j>0]
+	p.solveSpJava(sp,tw=True)	
+
+
+	#cechAimms()
 
 	#Uploads the scenarios (trained)
 
@@ -645,7 +654,7 @@ if __name__=='__main__':
 	'''
 	Neurtal risk scenarios
 	'''
-
+	'''
 	print(os.getcwd())
 	p=master()
 	#Unload scenarios
@@ -664,7 +673,8 @@ if __name__=='__main__':
 
 	#for h in [2,3,4,5,6,7,8,9]:
 	#	solveScens(h)
-
+	
+	'''
 	'''
 	calcCosts()
 
