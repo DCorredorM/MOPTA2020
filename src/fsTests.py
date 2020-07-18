@@ -16,7 +16,7 @@ def Upload_Scenarios(file,trained=False):
 		di=p.Demands[i][p.Demands[i]>0]
 		if trained:
 			try:
-				pickle_in = open(f'sp{id}.sp','rb')
+				pickle_in = open(f'Tsp{id}.sp','rb')
 				sp = pickle.load(pickle_in)
 				p.SPS.append(sp)		
 				#print(f'pikled {sp.id}')
@@ -101,7 +101,9 @@ def runBenders(h):
 	
 
 if __name__=='__main__':
-	
+	#1. Create master problem
+	p=master()	
+
 	'''
 	Save important paths
 	'''
@@ -117,7 +119,7 @@ if __name__=='__main__':
 
 	trained=False
 	
-	Nota=''										#
+	Nota=''										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
@@ -126,10 +128,13 @@ if __name__=='__main__':
 	write(resultsFo,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
 	
 	os.chdir(dPath)					#Change dir to Data
+
+	p.maxNumRoutes=500				#Number of routes in each sp
+	p.nItemptyRoutes=5				#Period for cleaning set of routes
+	
 	################################################################
 
-	#1. Create master problem
-	p=master()	
+	
 	#2. Load Scenarios
 	Upload_Scenarios(scenFile,trained=trained)
 
@@ -142,6 +147,9 @@ if __name__=='__main__':
 		write(compTimes,f'Training time: {trainingTime}')
 		write(compTimes,f'\t--------------\n\tSolving Times:')
 		write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
+		for s in p.SPS:
+			s.save(f'T_sp{s.id}')
+
 
 
 	#4. Solve firstStage with SPs trained

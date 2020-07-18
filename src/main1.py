@@ -145,6 +145,12 @@ class master():
 			#Cost of not covering a node
 			self.ρ=self.prob*self.demRate*100	
 
+			#Maximum set of routes for the subproblems
+			self.maxNumRoutes=200
+			#Period for cleaning set of routes of the subproblems
+			self.nItemptyRoutes=5
+
+
 	def createLog(self,h):
 		global log_text,log_path
 		os.chdir('../Results')
@@ -1203,165 +1209,6 @@ class master():
 		print_log('############################################################################################################')
 
 		return UB,LB,x_hat,y_hat
-	
-	def solve_sp(self,sp,plot=False):
-		'''
-		Solves the subproble inputed by parameter.
-		
-		Column generation with the pulse-split as slave.
-
-		Input:
-			sp (sub_problem): sub problem that wants to be solved				
-		Output: 			
-			FO: Returns the objective function of the problem with integrality!
-			Lambdas: Returns the dual variables for the benders cuts (relaxed problem.)
-		
-		'''
-
-		FO=[]
-
-		clients=sp.D.iloc[:]
-		π={i:0 for i in clients.index}
-
-		'''
-		Creates a first set of feasible paths using tge split algprithm over a neighborhood of each depot. 
-		Sub problem Warm start
-		If a set of routes already exists departing from some depot, (i.e d in sp.Ri.keys()), then this procedure is not done.
-		'''
-		time_1=time.time()
-		
-		#print_log('\t','Clients:\n',sp.R)
-		for d in sp.H:						
-			close=[i for i in sp.Ri.keys() if sp.t_mile*sp.dm[d][i]<0.5 and i!=d]
-			if len(close)!=0:
-				sp.petal_recicler(d,close)
-			else:				
-				if d not in sp.Ri.keys():
-					clients_h=list(self.Adj[d][self.Adj[d]==1].index)				
-					clients_h=list(set(clients.index) & set(clients_h))			
-					clients_h=clients.loc[clients_h]
-					sp.petal_generator(d, clients_h, π)
-			#petals=sp.R[-1]			
-			#print(petals)
-		
-		'''
-		alc=sum(sp.R,[])	
-		for i in clients.index:
-			if i not in alc:
-				for d in sp.H:
-					route=[d,i,d]
-					cost=sp.c_mile*sum(sp.dm[k][l] for k,l in zip(route[:-1],route[1:]))
-					sp.R.append(route)
-					sp.Route_cost.append(cost)
-					#print_log('por ',self.Adj[d][i])
-		'''
-		print_log('\t',f'En la fase constructiva del sub problama me tardo {time.time()-time_1}')
-		
-
-		'''
-		improves the solution witha column generation
-		'''
-
-		print_log('\t',f'Empece GC sub_problem {sp.id}')
-		n_it=0
-		while True:
-			n_it+=1			
-			m=sp.master_problem(relaxed=True)
-			time_genPet=time.time()
-			m.optimize()
-			sp.z_hat={k:kk. x for k,kk in m._z.items()}	
-
-			#print_log('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo la relajación')
-			FO.append(m.objVal)
-			#print('\t',f'el status del problema es {m.getAttr("Status")}')
-			π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
-			λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
-			print_log('\t πs')
-			print_log('\t',π)
-			print_log('\t λs')
-			print_log('\t',λ)
-
-			term=True
-			for d in sp.H:
-				#cord=self.V.loc[d][['lat','long']]	
-				#clients_h=list(self.V.loc[distance(self.V.loc[:,'lat'],self.V.loc[:,'long'],cord.loc['lat'],cord.loc['long'])<(self.route_time_limit/5) *40].index)			
-				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
-				clients_h=list(set(clients.index) & set(clients_h))
-				clients_h=clients.loc[clients_h]
-
-				#print_log(f'\t\tEmpcece con petal gen del depot {d} en la it {n_it}')
-				time_genPet=time.time()				
-				r_costs=sp.petal_generator(d, clients_h,π)
-				#print_log('\t\t',f'Me demoro {time.time()-time_genPet} segundos')
-
-				if sum(r_costs)-λ[d]<0:
-					#print_log('\t\t',r_costs)
-					#print_log('\t\tLas λ dan',λ[d])
-					term=False
-					break
-
-			#print('\t',f'Voy {n_it} iteraciones del subproblema')
-			#print('\t',FO[-1])
-
-			if n_it==10 or term:
-				print_log('\t','El numero de iteraciones fue: ',n_it)
-				break
-		print_log('\tTermine con la GC..')
-		
-		
-		m=sp.master_problem(relaxed=True)
-		m.optimize()
-
-		#Uses this solution to start next time
-		sp.z_hat={k:kk.x for k,kk in m._z.items()}	
-
-		#Recovers the duals of the relaxed
-		λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
-		π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}				
-
-		
-		m=sp.master_problem(relaxed=False)		
-		print_log('\tEmpece a resolver con integralidad')		
-		time_genPet=time.time()
-		m.optimize()		
-		print_log('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo sub problema {sp.id} con integralidad')
-
-		#Guarda las rutas seleccionadas para cada depot en sp.OptRi
-		for d in sp.H:
-			routes=[i for i,j in m._z.items() if j.x==1 and sp.R[i][0]==d]			
-			if d not in sp.OptRi.keys():
-				sp.OptRi[d]=routes
-			else:
-				sp.OptRi[d]+=routes		
-		
-		#if plot:
-		if True:
-			
-			#print_log('\t\t',sp.id,'\n\t\t',sp.R,'\n\t\t',sp.Route_cost,'\n\t\t',sp.OptRi)
-			#m=sp.master_problem(relaxed=False)
-			#m.optimize()
-			
-			sp.export_results({i:m._z[i].x for i in m._z.keys()})
-			pet=[i for i,p in enumerate(m._z) if m._z[i].x>.5]
-			routes=[sp.R[i] for i in pet]
-			sp.OptRi=routes
-			#self.plot_dem(sp.D)
-			#self.plot_petals(routes,sp.H,pet=True)
-			#plt.show()
-			os.chdir('../Plots/Subproblems')
-			if sp.id==0:delete_all_files(os.getcwd())
-			self.plot_dem(sp.D)
-			self.plot_petals(routes,sp.H,pet=False)
-			plt.savefig(f'sp_{sp.id}.png')
-			#plt.show()
-			plt.clf()			
-			os.chdir('..')
-			os.chdir('../Data')
-			
-			foi=sum(sp.Route_cost[r]*m._z[r].x for r in range(len(sp.R)))
-			return m.objVal, λ, π
-		else:
-			return m.objVal, λ, π
 
 	def solveSpJava(self,sp,nRoutes=10,gap=0.001,tw=False):
 		FO=[]
@@ -1379,49 +1226,28 @@ class master():
 
 			#Update route scores
 			sp.updateScores()
-			if n_it%2==0:
-				sp.updateSetOfRoutes(200)	
-			print(f'NumRoutes: {len(sp.R)}\nFo: {m.objVal}')
-
-			#print('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo la relajación')
+			if n_it%self.nItemptyRoutes==0:
+				sp.updateSetOfRoutes(self.maxNumRoutes)				
+			
+			print(f'NumRoutes: {len(sp.Rid)}')
 			FO.append(m.objVal)
-			#print('\t',f'el status del problema es {m.getAttr("Status")}')
+
 			π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
 			λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
-			#print('\t πs')
-			#print('\t',π)
-			#print('\t λs')
-			#print('\t',λ)
 
 			term=True			
 			for d in HH:
-
-				#cord=self.V.loc[d][['lat','long']]	
-				#clients_h=list(self.V.loc[distance(self.V.loc[:,'lat'],self.V.loc[:,'long'],cord.loc['lat'],cord.loc['long'])<(self.route_time_limit/5) *40].index)			
 				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
 				clients_h=list(set(clients.index) & set(clients_h))
-				clients_h=clients.loc[clients_h]
-
-				#print(f'\t\tEmpcece con petal gen del depot {d} en la it {n_it}')
+				clients_h=clients.loc[clients_h]				
 				time_genPet=time.time()
 				
 				r_costs=sp.runJavaPulse(d, clients_h,π,λ[d],nRoutes=nRoutes,tw=tw)
-				#print(f'\t\tRouteGen{d}')
 
-				#print('\t\t',f'Me demoro {time.time()-time_genPet} segundos')
-
-				if r_costs-λ[d]<0:
-					#print('\t\t',r_costs)
-					#print('\t\tLas λ dan',λ[d])
+				if r_costs-λ[d]<0:					
 					term=False
 					#break
-			
-			#print('\t',f'Voy {n_it} iteraciones del subproblema')
-			#print('\t',FO[-1])
-			#print(FO)
-			#if n_it==1:
-			#	break
-			#	print(FO)
+						
 			if n_it>2:
 				print('\t\tMejora de: '+str((FO[-2]-FO[-1])/FO[-1]))
 				print('\t\tVoy en de: '+str(FO[-1]))
@@ -1433,10 +1259,8 @@ class master():
 				print(FO)
 				break
 			
-
 		print_log('\tTermine con la GC..')
-		
-		
+				
 		m=sp.master_problem(relaxed=True)
 		m.optimize()
 
@@ -1445,54 +1269,9 @@ class master():
 
 		#Recovers the duals of the relaxed
 		λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
-		π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}				
+		π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}	
 
-		'''
-		m=sp.master_problem(relaxed=False)		
-		print_log('\tEmpece a resolver con integralidad')		
-		time_genPet=time.time()
-		m.optimize()		
-		print_log('\t',f'Me demoro {time.time()-time_genPet} segundos resolviendo sub problema {sp.id} con integralidad')
-
-		#Guarda las rutas seleccionadas para cada depot en sp.OptRi
-		for d in sp.H:
-			routes=[i for i,j in m._z.items() if j.x==1 and sp.R[i][0]==d]			
-			if d not in sp.OptRi.keys():
-				sp.OptRi[d]=routes
-			else:
-				sp.OptRi[d]+=routes		
-		'''
-		#if plot:
-		if True:
-			
-			#print_log('\t\t',sp.id,'\n\t\t',sp.R,'\n\t\t',sp.Route_cost,'\n\t\t',sp.OptRi)
-			m=sp.master_problem(relaxed=False)
-			m.optimize()
-			
-			sp.export_results({i:m._z[i].x for i in m._z.keys()})
-			pet=[i for i in m._z.keys() if m._z[i].x>.5]
-
-			routes=[sp.R[i] for i in pet]
-			sp.OptRi=routes
-			#self.plot_dem(sp.D)
-			#self.plot_petals(routes,sp.H,pet=True)
-			#plt.show()
-			'''
-			os.chdir('../Plots/Subproblems')
-			if sp.id==0:delete_all_files(os.getcwd())
-			self.plot_dem(sp.D)
-			self.plot_petals(routes,sp.H,pet=False)
-			plt.savefig(f'sp_{sp.id}.png')
-			#plt.show()
-			plt.clf()			
-			os.chdir('..')
-			os.chdir('../Data')
-			'''
-			
-			foi=sum(sp.Route_cost[r]*m._z[r].x for r in sp.Rid)
-			return m.objVal, λ, π
-		else:
-			return m.objVal, λ, π
+		return m.objVal, λ, π
 
 	def solveSpJavaNotAllDepots(self,sp,nRoutes=10,gap=0.001):
 		'''
@@ -1636,7 +1415,10 @@ class master():
 	def solveSpNoCG(self,sp):
 		m=sp.master_problem(relaxed=True)
 		m.optimize()
-
+		#Update route scores
+		sp.updateScores()
+		if n_it%self.nItemptyRouteself.nItemptyRoutes==0:
+			sp.updateSetOfRoutes(self.maxNumRoutes)				
 		#Uses this solution to start next time
 		sp.z_hat={k:kk.x for k,kk in m._z.items()}	
 
@@ -1755,6 +1537,7 @@ class master():
 		#print(centers)
 		#
 		return set(centers)
+
 class sub_problem():
 	"""docstring for sub_problem"""
 	def __init__(self,master,id,H, D,dm,pos=[]):
@@ -1832,6 +1615,15 @@ class sub_problem():
 		self.nLtw=2
 		self.nUtw=10
 	
+	def save(name):
+		'''
+		Writes a binary file with the object
+		'''	
+
+		file_sp=open(f'{name}.sp','wb')
+		pickle.dump(self, file_sp)
+		file_sp.close()
+
 	def master_problem(self,relaxed=False):
 		'''
 		Defines the master problem
@@ -2235,7 +2027,7 @@ class sub_problem():
 		
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
-		minus=2
+		minus=1
 		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-minus),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
 		tw=list(map(lambda x: (int(x[0]),int(x[1])),tw))
 		def classifier(client,order=[0,1]):
