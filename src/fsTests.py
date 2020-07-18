@@ -1,4 +1,4 @@
-from main import *
+from main1 import *
 import time
 import os
 import datetime
@@ -89,7 +89,6 @@ def write(file:str,s:str):
 	f.write(s+'\n')
 	f.close()
 
-
 def runBenders(h):
 	'''
 	Runs benders algo for h number of depots
@@ -100,9 +99,6 @@ def runBenders(h):
 	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False)
 	return UB,LB,x_hat,y_hat,ColGenCalls
 	
-	
-
-
 
 if __name__=='__main__':
 	
