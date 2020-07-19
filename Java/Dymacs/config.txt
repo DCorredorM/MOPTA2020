@@ -5,9 +5,9 @@ Capacity:60
 Start Node:0
 End Node:15
 Depot id:18014
-lambda:-120774.53234195338
+lambda:-110379.99999999997
 Num routes:10
-Route id:674
+Route id:551
 t mile:0.025
 c mile:0.7
 time Limit:5

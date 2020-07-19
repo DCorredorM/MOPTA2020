@@ -129,8 +129,8 @@ if __name__=='__main__':
 	
 	os.chdir(dPath)					#Change dir to Data
 
-	p.maxNumRoutes=500				#Number of routes in each sp
-	p.nItemptyRoutes=5				#Period for cleaning set of routes
+	p.maxNumRoutes=50				#Number of routes in each sp
+	p.nItemptyRoutes=2				#Period for cleaning set of routes
 
 	################################################################
 
@@ -152,15 +152,15 @@ if __name__=='__main__':
 
 
 
-	#4. Solve firstStage with SPs trained
-	
-	for h in range(4,len(p.possibleDepots)):
+
+	#4. Solve firstStage with SPs trained	
+	for h in range(3,len(p.possibleDepots)+1):
 		SolvingTime=time.time()
 		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
 		SolvingTime=time.time()-SolvingTime
 		write(compTimes,f'\t{h}: {SolvingTime}')
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
-	
+
 
 	
 

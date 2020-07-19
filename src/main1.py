@@ -1597,7 +1597,7 @@ class sub_problem():
 		self.SG=nx.DiGraph()
 		self.pos=pos
 
-		#Routes per node
+		#Routes of depot
 		self.Ri={}
 
 		#Routes selected for node i
@@ -1958,6 +1958,10 @@ class sub_problem():
 				self.Ri[route[0]].append(self.nRoutes)
 			else:
 				self.Ri[route[0]]=[self.nRoutes]			
+			
+			if route[0] not in self.master.possibleDepots:
+				print(f'esto esta pasando {route[0]}')
+				raise Exception('ALgo raro raro')
 			#time=self.c_mile*sum(self.dm[k][l] for k,l in zip(route[:-1],route[1:]))
 			cost=self.c_mile*sum(self.dm[k][l] for k,l in zip(route[:-1],route[1:]))
 			
@@ -2087,15 +2091,16 @@ class sub_problem():
 		beta=2
 		tScore=lambda t: exp(gamma/(t**beta))-1
 
-		R=sorted(self.Rid,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
-
-		self.Rid=R[:n]
-		Rno=R[n+1:]
-		for i in Rno:
-			del self.RScores[i]
-			del self.R[i]
-			del self.Route_cost[i]
-
+		for i,idis in self.Ri.items():
+			R=sorted(idis,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
+			
+			self.Ri[i]=R[:n]
+			Rno=R[n+1:]
+			for ii in Rno:
+				self.Rid.remove(ii)
+				del self.RScores[ii]
+				del self.R[ii]
+				del self.Route_cost[ii]			
 		#list(map(self.RScores.__delitem__, filter(self.RScores.__contains__,Rno)))
 
 #Some functions

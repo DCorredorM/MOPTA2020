@@ -6,3 +6,114 @@ Training time: 4940.507786035538
 --------------------
 Corrida 2020-07-19 16:29:19.636137
 Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 12:59:28.931886
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 12:59:55.275928
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:01:14.243783
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:02:19.465337
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:03:12.457900
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:05:47.476910
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:06:11.862641
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:07:27.414046
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:08:27.245666
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:08:44.096463
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:09:31.497249
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:09:48.247347
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:11:32.650515
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:12:54.005234
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:13:05.832328
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:13:13.422642
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:13:26.552173
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:13:33.212027
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:15:15.040519
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:15:21.242436
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:15:44.627545
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:21:40.137962
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:22:15.025318
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:22:56.119758
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:23:15.364842
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:24:02.152908
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:26:04.979812
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:26:36.433149
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:27:20.032133
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:29:31.327734
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:30:21.277808
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:31:08.127117
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:32:17.021880
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:32:54.676576
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 13:33:13.058257
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 18:19:28.788273
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+--------------------
+Corrida 2020-07-19 18:19:52.721046
+Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
