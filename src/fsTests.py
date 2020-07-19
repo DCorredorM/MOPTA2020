@@ -117,9 +117,9 @@ if __name__=='__main__':
 	tw=True		#TimeWindow strategy?
 	scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
 
-	trained=False
+	trained=True
 	
-	Nota=''										#Note 
+	Nota='Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
@@ -148,19 +148,19 @@ if __name__=='__main__':
 		write(compTimes,f'\t--------------\n\tSolving Times:')
 		write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
 		for s in p.SPS:
-			s.save(f'T_sp{s.id}')
+			s.save(f'Tsp{s.id}')
 
 
 
 	#4. Solve firstStage with SPs trained
-	'''
+	
 	for h in range(4,len(p.possibleDepots)):
 		SolvingTime=time.time()
 		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
 		SolvingTime=time.time()-SolvingTime
 		write(compTimes,f'\t{h}: {SolvingTime}')
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
-	'''
+	
 
 	
 

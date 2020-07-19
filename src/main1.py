@@ -784,6 +784,31 @@ class master():
 			
 		return UB,LB,x_hat,y_hat,ColGenCalls
 
+	def export_results(self,depots,veh_depot):
+		'''
+		Exports the first stage results into a .txt
+		Input:
+			depots (dict): Dictionaty with the solution of the x vatraibles of the benders algorithm
+			veh_depot (DICT): Dictionaty with the solution of the y vatraibles of the benders algorithm
+		Output:
+			None
+		'''
+
+		os.chdir('..')
+		os.chdir('Results')
+		#print(os.getcwd())
+
+		file = open(f"First_stage{self.h}.txt","w")
+		file.write('Depot'+'\t'+'Number of vehicles'+'\n')
+		for i in depots.keys():
+			if depots[i]>0:
+				file.write(str(i)+'\t'+str(veh_depot[i])+'\n')
+
+		file.close() 
+
+		os.chdir('..')
+		os.chdir('Data')
+
 	def Benders_algoMix(self,epsilon=0.1,time_limit=None,read=True):
 		'''
 		Benders algorithm is implemented.		
@@ -1417,8 +1442,7 @@ class master():
 		m.optimize()
 		#Update route scores
 		sp.updateScores()
-		if n_it%self.nItemptyRouteself.nItemptyRoutes==0:
-			sp.updateSetOfRoutes(self.maxNumRoutes)				
+		
 		#Uses this solution to start next time
 		sp.z_hat={k:kk.x for k,kk in m._z.items()}	
 
@@ -1615,7 +1639,7 @@ class sub_problem():
 		self.nLtw=2
 		self.nUtw=10
 	
-	def save(name):
+	def save(self,name):
 		'''
 		Writes a binary file with the object
 		'''	
@@ -2027,7 +2051,7 @@ class sub_problem():
 		
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
-		minus=1
+		minus=0.5
 		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-minus),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
 		tw=list(map(lambda x: (int(x[0]),int(x[1])),tw))
 		def classifier(client,order=[0,1]):

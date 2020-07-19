@@ -1,13 +1,13 @@
-DataFile:dymacsSp_15427.txt
-Number of Arcs:4838
-Number of Nodes:72
+DataFile:dymacsSp_18014.txt
+Number of Arcs:9690
+Number of Nodes:101
 Capacity:60
 Start Node:0
-End Node:12
-Depot id:15427
-lambda:0.0
+End Node:15
+Depot id:18014
+lambda:-120774.53234195338
 Num routes:10
-Route id:0
+Route id:674
 t mile:0.025
 c mile:0.7
 time Limit:5
