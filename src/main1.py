@@ -12,10 +12,8 @@ import pickle
 
 
 class master():
-
-	"""docstring for master"""
+	"""docstring fox master"""
 	def __init__(self,h=3,load=True):
-		
 		#Number of depots to open |H|.
 		self.h=h
 
@@ -36,10 +34,9 @@ class master():
 		#p(master, self).__init__()
 		self.data_path = os.chdir("../Data") #Data path
 
-				#print(self.dist_m.head())		
 		self.t_mile=1/40
 		self.c_mile=0.7
-				#Time limit for the Benders Algo
+		#Time limit for the Benders Algo
 		self.time_limit=1000
 
 		#Clusters
@@ -53,34 +50,12 @@ class master():
 		#Rate for the random variable modeling the number of units in an order.
 		self.demRate=10
 
-		
-		
-
-		#List for animation...
-		self.AnimNVeh=[{15051: 2.0, 16627: 1.0, 18617: 1.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0, 18617: 1.0}, {15051: 2.0, 16627: 1.0, 18617: 1.0, 18074: 4.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0, 18074: 4.0}, {15051: 2.0, 16627: 1.0, 18617: 14.0}, {15051: 2.0, 17017: 16.0, 16627: 1.0}, {15051: 11.0, 16627: 2.0, 18617: 7.0}, {15051: 8.0, 17017: 7.0, 16627: 7.0}, {15051: 2.0, 17017: 3.0, 16627: 1.0, 18617: 1.0, 18074: 4.0}, {15051: 2.0, 17017: 3.0, 16627: 2.0, 18617: 11.0}, {15051: 7.0, 16627: 5.0, 18617: 1.0, 18074: 4.0}, {15051: 2.0, 16627: 2.0, 18617: 10.0, 18074: 4.0}, {15051: 11.0, 17017: 3.0, 16627: 3.0, 18617: 3.0}, {15051: 2.0, 17017: 3.0, 16627: 11.0, 18074: 4.0}, {15051: 7.0, 16627: 6.0, 18617: 17.0}, {15051: 11.0, 17017: 3.0, 16627: 1.0, 18617: 1.0, 18074: 4.0}, {15051: 12.0, 16627: 1.0, 18617: 9.0, 18074: 4.0}, {15051: 12.0, 17017: 3.0, 16627: 1.0, 18617: 14.0}, {15051: 12.0, 17017: 20.0, 16627: 1.0}, {15051: 2.0, 17017: 3.0, 16627: 10.0, 18617: 20.0, 18074: 4.0}, {15051: 20.0, 17017: 13.0, 16627: 1.0, 18074: 4.0}, {15051: 2.0, 16627: 20.0, 18617: 8.0, 18074: 4.0}, {15051: 20.0, 17017: 3.0, 16627: 1.0, 18617: 20.0, 18074: 4.0}, {15051: 2.0, 17017: 11.0, 16627: 20.0, 18617: 2.0}, {15051: 20.0, 16627: 11.0, 18617: 5.0, 18074: 4.0}, {15051: 20.0, 17017: 3.0, 16627: 20.0, 18617: 1.0, 18074: 4.0}, {15051: 20.0, 17017: 3.0, 16627: 14.0, 18074: 4.0}, {15051: 5.0, 16627: 3.0, 18617: 2.0, 18074: 5.0}, {15051: 5.0, 16627: 3.0, 18617: 4.0, 18074: 4.0}]
-		#S[{15632: 1.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 1.0}, {15632: 5.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 1.0}, {15632: 1.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 6.0}, {15632: 3.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 2.0, 16669: 1.0, 16923: 1.0, 18660: 2.0, 18844: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 1.0, 16669: 4.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16669: 3.0, 16923: 1.0, 18660: 1.0, 18844: 3.0, 19310: 3.0}, {15632: 1.0, 16434: 7.0, 16669: 3.0, 16923: 1.0, 18660: 6.0, 18844: 1.0, 19310: 1.0}, {15632: 4.0, 16434: 6.0, 16669: 2.0, 16923: 1.0, 18660: 6.0, 18844: 1.0, 19310: 1.0}, {15632: 2.0, 16434: 7.0, 16669: 4.0, 16923: 1.0, 18660: 3.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 7.0, 16669: 3.0, 16923: 1.0, 18660: 3.0, 18844: 1.0, 19310: 3.0}, {15632: 19.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 2.0, 19310: 8.0}, {15632: 9.0, 16434: 1.0, 16669: 3.0, 16923: 1.0, 18660: 2.0, 18844: 2.0, 19310: 3.0}, {15632: 4.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 2.0, 18844: 1.0, 19310: 4.0}, {15632: 4.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 2.0, 18844: 1.0, 19310: 4.0}, {16249: 1.0, 18660: 1.0}, {16249: 11.0, 18660: 1.0}, {16249: 4.0, 18660: 10.0}, {16249: 13.0, 18660: 10.0}, {16249: 6.0, 18660: 5.0}, {16249: 6.0, 18660: 5.0}]
-		#[{15632: 1.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 1.0}, {15632: 5.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 1.0}, {15632: 1.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 6.0}, {15632: 3.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 2.0, 16669: 1.0, 16923: 1.0, 18660: 2.0, 18844: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 1.0, 16669: 4.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16669: 3.0, 16923: 1.0, 18660: 1.0, 18844: 3.0, 19310: 3.0}, {15632: 1.0, 16434: 7.0, 16669: 3.0, 16923: 1.0, 18660: 6.0, 18844: 1.0, 19310: 1.0}, {15632: 4.0, 16434: 6.0, 16669: 2.0, 16923: 1.0, 18660: 6.0, 18844: 1.0, 19310: 1.0}, {15632: 2.0, 16434: 7.0, 16669: 4.0, 16923: 1.0, 18660: 3.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 7.0, 16669: 3.0, 16923: 1.0, 18660: 3.0, 18844: 1.0, 19310: 3.0}, {15632: 19.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 2.0, 19310: 8.0}, {15632: 9.0, 16434: 1.0, 16669: 3.0, 16923: 1.0, 18660: 2.0, 18844: 2.0, 19310: 3.0}, {15632: 4.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 2.0, 18844: 1.0, 19310: 4.0}, {15632: 4.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 2.0, 18844: 1.0, 19310: 4.0}]
-		#[{15632: 1.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 1.0}, {15632: 6.0, 16434: 1.0, 16669: 1.0, 16864: 1.0, 16923: 1.0, 18701: 1.0, 19310: 1.0}, {15632: 4.0, 16434: 1.0, 16669: 1.0, 16923: 1.0, 18660: 2.0, 18701: 1.0, 19310: 2.0}, {15632: 3.0, 16436: 0.999997750420129, 16669: 1.0, 16923: 0.999998500629347, 18660: 1.0, 18844: 1.0, 19310: 3.9999986672970103}, {15632: 3.0, 16434: 2.0, 16669: 1.0, 16864: 1.0, 16915: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16669: 2.0, 16923: 1.0, 18660: 1.0, 18701: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16669: 2.0, 16864: 1.0, 16915: 1.0, 18701: 1.0, 19310: 5.0}, {15632: 3.0, 16436: 1.0, 16669: 3.0, 16923: 1.0, 18660: 1.0, 18701: 2.0, 19310: 3.0}, {15632: 3.0, 16434: 2.0, 16669: 2.0, 16864: 1.0, 16915: 1.0, 18660: 1.0, 18701: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 1.0, 16669: 1.0, 16864: 1.0, 16915: 1.0, 18701: 2.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16436: 1.0, 16669: 1.0, 16923: 1.0, 18660: 7.0, 18844: 1.0, 19310: 1.0}, {15632: 3.0, 16434: 2.0, 16669: 1.0, 16923: 1.0, 18651: 1.0, 18660: 4.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16669: 2.0, 16915: 1.0, 16923: 1.0, 18660: 4.0, 18844: 1.0, 19310: 2.0}, {15632: 3.0, 16434: 1.0000008230984083, 16436: 0.9999991782699773, 16669: 1.999999178269977, 16923: 1.0, 18660: 2.0, 18701: 1.0, 19310: 3.0}, {15632: 4.0, 16436: 2.0, 16669: 1.0, 16864: 1.0, 16923: 1.0, 18660: 3.0, 18844: 1.0, 19310: 2.0}, {15632: 3.0, 16434: 2.0, 16669: 1.0, 16864: 1.0, 16923: 1.0, 18660: 2.0, 18701: 1.0, 19310: 3.0}, {15632: 7.0, 16434: 1.0, 16669: 1.0, 16882: 1.0, 16915: 1.0, 18660: 1.0, 18844: 2.0, 19310: 3.0}, {15632: 5.0, 16436: 2.0, 16669: 1.0, 16923: 1.0, 18660: 1.0, 18701: 1.0, 18844: 2.0, 19310: 5.0}, {15632: 1.0, 16434: 2.0, 16669: 10.0, 16864: 9.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 2.0, 16434: 1.0, 16669: 4.0, 16864: 12.0, 16915: 1.0, 16923: 1.0, 18660: 3.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 2.0, 16669: 3.0, 16864: 14.0, 16923: 1.0, 18701: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 3.0, 16434: 1.0, 16669: 2.0, 16864: 14.0, 16915: 1.0, 18651: 1.0, 18660: 3.0, 19310: 3.0}, {15632: 4.0, 16350: 1.0, 16434: 2.0, 16669: 2.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 2.0, 16669: 2.0, 16882: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}, {15632: 4.0, 16434: 2.0, 16669: 2.0, 16882: 1.0, 16923: 1.0, 18660: 1.0, 18844: 1.0, 19310: 3.0}]
-
-
-
-
 		self.possibleDepots=[17728, 16130, 15427, 16650, 19372, 17582, 15824, 18014, 18463]#list(self.possDepots(N=[9]))
 		n=len(self.possibleDepots)
 		k=self.h
 
 		self.posDisplays=self.calcPosDisp()
-		#print(self.possibleDepots)
 		
-		'''
-		plot adjacency matrix...
-
-		plt.matshow( (self.dist_m*self.t_mile).applymap(lambda x: 1 if x<=2 else 0))
-		cb = plt.colorbar()
-		cb.ax.tick_params(labelsize=14)
-		plt.show()		
-		'''	
-
 		if load:
 			#Vertexes
 
@@ -91,7 +66,7 @@ class master():
 
 			#Daily demmand
 			self.Demands=self.import_data('mopta2020_q2019.csv',h=None,names=['id']+list(range(1,366))).set_index('id')
-			#self.Demands=pd.read_csv('Scenarios_robust_new.csv',header=0,index_col=0)	
+			#self.Demands=pd.read_csv('Scenarios_robust_new.csv',header=0,index_col=0)
 			#pd.read_csv('Scenarios.csv',header=1,sep=',',index_col=0)
 
 			#Vertexes
@@ -141,24 +116,23 @@ class master():
 			#self.compMinVeh(α=0.4)
 
 			self.minVeh=self.import_data('num_veh.csv',h=0,names=['id','minVeh']).set_index('id').applymap(lambda x: max(x,1))
-			self.minVeh=self.minVeh['minVeh']	
+			self.minVeh=self.minVeh['minVeh']
 			#Cost of not covering a node
-			self.ρ=self.prob*self.demRate*100	
+			self.ρ=self.prob*self.demRate*100
 
 			#Maximum set of routes for the subproblems
 			self.maxNumRoutes=200
 			#Period for cleaning set of routes of the subproblems
 			self.nItemptyRoutes=5
-
-
+	
 	def createLog(self,h):
 		global log_text,log_path
 		os.chdir('../Results')
 		log_text=open(f'log{h}.txt','w')
 		log_path=os.getcwd()+f'/log{h}.txt'		
 		log_text.close()
-		os.chdir('../Data')
-	
+		os.chdir('../Data')	
+
 	def calcPosDisp(self):
 		n=len(self.possibleDepots)
 		k=self.h
@@ -692,7 +666,7 @@ class master():
 		print_log('############################################################################################################')
 
 		return UB,LB,x_hat,y_hat
-	
+
 	def BendersAlgoMix(self,epsilon=0.1,read=True):
 		'''
 		Benders algorithm is implemented.		
@@ -773,7 +747,7 @@ class master():
 			
 			#Check optimality gap
 			try:
-				print(f'El gap es de: {UB[-1]-LB[-1]/UB[-1]}\nCon pb de {UB[-1]}')
+				print(f'El gap es de: {(UB[-1]-LB[-1])/UB[-1]}\nCon pb de {UB[-1]}')
 			except:
 				pass
 			if ((UB[-1]-LB[-1])<self.epsilon*UB[-1]):								
@@ -784,31 +758,6 @@ class master():
 			self.export_results(depots=x_hat,veh_depot=y_hat)
 			
 		return UB,LB,x_hat,y_hat,ColGenCalls
-
-	def export_results(self,depots,veh_depot):
-		'''
-		Exports the first stage results into a .txt
-		Input:
-			depots (dict): Dictionaty with the solution of the x vatraibles of the benders algorithm
-			veh_depot (DICT): Dictionaty with the solution of the y vatraibles of the benders algorithm
-		Output:
-			None
-		'''
-
-		os.chdir('..')
-		os.chdir('Results')
-		#print(os.getcwd())
-
-		file = open(f"First_stage{self.h}.txt","w")
-		file.write('Depot'+'\t'+'Number of vehicles'+'\n')
-		for i in depots.keys():
-			if depots[i]>0:
-				file.write(str(i)+'\t'+str(veh_depot[i])+'\n')
-
-		file.close() 
-
-		os.chdir('..')
-		os.chdir('Data')
 
 	def Benders_algoMix(self,epsilon=0.1,time_limit=None,read=True):
 		'''
@@ -1244,24 +1193,17 @@ class master():
 		HH=[i for i in sp.H if sp.y_hat[i]>0]
 		while True:
 			n_it+=1			
-			m=sp.master_problem(relaxed=True)
-			time_genPet=time.time()
-			m.optimize()
-			sp.z_hat={k:kk.x for k,kk in m._z.items()}
-
-			#Update route scores
-			sp.updateScores()
-			if n_it%self.nItemptyRoutes==0:
-				sp.updateSetOfRoutes(self.maxNumRoutes)				
-			
-			print(f'NumRoutes: {len(sp.Rid)}')
-			FO.append(m.objVal)
-
-			π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
-			λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
 
 			term=True			
 			for d in HH:
+				m=sp.master_problem(relaxed=True)
+				time_genPet=time.time()
+				m.optimize()
+				sp.z_hat={k:kk.x for k,kk in m._z.items()}
+
+				π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
+				λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
+
 				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
 				clients_h=list(set(clients.index) & set(clients_h))
 				clients_h=clients.loc[clients_h]				
@@ -1272,6 +1214,18 @@ class master():
 				if r_costs-λ[d]<0:					
 					term=False
 					#break
+			m=sp.master_problem(relaxed=True)
+			time_genPet=time.time()
+			m.optimize()
+			sp.z_hat={k:kk.x for k,kk in m._z.items()}
+			#Update route scores
+			sp.updateScores()
+			if n_it%self.nItemptyRoutes==0:
+				sp.updateSetOfRoutes(self.maxNumRoutes)				
+			
+			print(f'NumRoutes: {len(sp.Rid)}')
+			FO.append(m.objVal)
+
 						
 			if n_it>2:
 				print('\t\tMejora de: '+str((FO[-2]-FO[-1])/FO[-1]))
@@ -1493,8 +1447,8 @@ class master():
 			return m.objVal, λ, π
 		else:
 			return m.objVal, λ, π
-
-	def create_cluters(self,N):		
+	
+	def create_cluters(self,N):
 		nodes=list(self.V.index)
 		points=[[self.V.loc[i]['lat'],self.V.loc[i]['long']] for i in nodes]
 
@@ -1556,12 +1510,37 @@ class master():
 		n=self.V.index[points.index(min(points))]
 		#print('n',n)
 		return n
-		
-	def possDepotsNoNocluster(self,cent):				
+
+	def possDepotsNoNocluster(self,cent):
 		centers=list(map(lambda x: self.centroidNoNocluster(x),cent))
 		#print(centers)
 		#
 		return set(centers)
+
+	def export_results(self,depots,veh_depot):
+		'''
+		Exports the first stage results into a .txt
+		Input:
+			depots (dict): Dictionaty with the solution of the x vatraibles of the benders algorithm
+			veh_depot (DICT): Dictionaty with the solution of the y vatraibles of the benders algorithm
+		Output:
+			None
+		'''
+
+		os.chdir('..')
+		os.chdir('Results')
+		#print(os.getcwd())
+
+		file = open(f"First_stage{self.h}.txt","w")
+		file.write('Depot'+'\t'+'Number of vehicles'+'\n')
+		for i in depots.keys():
+			if depots[i]>0:
+				file.write(str(i)+'\t'+str(veh_depot[i])+'\n')
+
+		file.close() 
+
+		os.chdir('..')
+		os.chdir('Data')
 
 class sub_problem():
 	"""docstring for sub_problem"""
@@ -2098,7 +2077,7 @@ class sub_problem():
 			
 			if n<len(idis):
 				R=sorted(idis,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
-				#print(f'Scores:\n{[ (self.RScores[x],self.TInSet[x]) for x in R]}')
+				print(f'\t\tScores:\n\t\t{[ (self.RScores[x],self.TInSet[x]) for x in R]}')
 				self.Ri[i]=R[:n]
 				Rno=R[n+1:]
 				for ii in Rno:
@@ -2109,7 +2088,8 @@ class sub_problem():
 					del self.TInSet[ii]
 			#print(f'\t\tDepot: {i}\n\t\t#Routes:{len(self.Ri[i])}')		
 		#list(map(self.RScores.__delitem__, filter(self.RScores.__contains__,Rno)))
-
+		print(f'\t\tRoutes per depot: {[(i,len(l)) for i,l in self.Ri.items()]}')
+	
 	def restartScores(self):
 		for ii in self.Rid:
 			self.RScores[ii]=0
