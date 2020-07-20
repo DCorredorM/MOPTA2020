@@ -16,7 +16,7 @@ def Upload_Scenarios(file,trained=False):
 		di=p.Demands[i][p.Demands[i]>0]
 		if trained:
 			try:
-				pickle_in = open(f'Tsp{id}.sp','rb')
+				pickle_in = open(f'sp{id}.sp','rb')
 				sp = pickle.load(pickle_in)
 				p.SPS.append(sp)
 				sp.master=p		
@@ -151,13 +151,13 @@ if __name__=='__main__':
 		for s in p.SPS:
 			s.save(f'Tsp{s.id}')
 	
-	for s in p.SPS:
-		s.save(f'Tsp{s.id}')
+	
 
-	for s in p.SPS:
-		s.restartScores()
+
 	#4. Solve firstStage with SPs trained	
-	for h in range(3,len(p.possibleDepots)+1):
+	for h in range(7,len(p.possibleDepots)+1):
+		for s in p.SPS:
+			s.restartScores()
 		SolvingTime=time.time()
 		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
 		SolvingTime=time.time()-SolvingTime

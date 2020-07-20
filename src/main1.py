@@ -745,7 +745,7 @@ class master():
 			
 			#Check optimality gap
 			try:
-				print(f'El gap es de: {UB[-1]-LB[-1]/UB[-1]}\nCon pb de {UB[-1]}')
+				print(f'El gap es de: {(UB[-1]-LB[-1])/UB[-1]}\nCon pb de {UB[-1]}')
 			except:
 				pass
 			if ((UB[-1]-LB[-1])<self.epsilon*UB[-1]):								
@@ -1191,24 +1191,17 @@ class master():
 		HH=[i for i in sp.H if sp.y_hat[i]>0]
 		while True:
 			n_it+=1			
-			m=sp.master_problem(relaxed=True)
-			time_genPet=time.time()
-			m.optimize()
-			sp.z_hat={k:kk.x for k,kk in m._z.items()}
-
-			#Update route scores
-			sp.updateScores()
-			if n_it%self.nItemptyRoutes==0:
-				sp.updateSetOfRoutes(self.maxNumRoutes)				
-			
-			print(f'NumRoutes: {len(sp.Rid)}')
-			FO.append(m.objVal)
-
-			π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
-			λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
 
 			term=True			
 			for d in HH:
+				m=sp.master_problem(relaxed=True)
+				time_genPet=time.time()
+				m.optimize()
+				sp.z_hat={k:kk.x for k,kk in m._z.items()}
+
+				π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
+				λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
+
 				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
 				clients_h=list(set(clients.index) & set(clients_h))
 				clients_h=clients.loc[clients_h]				
@@ -1219,6 +1212,18 @@ class master():
 				if r_costs-λ[d]<0:					
 					term=False
 					#break
+			m=sp.master_problem(relaxed=True)
+			time_genPet=time.time()
+			m.optimize()
+			sp.z_hat={k:kk.x for k,kk in m._z.items()}
+			#Update route scores
+			sp.updateScores()
+			if n_it%self.nItemptyRoutes==0:
+				sp.updateSetOfRoutes(self.maxNumRoutes)				
+			
+			print(f'NumRoutes: {len(sp.Rid)}')
+			FO.append(m.objVal)
+
 						
 			if n_it>2:
 				print('\t\tMejora de: '+str((FO[-2]-FO[-1])/FO[-1]))
@@ -1440,8 +1445,8 @@ class master():
 			return m.objVal, λ, π
 		else:
 			return m.objVal, λ, π
-
-		def create_cluters(self,N):
+	
+	def create_cluters(self,N):
 		nodes=list(self.V.index)
 		points=[[self.V.loc[i]['lat'],self.V.loc[i]['long']] for i in nodes]
 
@@ -1534,6 +1539,7 @@ class master():
 
 		os.chdir('..')
 		os.chdir('Data')
+
 class sub_problem():
 	"""docstring for sub_problem"""
 	def __init__(self,master,id,H, D,dm,pos=[]):
@@ -2069,7 +2075,7 @@ class sub_problem():
 			
 			if n<len(idis):
 				R=sorted(idis,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
-				#print(f'Scores:\n{[ (self.RScores[x],self.TInSet[x]) for x in R]}')
+				print(f'\t\tScores:\n\t\t{[ (self.RScores[x],self.TInSet[x]) for x in R]}')
 				self.Ri[i]=R[:n]
 				Rno=R[n+1:]
 				for ii in Rno:
@@ -2080,7 +2086,8 @@ class sub_problem():
 					del self.TInSet[ii]
 			#print(f'\t\tDepot: {i}\n\t\t#Routes:{len(self.Ri[i])}')		
 		#list(map(self.RScores.__delitem__, filter(self.RScores.__contains__,Rno)))
-
+		print(f'\t\tRoutes per depot: {[(i,len(l)) for i,l in self.Ri.items()]}')
+	
 	def restartScores(self):
 		for ii in self.Rid:
 			self.RScores[ii]=0
