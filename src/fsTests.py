@@ -18,7 +18,8 @@ def Upload_Scenarios(file,trained=False):
 			try:
 				pickle_in = open(f'Tsp{id}.sp','rb')
 				sp = pickle.load(pickle_in)
-				p.SPS.append(sp)		
+				p.SPS.append(sp)
+				sp.master=p		
 				#print(f'pikled {sp.id}')
 				pik+=f'{sp.id}, '
 			except:		
@@ -129,7 +130,7 @@ if __name__=='__main__':
 	
 	os.chdir(dPath)					#Change dir to Data
 
-	p.maxNumRoutes=50				#Number of routes in each sp
+	p.maxNumRoutes=100				#Number of routes in each sp
 	p.nItemptyRoutes=2				#Period for cleaning set of routes
 
 	################################################################
@@ -149,10 +150,12 @@ if __name__=='__main__':
 		write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
 		for s in p.SPS:
 			s.save(f'Tsp{s.id}')
+	
+	for s in p.SPS:
+		s.save(f'Tsp{s.id}')
 
-
-
-
+	for s in p.SPS:
+		s.restartScores()
 	#4. Solve firstStage with SPs trained	
 	for h in range(3,len(p.possibleDepots)+1):
 		SolvingTime=time.time()
@@ -162,18 +165,11 @@ if __name__=='__main__':
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
 
 
-	
-
-
-
-
-
 
 
 
 
 	
-
 
 
 

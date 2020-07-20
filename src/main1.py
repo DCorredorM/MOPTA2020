@@ -224,8 +224,6 @@ class master():
 			m.update()
 
 		else:
-			#m=pickle.load('BMP.pkl')
-
 			m=Model('BMP')
 			m.setParam('OutputFlag', 0)
 			m._epsilon=epsilon
@@ -409,8 +407,8 @@ class master():
 					#m.addConstr(m._η[ss]>=γ+quicksum(π[i] for i in π.keys()) + quicksum(λ[i]*m._y[i] for i in self.G.nodes) )
 					m.update()
 					cuts+=1				
-				file_sp=open(f'sp{ss}.sp','wb')
-				pickle.dump(s, file_sp)
+				s.save(f'sp{ss}')
+				
 				
 
 				#TODO: Feasibility cuts?
@@ -606,9 +604,9 @@ class master():
 					#Optimality Continious Benders Cuts
 					#m.addConstr(m._η[ss]>=γ+quicksum(π[i] for i in π.keys()) + quicksum(λ[i]*m._y[i] for i in self.G.nodes) )
 					m.update()
-					cuts+=1				
-				file_sp=open(f'sp{ss}.sp','wb')
-				pickle.dump(s, file_sp)
+					cuts+=1	
+				s.save(f'sp{ss}')
+				
 				
 
 				#TODO: Feasibility cuts?
@@ -745,8 +743,7 @@ class master():
 				if ColGen:
 					FOi,λ,π=self.solveSpJava(s,nRoutes=10,tw=True)
 					#Save sp with new generated routes:
-					file_sp=open(f'sp{s.id}.sp','wb')
-					pickle.dump(s, file_sp)
+					s.save(f'sp{s.id}')
 					ColGenCalls+=1
 				else:
 					FOi,λ,π=self.solveSpNoCG(s)
@@ -774,7 +771,11 @@ class master():
 			else:
 				ColGen=False
 			
-			#Check optimality gap			
+			#Check optimality gap
+			try:
+				print(f'El gap es de: {UB[-1]-LB[-1]/UB[-1]}\nCon pb de {UB[-1]}')
+			except:
+				pass
 			if ((UB[-1]-LB[-1])<self.epsilon*UB[-1]):								
 				break
 			elif (time.time()-Start_time>=self.time_limit):				
@@ -928,8 +929,7 @@ class master():
 					#m.addConstr(m._η[ss]>=γ+quicksum(π[i] for i in π.keys()) + quicksum(λ[i]*m._y[i] for i in self.G.nodes) )
 					m.update()
 					cuts+=1				
-				file_sp=open(f'sp{s.id}.sp','wb')
-				pickle.dump(s, file_sp)
+				s.save(f'sp{s.id}')				
 				
 
 				#TODO: Feasibility cuts?
@@ -1440,11 +1440,12 @@ class master():
 	def solveSpNoCG(self,sp):
 		m=sp.master_problem(relaxed=True)
 		m.optimize()
-		#Update route scores
-		sp.updateScores()
-		
+				
 		#Uses this solution to start next time
 		sp.z_hat={k:kk.x for k,kk in m._z.items()}	
+		#print([ (j,i) for j,i in sp.z_hat.items() if i>0])
+		#Update route scores
+		sp.updateScores()
 
 		#Recovers the duals of the relaxed
 		λ={i:m._Num_veh[i].Pi for i in m._Num_veh.keys()}
@@ -1643,10 +1644,12 @@ class sub_problem():
 		'''
 		Writes a binary file with the object
 		'''	
-
+		m=self.master
+		self.master=None
 		file_sp=open(f'{name}.sp','wb')
 		pickle.dump(self, file_sp)
 		file_sp.close()
+		self.master=m
 
 	def master_problem(self,relaxed=False):
 		'''
@@ -2086,22 +2089,31 @@ class sub_problem():
 		Uses the scores to keep the first n routes based on the score in the set of routes
 		'''
 		#self.updateScores()
-		n=min(n,len(self.R))
+		
 		gamma=3
 		beta=2
 		tScore=lambda t: exp(gamma/(t**beta))-1
 
 		for i,idis in self.Ri.items():
-			R=sorted(idis,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
 			
-			self.Ri[i]=R[:n]
-			Rno=R[n+1:]
-			for ii in Rno:
-				self.Rid.remove(ii)
-				del self.RScores[ii]
-				del self.R[ii]
-				del self.Route_cost[ii]			
+			if n<len(idis):
+				R=sorted(idis,key=lambda x: -(self.RScores[x] +tScore(self.TInSet[x]) ))
+				#print(f'Scores:\n{[ (self.RScores[x],self.TInSet[x]) for x in R]}')
+				self.Ri[i]=R[:n]
+				Rno=R[n+1:]
+				for ii in Rno:
+					self.Rid.remove(ii)
+					del self.RScores[ii]
+					del self.R[ii]
+					del self.Route_cost[ii]
+					del self.TInSet[ii]
+			#print(f'\t\tDepot: {i}\n\t\t#Routes:{len(self.Ri[i])}')		
 		#list(map(self.RScores.__delitem__, filter(self.RScores.__contains__,Rno)))
+
+	def restartScores(self):
+		for ii in self.Rid:
+			self.RScores[ii]=0
+			self.TInSet[ii]=0
 
 #Some functions
 def normal(x):
