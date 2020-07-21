@@ -1,0 +1,4 @@
+Depot	Number of vehicles
+16650	3.0
+15824	9.0
+18014	9.0

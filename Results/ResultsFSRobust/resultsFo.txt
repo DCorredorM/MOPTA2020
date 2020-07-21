@@ -21,3 +21,33 @@ Just trained, Tw strategy and cleaning routes with 500 for the max number of rou
 	--------------------
 Corrida 2020-07-20 14:35:57.418291
 Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:49:48.815185
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:50:23.467415
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:50:52.156936
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:51:06.526710
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:51:32.329483
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:52:14.523924
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:52:35.566744
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:52:59.421306
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:53:06.271117
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-20 22:53:33.028735
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
