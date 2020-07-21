@@ -1,8 +1,15 @@
-Corrida 2020-07-19 03:20:58.510540
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes per depot and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-21 04:51:25.145776
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
 	--------------
 	h	Value	Number of calls Route Gen
 --------------------
+<<<<<<< HEAD
 Corrida 2020-07-20 03:53:52.646450
 Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
 --------------------
@@ -22,3 +29,39 @@ Just trained, Tw strategy and cleaning routes with 500 for the max number of rou
 	8	4587.673831969327	15
 	9	4738.696271986186	20
 
+=======
+Corrida 2020-07-21 05:22:55.337051
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen
+--------------------
+Corrida 2020-07-21 11:46:49.028903
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen
+	3	5707.813663613171	0
+--------------------
+Corrida 2020-07-21 11:48:28.027516
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen
+	3	4786.156215567378	15
+	4	4587.0673071478905	15
+	5	4419.925612072774	20
+	6	4425.442030777031	20
+>>>>>>> 68e03eddb3cf13dea5f0a4f5d7877e72858c4a6c

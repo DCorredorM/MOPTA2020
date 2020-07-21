@@ -1,8 +1,14 @@
-Corrida 2020-07-19 03:20:58.510540
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes per depot and, 2 for the number of its for cleaning
-Training time: 4940.507786035538
+--------------------
+Corrida 2020-07-21 04:51:25.145776
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
 	--------------
 	Solving Times:
+<<<<<<< HEAD
 	3: 8736.027493476868
 	4: 8379.64193868637
 	5: 8766.041872501373
@@ -10,3 +16,44 @@ Training time: 4940.507786035538
 	7: 15443.6631128788
 	8: 7200.35960149765
 	9: 8772.948284387589
+=======
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+--------------------
+Corrida 2020-07-21 05:22:55.337051
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+--------------------
+Corrida 2020-07-21 11:46:49.028903
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+	3	33.2492094039917	7.443388223648071	25.29213309288025	0	0.1872386932373047
+--------------------
+Corrida 2020-07-21 11:48:28.027516
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+	3	2762.5058209896088	5.817832946777344	31.407148122787476	2686.5037982463837	0.20343995094299316
+	4	3638.930472135544	136.3120837211609	138.28090524673462	3305.67485165596	0.21878767013549805
+	5	4814.866299390793	477.42190980911255	279.00015354156494	3995.635463476181	0.20314717292785645
+	6	4210.859528303146	430.2920002937317	315.0795180797577	3387.8601593971252	0.17169713973999023
+>>>>>>> 68e03eddb3cf13dea5f0a4f5d7877e72858c4a6c
