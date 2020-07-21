@@ -1,0 +1,39 @@
+	Termine con la GC..
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 68e03eddb3cf13dea5f0a4f5d7877e72858c4a6c
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+<<<<<<< HEAD
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+	Termine con la GC..
+>>>>>>> 1b3dc05448700c08ec4bf6da0d45623ac017f1fd
+=======
+>>>>>>> 68e03eddb3cf13dea5f0a4f5d7877e72858c4a6c

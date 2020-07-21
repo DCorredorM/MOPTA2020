@@ -1,0 +1,4 @@
+Depot	Number of vehicles
+15427	6.0
+15824	10.0
+18014	9.0
