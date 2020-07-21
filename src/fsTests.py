@@ -124,7 +124,7 @@ if __name__=='__main__':
 	p.maxNumRoutes=100				#Number of routes in each sp
 	p.nItemptyRoutes=2				#Period for cleaning set of routes
 
-	Nota=f'Just trained, Tw strategy and cleaning routes with {p.maxNumRoutes} for the max number of routes and, {p.nItemptyRoutes} for the number of its for cleaning'										#Note 
+	Nota=f'Scenarios just trained\nWarm start:{WS}\nTw strategy:{tw}\nCleaning routes:\n\t{p.maxNumRoutes} for the max number of routes\n\t{p.nItemptyRoutes} for the number of iterations for cleaning'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
@@ -155,7 +155,7 @@ if __name__=='__main__':
 	write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
 
 	#4. Solve firstStage with SPs trained	
-	for h in range(7,len(p.possibleDepots)+1):
+	for h in range(3,len(p.possibleDepots)+1):
 		#restore times
 		p.totalBendersTime=0
 		p.bendersMasterTime=0
@@ -176,6 +176,7 @@ if __name__=='__main__':
 
 
 
+	
 
 	
 

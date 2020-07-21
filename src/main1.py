@@ -703,6 +703,9 @@ class master():
 			self.warmStartTime=time.time()-self.warmStartTime
 			η_hat={s:0 for s,i in enumerate(self.SPS)}
 			
+			val=sum(self.f['cost'].loc[i]*x_hat[i]+ self.c*y_hat[i] for i in  self.possibleDepots)
+			LB.append(val)
+
 			#On and Off variables
 			ON= quicksum((1-m._x[i]) for i in self.possibleDepots if x_hat[i]>0.5)
 			OFF = quicksum(m._x[i] for i in self.possibleDepots if x_hat[i]<0.5)
@@ -780,7 +783,7 @@ class master():
 				pass
 			if ((UB[-1]-LB[-1])<self.epsilon*UB[-1]):								
 				break
-			elif (time.time()-Start_time>=self.time_limit):				
+			elif (time.time()-self.totalBendersTime>=self.time_limit):				
 				break
 			#Export results
 			self.export_results(depots=x_hat,veh_depot=y_hat)

@@ -1,53 +1,42 @@
-Corrida 2020-07-19 03:20:58.510540
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes per depot and, 2 for the number of its for cleaning
+--------------------
+Corrida 2020-07-21 04:51:25.145776
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
 	--------------
 	h	Value	Number of calls Route Gen
 --------------------
-Corrida 2020-07-20 03:53:52.646450
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+Corrida 2020-07-21 05:22:55.337051
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen
 --------------------
-Corrida 2020-07-20 03:54:56.317071
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+Corrida 2020-07-21 11:46:49.028903
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen
+	3	5707.813663613171	0
 --------------------
-Corrida 2020-07-20 04:34:32.985485
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 04:37:32.966836
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
-	3	4905.140122550438	45
-	4	4664.943390000602	45
-	5	4546.006073243094	45
-	6	4550.711105868768	40
-	--------------------
-Corrida 2020-07-20 14:35:57.418291
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:49:48.815185
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:50:23.467415
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:50:52.156936
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:51:06.526710
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:51:32.329483
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:52:14.523924
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:52:35.566744
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:52:59.421306
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:53:06.271117
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:53:33.028735
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+Corrida 2020-07-21 11:48:28.027516
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen
+	3	4786.156215567378	15

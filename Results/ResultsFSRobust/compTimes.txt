@@ -1,56 +1,46 @@
-Corrida 2020-07-19 03:20:58.510540
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes per depot and, 2 for the number of its for cleaning
-Training time: 4940.507786035538
+--------------------
+Corrida 2020-07-21 04:51:25.145776
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
 	--------------
 	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
 --------------------
-
+Corrida 2020-07-21 05:22:55.337051
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
 --------------------
-Corrida 2020-07-20 03:53:52.646450
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
+Corrida 2020-07-21 11:46:49.028903
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+	3	33.2492094039917	7.443388223648071	25.29213309288025	0	0.1872386932373047
 --------------------
-Corrida 2020-07-20 03:54:56.317071
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 04:34:32.985485
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 04:37:32.966836
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
-	3: 8736.027493476868
-	4: 8379.64193868637
-	5: 8766.041872501373
-	6: 8879.055645942688
-	--------------------
-Corrida 2020-07-20 14:35:57.417531
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:49:48.814929
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:50:23.467276
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:50:52.156796
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:51:06.526566
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:51:32.329335
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:52:14.523765
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:52:35.566594
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:52:59.421168
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:53:06.270968
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 22:53:33.028601
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+Corrida 2020-07-21 11:48:28.027516
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+	3	2762.5058209896088	5.817832946777344	31.407148122787476	2686.5037982463837	0.20343995094299316
