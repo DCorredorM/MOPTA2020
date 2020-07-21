@@ -3,24 +3,10 @@ Just trained, Tw strategy and cleaning routes with 100 for the max number of rou
 Training time: 4940.507786035538
 	--------------
 	Solving Times:
---------------------
-
---------------------
-Corrida 2020-07-20 03:53:52.646450
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 03:54:56.317071
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 04:34:32.985485
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
---------------------
-Corrida 2020-07-20 04:37:32.966836
-Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning
 	3: 8736.027493476868
 	4: 8379.64193868637
 	5: 8766.041872501373
 	6: 8879.055645942688
-	--------------------
-Corrida 2020-07-20 14:35:57.417531
-Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
+	7: 15443.6631128788
+	8: 7200.35960149765
+	9: 8772.948284387589
