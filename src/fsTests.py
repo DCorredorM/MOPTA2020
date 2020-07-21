@@ -90,15 +90,49 @@ def write(file:str,s:str):
 	f.write(s+'\n')
 	f.close()
 
+def solveSp(sp):
+
+	print_log('\t\t',sp.id,'\n\t\t',sp.R,'\n\t\t',sp.Route_cost,'\n\t\t',sp.OptRi)
+	m=sp.master_problem(relaxed=False)
+	m.optimize()
+	
+	sp.export_results({i:m._z[i].x for i in m._z.keys()})
+	pet=[i for i,p in m._z.items() if m._z[i].x>.5]
+	routes=[sp.R[i] for i in pet]
+	#self.plot_dem(sp.D)
+	#self.plot_petals(routes,sp.H,pet=True)
+	#plt.show()
+	'''
+	os.chdir('../Plots/Subproblems')
+	if sp.id==0:delete_all_files(os.getcwd())
+	p.plot_dem(sp.D)
+	p.plot_petals(routes,sp.H,pet=False)
+	plt.savefig(f'spNoCG_{sp.id}.png')
+	#plt.show()
+	plt.clf()			
+	os.chdir('..')
+	os.chdir('../Data')
+	'''
+	return m.objVal
+
+	
+	foi=sum(sp.Route_cost[r]*m._z[r].x for r in range(len(sp.R)))
 def runBenders(h):
 	'''
 	Runs benders algo for h number of depots
 	'''
-	p.time_limit=1000000000
+	p.time_limit=100000000
 	p.h=h
 	p.createLog(h)
-	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=WS)
-	return UB,LB,x_hat,y_hat,ColGenCalls
+	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=False)
+	
+
+	firstStage=val=sum(p.f['cost'].loc[i]*x_hat[i]+ p.c*y_hat[i] for i in  p.possibleDepots)
+
+	secondStage=sum(solveSp(sp) for sp in p.SPS)/len(p.SPS)
+
+
+	return UB,LB,ColGenCalls,firstStage,secondStage
 	
 
 if __name__=='__main__':
@@ -123,7 +157,7 @@ if __name__=='__main__':
 	
 	p.maxNumRoutes=100				#Number of routes in each sp
 	p.nItemptyRoutes=2				#Period for cleaning set of routes
-
+	p.ColGenTolerance=200
 	Nota=f'Scenarios just trained\nWarm start:{WS}\nTw strategy:{tw}\nCleaning routes:\n\t{p.maxNumRoutes} for the max number of routes\n\t{p.nItemptyRoutes} for the number of iterations for cleaning'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
@@ -152,7 +186,7 @@ if __name__=='__main__':
 	
 	write(compTimes,f'\t--------------\n\tSolving Times:')
 	write(compTimes,f'\th\tTotal Time\tBenders Master\tSubproblem Master\tRoute Generator\tWarm Start')
-	write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
+	write(resultsFo,f'\t--------------\n\th\tValue Relaxed\tValue Total\t FS Cost\t SS Expected Cost\tNumber of calls Route Gen')
 
 	#4. Solve firstStage with SPs trained	
 	for h in range(3,len(p.possibleDepots)+1):
@@ -166,11 +200,11 @@ if __name__=='__main__':
 		for s in p.SPS:
 			s.restartScores()
 		SolvingTime=time.time()
-		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
+		UB,LB,ColGenCalls,firstStage,secondStage=runBenders(h)
 		SolvingTime=time.time()-SolvingTime
 
 		write(compTimes,f'\t{h}\t{p.totalBendersTime}\t{p.bendersMasterTime}\t{p.subProblemMasterTime}\t{p.routeGeneratorsTime}\t{p.warmStartTime}')
-		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
+		write(resultsFo,f'\t{h}\t{UB[-1]}\t{firstStage+secondStage}\t{firstStage}\t{secondStage}\t{ColGenCalls}')
 
 
 
