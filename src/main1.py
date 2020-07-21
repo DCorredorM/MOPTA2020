@@ -8,6 +8,7 @@ import math
 from math import exp
 import time
 import pickle
+from itertools import product
 
 class master():
 	"""docstring fox master"""
@@ -1540,6 +1541,33 @@ class master():
 		os.chdir('..')
 		os.chdir('Data')
 
+	def warmStart(self):
+		m=Model('WarmStart')
+		#Add Variables:
+
+		#N=self.G.nodes()
+		i=4
+		N=list(self.Demands[i][self.Demands[i]>0].index)
+
+
+		m._x={i:m.addVar(name=f'x_{i}',vtype=GRB.BINARY,obj=self.f['cost'].loc[i]) for i in self.possibleDepots}
+		m._z={(i,j):m.addVar(name=f'z_{(i,j)}',vtype=GRB.BINARY,obj=self.dist_m[i][j]) for i,j in product(self.possibleDepots, N)}
+		
+		#Constraints:
+		m.addConstr(quicksum(m._x[i] for i in self.possibleDepots)==self.h)
+		m.addConstrs(quicksum(m._z[i,j] for i in self.possibleDepots)>=1 for j in N)
+		M=len(N)
+		m.addConstrs(quicksum(m._z[i,j] for j in N)<=M*m._x[i] for i in self.possibleDepots)
+
+		m.update()
+		m.optimize()
+
+		x_hat=dict(map(lambda y: (y[0],y[1].x), m._x.items()))
+		clien={i:sum(m._z[i,j].x for j in N) for i in self.possibleDepots}
+		print(clien)
+
+
+
 class sub_problem():
 	"""docstring for sub_problem"""
 	def __init__(self,master,id,H, D,dm,pos=[]):
@@ -2134,4 +2162,7 @@ def print_log(*args):
 
 
 if __name__=='__main__':
+	p=master()
+	p.h=4
+	p.warmStart()
 	pass

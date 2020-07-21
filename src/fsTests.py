@@ -120,7 +120,10 @@ if __name__=='__main__':
 
 	trained=True
 	
-	Nota='Just trained, Tw strategy and cleaning routes with 500 for the max number of routes and, 5 for the number of its for cleaning'										#Note 
+	p.maxNumRoutes=100				#Number of routes in each sp
+	p.nItemptyRoutes=2				#Period for cleaning set of routes
+
+	Nota=f'Just trained, Tw strategy and cleaning routes with {p.maxNumRoutes} for the max number of routes and, {p.nItemptyRoutes} for the number of its for cleaning'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
@@ -129,9 +132,6 @@ if __name__=='__main__':
 	write(resultsFo,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
 	
 	os.chdir(dPath)					#Change dir to Data
-
-	p.maxNumRoutes=100				#Number of routes in each sp
-	p.nItemptyRoutes=2				#Period for cleaning set of routes
 
 	################################################################
 
@@ -151,9 +151,6 @@ if __name__=='__main__':
 		for s in p.SPS:
 			s.save(f'Tsp{s.id}')
 	
-	
-
-
 	#4. Solve firstStage with SPs trained	
 	for h in range(7,len(p.possibleDepots)+1):
 		for s in p.SPS:

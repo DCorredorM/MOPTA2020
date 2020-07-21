@@ -21,4 +21,6 @@ Just trained, Tw strategy and cleaning routes with 500 for the max number of rou
 	4: 8379.64193868637
 	5: 8766.041872501373
 	6: 8879.055645942688
-	
+	--------------------
+Corrida 2020-07-20 14:35:57.417531
+Just trained, Tw strategy and cleaning routes with 100 for the max number of routes and, 2 for the number of its for cleaning
