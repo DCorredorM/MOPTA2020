@@ -16,7 +16,7 @@ def Upload_Scenarios(file,trained=False):
 		di=p.Demands[i][p.Demands[i]>0]
 		if trained:
 			try:
-				pickle_in = open(f'sp{id}.sp','rb')
+				pickle_in = open(f'Tsp{id}.sp','rb')
 				sp = pickle.load(pickle_in)
 				p.SPS.append(sp)
 				sp.master=p		
@@ -97,7 +97,7 @@ def runBenders(h):
 	p.time_limit=1000000000
 	p.h=h
 	p.createLog(h)
-	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False)
+	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=WS)
 	return UB,LB,x_hat,y_hat,ColGenCalls
 	
 
@@ -116,6 +116,7 @@ if __name__=='__main__':
 	#Constants:	
 	################################################################
 	tw=True		#TimeWindow strategy?
+	WS=True 	#WarmStart Strategy?
 	scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
 
 	trained=True
@@ -146,19 +147,29 @@ if __name__=='__main__':
 		TrainSPs()
 		trainingTime=time.time()-trainingTime
 		write(compTimes,f'Training time: {trainingTime}')
-		write(compTimes,f'\t--------------\n\tSolving Times:')
-		write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
 		for s in p.SPS:
 			s.save(f'Tsp{s.id}')
 	
+	write(compTimes,f'\t--------------\n\tSolving Times:')
+	write(compTimes,f'\th\tTotal Time\tBenders Master\tSubproblem Master\tRoute Generator\tWarm Start')
+	write(resultsFo,f'\t--------------\n\th\tValue\tNumber of calls Route Gen')
+
 	#4. Solve firstStage with SPs trained	
 	for h in range(7,len(p.possibleDepots)+1):
+		#restore times
+		p.totalBendersTime=0
+		p.bendersMasterTime=0
+		p.subProblemMasterTime=0
+		p.routeGeneratorsTime=0
+		p.warmStartTime=0
+
 		for s in p.SPS:
 			s.restartScores()
 		SolvingTime=time.time()
 		UB,LB,x_hat,y_hat,ColGenCalls=runBenders(h)
 		SolvingTime=time.time()-SolvingTime
-		write(compTimes,f'\t{h}: {SolvingTime}')
+
+		write(compTimes,f'\t{h}\t{p.totalBendersTime}\t{p.bendersMasterTime}\t{p.subProblemMasterTime}\t{p.routeGeneratorsTime}\t{p.warmStartTime}')
 		write(resultsFo,f'\t{h}\t{UB[-1]}\t{ColGenCalls}')
 
 

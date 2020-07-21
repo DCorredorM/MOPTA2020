@@ -9,6 +9,7 @@ from math import exp
 import time
 import pickle
 from itertools import product
+from scipy.stats import poisson
 
 class master():
 	"""docstring fox master"""
@@ -120,9 +121,16 @@ class master():
 			self.ρ=self.prob*self.demRate*100
 
 			#Maximum set of routes for the subproblems
-			self.maxNumRoutes=200
+			self.maxNumRoutes=100
 			#Period for cleaning set of routes of the subproblems
-			self.nItemptyRoutes=5
+			self.nItemptyRoutes=2
+
+			#Keeping track of times:
+			self.totalBendersTime=0
+			self.bendersMasterTime=0
+			self.subProblemMasterTime=0
+			self.routeGeneratorsTime=0
+			self.warmStartTime=0
 	
 	def createLog(self,h):
 		global log_text,log_path
@@ -666,7 +674,7 @@ class master():
 
 		return UB,LB,x_hat,y_hat
 
-	def BendersAlgoMix(self,epsilon=0.1,read=True):
+	def BendersAlgoMix(self,epsilon=0.1,read=True,WS=True):
 		'''
 		Benders algorithm is implemented.		
 		
@@ -686,15 +694,34 @@ class master():
 		cuts = 0
 		LB, UB, CUT= [], [float("inf")], []
 		ColGenCalls=0
-		Start_time=time.time()
-		ColGen=False		
+		self.totalBendersTime=time.time()
+
+		if WS:
+			#Recovers warmStart solution
+			self.warmStartTime=time.time()
+			x_hat,y_hat=self.warmStart()
+			self.warmStartTime=time.time()-self.warmStartTime
+			η_hat={s:0 for s,i in enumerate(self.SPS)}
+			
+			#On and Off variables
+			ON= quicksum((1-m._x[i]) for i in self.possibleDepots if x_hat[i]>0.5)
+			OFF = quicksum(m._x[i] for i in self.possibleDepots if x_hat[i]<0.5)
+			
+			#Improves the warmstrat solution with column generation.
+			ColGen=True
+		else:
+			ColGen=False	
+
+
 		while True:			
 			it+=1
 			#If ColGen then it is that the previous solution is going to be improved, so no new solution needs to be obtained.
 			if not ColGen:
 				#Solve master problem and Update the Lower Bound
 				m.update()
+				t=time.time()
 				m.optimize()
+				self.bendersMasterTime+=time.time()-t
 				LB.append(m.objVal)
 
 				#Recovers solution
@@ -719,7 +746,9 @@ class master():
 					s.save(f'sp{s.id}')
 					ColGenCalls+=1
 				else:
+					t=time.time()
 					FOi,λ,π=self.solveSpNoCG(s)
+					self.subProblemMasterTime+=time.time()-t
 				#Save FO
 				OF.append(FOi)
 				#Checks for optimality cuts
@@ -755,7 +784,8 @@ class master():
 				break
 			#Export results
 			self.export_results(depots=x_hat,veh_depot=y_hat)
-			
+		
+		self.totalBendersTime=time.time()-self.totalBendersTime
 		return UB,LB,x_hat,y_hat,ColGenCalls
 
 	def Benders_algoMix(self,epsilon=0.1,time_limit=None,read=True):
@@ -1198,6 +1228,8 @@ class master():
 				m=sp.master_problem(relaxed=True)
 				time_genPet=time.time()
 				m.optimize()
+				self.subProblemMasterTime+=time.time()-time_genPet
+
 				sp.z_hat={k:kk.x for k,kk in m._z.items()}
 
 				π={i:m._set_covering[i].Pi for i in m._set_covering.keys()}			
@@ -1206,16 +1238,19 @@ class master():
 				clients_h=list(self.Adj[d][self.Adj[d]==1].index)
 				clients_h=list(set(clients.index) & set(clients_h))
 				clients_h=clients.loc[clients_h]				
-				time_genPet=time.time()
-				
+				time_genPet=time.time()				
 				r_costs=sp.runJavaPulse(d, clients_h,π,λ[d],nRoutes=nRoutes,tw=tw)
+				self.routeGeneratorsTime+=time.time()-time_genPet
 
 				if r_costs-λ[d]<0:					
 					term=False
 					#break
 			m=sp.master_problem(relaxed=True)
+			
 			time_genPet=time.time()
 			m.optimize()
+			self.subProblemMasterTime+=time.time()-time_genPet
+			
 			sp.z_hat={k:kk.x for k,kk in m._z.items()}
 			#Update route scores
 			sp.updateScores()
@@ -1546,7 +1581,9 @@ class master():
 		#Add Variables:
 
 		#N=self.G.nodes()
-		i=4
+		
+		i=max(self.Demands.columns)
+		
 		N=list(self.Demands[i][self.Demands[i]>0].index)
 
 
@@ -1564,7 +1601,12 @@ class master():
 
 		x_hat=dict(map(lambda y: (y[0],y[1].x), m._x.items()))
 		clien={i:sum(m._z[i,j].x for j in N) for i in self.possibleDepots}
-		print(clien)
+		N=np.percentile(a=poisson.rvs(mu=self.demRate, loc=0, size=1000), q=90)
+
+		
+		y_hat={i:math.ceil(clien[i]*N/self.cap) for i in self.possibleDepots}
+		
+		return x_hat,y_hat
 
 
 
