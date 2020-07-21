@@ -1,6 +1,4 @@
 	Termine con la GC..
-<<<<<<< HEAD
-=======
 	Termine con la GC..
 	Termine con la GC..
 	Termine con la GC..
@@ -20,14 +18,3 @@
 	Termine con la GC..
 	Termine con la GC..
 	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
-	Termine con la GC..
->>>>>>> 1b3dc05448700c08ec4bf6da0d45623ac017f1fd
