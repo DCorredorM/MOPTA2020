@@ -19879,7 +19879,7 @@ COLUMNS
     η_4      OBJ       0.2
 RHS
     RHS1      OBJ       -2.0435827041866978e+04
-    RHS1      R0        4
+    RHS1      R0        7
     RHS1      R1476     1457
 BOUNDS
  BV BND1      x_17728 
