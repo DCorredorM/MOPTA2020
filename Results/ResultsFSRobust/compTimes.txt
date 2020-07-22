@@ -159,3 +159,13 @@ Cleaning routes:
 	9	15962.012575626373	0.2809302806854248	75.32545709609985	15566.482901334763	0.06250476837158203
 >>>>>>> 9454b6d581a83d070a711ce65399f5145ac3b326
 >>>>>>> 70b2871f552f6d1e46ff83327f321ff57dcaefb1
+--------------------
+Corrida 2020-07-22 23:25:36.903797
+Scenarios just trained
+NoCleaning Routes
+ColGenTolerance:200
+Warm start:True
+Tw strategy:True with lunchbreake at beginning and end.
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
