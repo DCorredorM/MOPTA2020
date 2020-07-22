@@ -124,6 +124,8 @@ class master():
 			self.maxNumRoutes=100
 			#Period for cleaning set of routes of the subproblems
 			self.nItemptyRoutes=2
+			#Tolerance for staring column generation: When a current solution is close to UB by self.ColGenTolerance or less, the CG is turned on
+			self.ColGenTolerance=200
 
 			#Keeping track of times:
 			self.totalBendersTime=0
@@ -761,11 +763,14 @@ class master():
 			
 			#Update number of cuts and Upper bound
 			CUT.append(cuts)
-			UB.append(min(UB[-1],LB[-1]-(1/len(self.SPS))*(sum(η_hat.values())-sum(OF))))
+			UBt=LB[-1]-(1/len(self.SPS))*(sum(η_hat.values())-sum(OF))
+			UB.append(min(UB[-1],UBt))
 			
 			#Decide weather to gen routes or not
 			if not ColGen and it>2:				
 				print(f"Improvements {UB[-1]-UB[-2]}")
+				# if the current solution is really close to the UB, the ColGen is turned on
+				# if UBt-UB[-2]<100:
 				if UB[-1]-UB[-2]<0:
 					ColGen=True
 					for ss,s in enumerate(self.SPS):
@@ -2109,7 +2114,7 @@ class sub_problem():
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
 		minus=0.5
-		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-minus),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
+		tw=[(self.nLtw+minus,self.nLtw+(self.nUtw-self.nLtw)/2),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
 		tw=list(map(lambda x: (int(x[0]),int(x[1])),tw))
 		def classifier(client,order=[0,1]):
 			p=np.array(self.pos[client])
