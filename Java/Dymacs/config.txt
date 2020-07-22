@@ -1,3 +1,24 @@
+<<<<<<< HEAD
+DataFile:dymacsSp_18463.txt
+Number of Arcs:9102
+Number of Nodes:98
+=======
+<<<<<<< HEAD
+DataFile:dymacsSp_18014.txt
+Number of Arcs:4070
+Number of Nodes:66
+>>>>>>> 70b2871f552f6d1e46ff83327f321ff57dcaefb1
+Capacity:60
+Start Node:0
+End Node:15
+Depot id:18463
+lambda:-1572.344159633417
+Num routes:10
+<<<<<<< HEAD
+Route id:8308
+=======
+Route id:544
+=======
 DataFile:dymacsSp_18463.txt
 Number of Arcs:9102
 Number of Nodes:98
@@ -5,9 +26,11 @@ Capacity:60
 Start Node:0
 End Node:15
 Depot id:18463
-lambda:-1572.344159633417
+lambda:-4924.27483543752
 Num routes:10
-Route id:8308
+Route id:1727
+>>>>>>> 9454b6d581a83d070a711ce65399f5145ac3b326
+>>>>>>> 70b2871f552f6d1e46ff83327f321ff57dcaefb1
 t mile:0.025
 c mile:0.7
 time Limit:5
