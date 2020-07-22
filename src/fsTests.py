@@ -124,7 +124,7 @@ def runBenders(h):
 	p.time_limit=100000000
 	p.h=h
 	p.createLog(h)
-	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=False)
+	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=WS)
 	
 
 	firstStage=val=sum(p.f['cost'].loc[i]*x_hat[i]+ p.c*y_hat[i] for i in  p.possibleDepots)
@@ -155,15 +155,15 @@ if __name__=='__main__':
 
 	trained=True
 	
-	p.maxNumRoutes=100				#Number of routes in each sp
-	p.nItemptyRoutes=2				#Period for cleaning set of routes
+	p.maxNumRoutes=1000				#Number of routes in each sp
+	p.nItemptyRoutes=2000				#Period for cleaning set of routes
 	p.ColGenTolerance=200
-	Nota=f'Scenarios just trained\nWarm start:{WS}\nTw strategy:{tw}\nCleaning routes:\n\t{p.maxNumRoutes} for the max number of routes\n\t{p.nItemptyRoutes} for the number of iterations for cleaning'										#Note 
+	Nota=f'Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw}'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
 
-	resultsFo=rPath+'/resultsFo.txt'			#Computational times file 
+	resultsFo=rPath+'/resultsFo.txt'			#Results times file 
 	write(resultsFo,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
 	
 	os.chdir(dPath)					#Change dir to Data
