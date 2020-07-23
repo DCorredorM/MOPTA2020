@@ -140,3 +140,23 @@ Cleaning routes:
 	8	4572.765043746978	25
 	9	4727.988948592807	35
 >>>>>>> 9454b6d581a83d070a711ce65399f5145ac3b326
+--------------------
+Corrida 2020-07-22 20:53:48.406835
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value Relaxed	Value Total	 FS Cost	 SS Expected Cost	Number of calls Route Gen
+--------------------
+Corrida 2020-07-22 20:55:19.866326
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value Relaxed	Value Total	 FS Cost	 SS Expected Cost	Number of calls Route Gen

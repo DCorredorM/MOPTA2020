@@ -150,3 +150,25 @@ Cleaning routes:
 	8	8482.624900341034	9.028656482696533	99.57759308815002	8197.151307821274	0.09363222122192383
 	9	15962.012575626373	0.2809302806854248	75.32545709609985	15566.482901334763	0.06250476837158203
 >>>>>>> 9454b6d581a83d070a711ce65399f5145ac3b326
+--------------------
+Corrida 2020-07-22 20:53:48.406690
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+--------------------
+Corrida 2020-07-22 20:55:19.866200
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start

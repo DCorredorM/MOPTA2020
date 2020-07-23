@@ -117,6 +117,7 @@ def solveSp(sp):
 
 	
 	foi=sum(sp.Route_cost[r]*m._z[r].x for r in range(len(sp.R)))
+
 def runBenders(h):
 	'''
 	Runs benders algo for h number of depots
@@ -124,7 +125,7 @@ def runBenders(h):
 	p.time_limit=100000000
 	p.h=h
 	p.createLog(h)
-	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=False)
+	UB,LB,x_hat,y_hat,ColGenCalls=p.BendersAlgoMix(epsilon=0.01,read=False,WS=WS)
 	
 
 	firstStage=val=sum(p.f['cost'].loc[i]*x_hat[i]+ p.c*y_hat[i] for i in  p.possibleDepots)
