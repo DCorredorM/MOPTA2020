@@ -158,7 +158,7 @@ if __name__=='__main__':
 	p.maxNumRoutes=1000				#Number of routes in each sp
 	p.nItemptyRoutes=2000				#Period for cleaning set of routes
 	p.ColGenTolerance=200
-	Nota=f'Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw}'										#Note 
+	Nota=f'Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw} no lunchbreak'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')

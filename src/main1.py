@@ -2109,7 +2109,7 @@ class sub_problem():
 		a=normal(o-np.array([np.mean(X),np.mean(Y)]))
 		b=a.dot(o)
 		minus=0.5
-		tw=[(self.nLtw,self.nLtw+(self.nUtw-self.nLtw)/2-minus),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
+		tw=[(self.nLtw+minus,self.nLtw+(self.nUtw-self.nLtw)/2),(self.nLtw+(self.nUtw-self.nLtw)/2,self.nUtw-minus)]
 		tw=list(map(lambda x: (int(x[0]),int(x[1])),tw))
 		def classifier(client,order=[0,1]):
 			p=np.array(self.pos[client])
