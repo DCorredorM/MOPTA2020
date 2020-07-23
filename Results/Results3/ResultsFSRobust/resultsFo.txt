@@ -1,0 +1,18 @@
+--------------------
+Corrida 2020-07-21 11:55:57.946821
+Scenarios just trained
+Warm start:True
+Tw strategy:True
+Cleaning routes:
+	100 for the max number of routes
+	2 for the number of iterations for cleaning
+	--------------
+	h	Value	Number of calls Route Gen	
+	3	4786.156215567378	15
+	4	4587.0673071478905	15
+	5	4419.925612072774	20
+	6	4425.442030777031	20
+	7	4448.119105039754	25
+	8	4572.765043746978	25
+	9	4727.988948592807	35
+
