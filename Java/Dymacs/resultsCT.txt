@@ -1,0 +1,3 @@
+COMPOSITE TABLE
+	r	i		j		arrivalTime
+!	---------		---------		--------		--------	

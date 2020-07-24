@@ -1,13 +1,4 @@
 --------------------
-Corrida 2020-07-23 00:29:55.315942
-Scenarios just trained
-NoCleaning Routes
-ColGenTolerance:200
-Warm start:True
-Tw strategy:True
-	--------------
-	h	Value Relaxed	Value Total	 FS Cost	 SS Expected Cost	Number of calls Route Gen
---------------------
 Corrida 2020-07-23 00:39:13.869990
 Scenarios just trained
 NoCleaning Routes
@@ -16,3 +7,10 @@ Warm start:True
 Tw strategy:True no lunchbreak
 	--------------
 	h	Value Relaxed	Value Total	 FS Cost	 SS Expected Cost	Number of calls Route Gen
+	3	4550.155107117794	4923.309594482297	1243.0	3680.309594482297	15
+	4	4488.756223860063	4808.73155791672	1442.0	3366.73155791672	15
+	5	4332.333970915592	4653.749724387279	1539.0	3114.7497243872785	20
+	6	4375.482971870515	5119.32	1634.0	3485.3199999999997	30
+	7	4383.994036026847	4564.114	1853.0	2711.114	25
+	8	4523.368111784884	4738.948122803276	2053.0	2685.9481228032764	30
+	9	4690.725004378747	4928.246373770027	2214.0	2714.246373770027	40
