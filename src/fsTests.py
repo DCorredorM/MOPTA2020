@@ -117,6 +117,7 @@ def solveSp(sp):
 
 	
 	foi=sum(sp.Route_cost[r]*m._z[r].x for r in range(len(sp.R)))
+
 def runBenders(h):
 	'''
 	Runs benders algo for h number of depots
@@ -152,14 +153,15 @@ if __name__=='__main__':
 	################################################################
 	tw=True		#TimeWindow strategy?
 	WS=True 	#WarmStart Strategy?
-	scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
+	#scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
+	scenFile='Scenarios_robust_equal.csv'
 
-	trained=True
+	trained=False
 	
 	p.maxNumRoutes=1000				#Number of routes in each sp
 	p.nItemptyRoutes=2000				#Period for cleaning set of routes
 	p.ColGenTolerance=200
-	Nota=f'Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw} with lunchbreake at beginning and end.'										#Note 
+	Nota=f'Neutral Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw} with lunchbreake at beginning and end.'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')

@@ -119,6 +119,18 @@ def createMaster(n):
 
 	return m
 
+
+def paintRoute(p,ax):
+	pet_col='orange'	
+	for i,j in zip(p[:-1],p[1:]):				
+		path=nx.shortest_path(m.G,i,j,weight='c')
+		path=list(zip(path[:-1],path[1:]))
+		#print('este pat', path)
+		nx.draw_networkx_edges(m.G, m.pos,edgelist=path,edge_color=pet_col,width=3,ax=ax)
+	
+	
+
+
 def plotSol(sp,ax):
 	dem=sp.D.to_dict()[0]
 	drawDem(sp.master.G,sp.master.pos,dem,ax)
@@ -179,19 +191,43 @@ def firstStageAnim(n):
 	return ani
 
 
+def paintRoutes():	
+	sp=m.SPS[0]
+	dem=sp.D.to_dict()[0]
+	os.chdir('../src')
+	m.solveSpJava(sp)
+	os.chdir(path)
+	delete_all_files(path='media/Routes',exceptions=[])
+	fig,ax= plt.subplots(figsize=(10,8))
+	
+	h=[i for i,y in sp.y_hat.items() if y>0]
+	for i,p in enumerate(sp.R):
+		if random.random()>0.9:
+			fig,ax= plt.subplots(figsize=(10,8))
+			drawDem(m.G,m.pos,dem,ax)
+			nx.draw_networkx_nodes(m.G, m.pos,nodelist=h,node_shape='s',node_size=200,node_color='green',ax=ax)	
+			paintRoute(p,ax)		
+			ax.axis('off')
+			plt.savefig(f'media/Routes/r{i}.png')
+			#plt.show()
+	print(sp.z_hat.items())
+	for i,z in sp.z_hat.items():
+		if z>0:
+			fig,ax= plt.subplots(figsize=(10,8))
+			drawDem(m.G,m.pos,dem,ax)
+			nx.draw_networkx_nodes(m.G, m.pos,nodelist=h,node_shape='s',node_size=200,node_color='green',ax=ax)	
+			paintRoute(sp.R[i],ax)		
+			ax.axis('off')
+			plt.savefig(f'media/Routes/rSol{i}.png')
+			#plt.show()
+
 
 if __name__=='__main__':
 	
-	p=os.getcwd()
+	path=os.getcwd()
 	m=createMaster(10)
-	sp=m.SPS[0]
-	m.solveSpJava(sp)
-	fig,ax= plt.subplots(figsize=(10,8))
-	plotSol(sp,ax)
-	os.chdir(p)
-	ax.axis('off')
-	plt.savefig('media/staticSol.png')
-	plt.show()
+
+	paintRoutes()
 	pass
 	
 

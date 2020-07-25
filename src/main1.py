@@ -1947,6 +1947,7 @@ class sub_problem():
 		'''		
 
 		f=open(f'../Java/Dymacs/config.txt','w')
+		f.write(f'Scenario:1'+'\n')
 		f.write(f'DataFile:dymacsSp_{depot}.txt'+'\n')
 		f.write(f'Number of Arcs:{nArcs}'+'\n')
 		f.write(f'Number of Nodes:{nNodes}'+'\n')

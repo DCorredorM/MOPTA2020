@@ -1,0 +1,13 @@
+--------------------
+Corrida 2020-07-24 01:57:18.098888
+Scenarios just trained
+No Number of depots constraint
+NoCleaning Routes
+ColGenTolerance:200
+Warm start:True
+Tw strategy:True no lunchbreak
+	--------------
+	h	Value Relaxed	Value Total	 FS Cost	 SS Expected Cost	Number of calls Route Gen
+	1	4393.931444923981	6489.4309902713085	3846.0	2643.430990271309	20
+	5	4337.744504205002	4682.4534	1539.0	3143.4534	20
+
