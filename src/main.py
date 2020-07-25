@@ -3370,8 +3370,7 @@ class sub_problem():
 		print_log('\t\t',f'reciclé {num} rutas')
 		print_log('\t\t######################################################')
 
-	def printDymacs(self,depot,clients,π,λ,nRoutes=10):
-		
+	def printDymacs(self,depot,clients,π,λ,nRoutes=10):		
 		delete_all_files('../Java/Dymacs/',exceptions=['.jar'])
 		auxs=math.ceil(clients.sum()/self.cap)
 		
@@ -3393,12 +3392,16 @@ class sub_problem():
 			else:
 				#8-16->2-10
 				f.write(f'{j}\t{0}\t{1}\t{self.nLtw*60}\t{self.nUtw*60}\n')
-		for i in clients.index:
+		for i in list(clients.index):
 			#8-16->2-8
 			if π[i]>0:
 				solve.append(i)
-			#TODO: Modificar Tw por para acelerar pulso.... particionar los nodos por depot	
-			f.write(f'{i}\t{clients[i]}\t{0}\t{self.nLtw*60}\t{self.nUtw*60}\n')
+			
+			#TODO: Modificar Tw por para acelerar pulso.... particionar los nodos por depot							
+			try:
+				f.write(f'{i}\t{clients[i]}\t{0}\t{self.nLtw*60}\t{self.nUtw*60}\n')
+			except:
+				f.write(f'{i}\t{int(clients.loc[i])}\t{0}\t{self.nLtw*60}\t{self.nUtw*60}\n')
 
 		nArcs=0
 		nNodes=len(clients.index)+auxs+2
@@ -3439,6 +3442,7 @@ class sub_problem():
 		'''		
 
 		f=open(f'../Java/Dymacs/config.txt','w')
+		f.write(f'Scen:{1}'+'\n')
 		f.write(f'DataFile:dymacsSp_{depot}.txt'+'\n')
 		f.write(f'Number of Arcs:{nArcs}'+'\n')
 		f.write(f'Number of Nodes:{nNodes}'+'\n')
@@ -3457,8 +3461,7 @@ class sub_problem():
 		#c mile:0.7
 		f.close()
 
-	def printDymacsTW(self,depot,clients,π,λ,nRoutes=10):
-		
+	def printDymacsTW(self,depot,clients,π,λ,nRoutes=10):		
 		delete_all_files('../Java/Dymacs/',exceptions=['.jar'])
 		auxs=math.ceil(clients.sum()/self.cap)
 		
@@ -3490,10 +3493,12 @@ class sub_problem():
 				solve.append(i)
 			#print(clients.loc[i][0])
 			nLtw,nUtw=classifier(i,ro)
-			try:
-				f.write(f'{i}\t{clients[i]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
-			except:
-				f.write(f'{i}\t{clients.loc[i][0]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
+			#try:
+				#f.write(f'{i}\t{clients[i]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
+			#	pass
+			#except:
+			print(f'{i}\t{clients.loc[i][0]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
+			f.write(f'{i}\t{clients.loc[i][0]}\t{0}\t{nLtw*60}\t{nUtw*60}\n')
 
 		nArcs=0
 		nNodes=len(clients.index)+auxs+2
@@ -3534,6 +3539,7 @@ class sub_problem():
 		'''		
 
 		f=open(f'../Java/Dymacs/config.txt','w')
+		f.write(f'Scenario:{1}'+'\n')
 		f.write(f'DataFile:dymacsSp_{depot}.txt'+'\n')
 		f.write(f'Number of Arcs:{nArcs}'+'\n')
 		f.write(f'Number of Nodes:{nNodes}'+'\n')
@@ -3552,7 +3558,7 @@ class sub_problem():
 		#c mile:0.7
 		f.close()
 
-	def readDymacs(self,path='../Java/Dymacs/results.txt'):
+	def readDymacs(self,path='../Java/Dymacs/results.txt'):		
 		f=open(path,'r')
 		try:
 			cost=float(f.readline().split(':')[1])

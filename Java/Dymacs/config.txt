@@ -1,14 +1,14 @@
-Scenario:1
-DataFile:dymacsSp_18463.txt
-Number of Arcs:3816
-Number of Nodes:64
+Scen:1
+DataFile:dymacsSp_1500.txt
+Number of Arcs:126
+Number of Nodes:13
 Capacity:60
 Start Node:0
-End Node:10
-Depot id:18463
-lambda:-130192.90000000001
+End Node:3
+Depot id:1500
+λ:0.0
 Num routes:10
-Route id:555
+Route id:35
 t mile:0.025
 c mile:0.7
 time Limit:5
