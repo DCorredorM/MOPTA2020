@@ -152,7 +152,8 @@ if __name__=='__main__':
 	################################################################
 	tw=True		#TimeWindow strategy?
 	WS=True 	#WarmStart Strategy?
-	scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
+	#scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
+	scenFile='Scenarios_robust_equal.csv'
 
 	trained=True
 	
