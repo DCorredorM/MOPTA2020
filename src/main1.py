@@ -229,7 +229,7 @@ class master():
 
 			#Restricciones			
 
-			m._N_depots=m.addConstr(quicksum(m._x[i] for i in self.possibleDepots)==self.h)
+			#m._N_depots=m.addConstr(quicksum(m._x[i] for i in self.possibleDepots)==self.h)
 			
 
 			#1.)If the location i ∈ N has no facility, the number of vehicles in that node has to be zero.

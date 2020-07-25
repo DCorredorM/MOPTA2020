@@ -156,12 +156,12 @@ if __name__=='__main__':
 	#scenFile='Scenarios_robust_new.csv'		#Set of scenarios to solve.
 	scenFile='Scenarios_robust_equal.csv'
 
-	trained=False
+	trained=True
 	
 	p.maxNumRoutes=1000				#Number of routes in each sp
 	p.nItemptyRoutes=2000				#Period for cleaning set of routes
 	p.ColGenTolerance=200
-	Nota=f'Neutral Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw} with lunchbreake at beginning and end.'										#Note 
+	Nota=f'No depot restriccion, warmstart en 3\nNeutral Scenarios just trained\nNoCleaning Routes\nColGenTolerance:{p.ColGenTolerance}\nWarm start:{WS}\nTw strategy:{tw} with lunchbreake at beginning and end.'										#Note 
 
 	compTimes=rPath+'/compTimes.txt'			#Computational times file 	
 	write(compTimes,f'--------------------\nCorrida {datetime.datetime.now()}\n{Nota}')
@@ -192,7 +192,7 @@ if __name__=='__main__':
 	write(resultsFo,f'\t--------------\n\th\tValue Relaxed\tValue Total\t FS Cost\t SS Expected Cost\tNumber of calls Route Gen')
 
 	#4. Solve firstStage with SPs trained	
-	for h in range(3,len(p.possibleDepots)+1):
+	for h in [3]:
 		#restore times
 		p.totalBendersTime=0
 		p.bendersMasterTime=0

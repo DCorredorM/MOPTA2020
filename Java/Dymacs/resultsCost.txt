@@ -1,1 +1,1 @@
-cReduced:=-206.0;
+cReduced:=-10403.0;
