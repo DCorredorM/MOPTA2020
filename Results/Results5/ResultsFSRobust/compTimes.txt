@@ -1,0 +1,13 @@
+--------------------
+Corrida 2020-07-24 01:57:18.098888
+Scenarios just trained
+No Number of depots constraint
+NoCleaning Routes
+ColGenTolerance:200
+Warm start:True
+Tw strategy:True no lunchbreak
+	--------------
+	Solving Times:
+	h	Total Time	Benders Master	Subproblem Master	Route Generator	Warm Start
+	1	20421.12931752205	5381.004418134689	1575.8637249469757	13173.869354486465	0.09387683868408203
+	5	16112.512901306152	3675.8898780345917	1102.7567789554596	11147.36990571022	0.21869850158691406
